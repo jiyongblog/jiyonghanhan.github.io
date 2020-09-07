@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    BFS与DFS |  寒
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-BFS与DFS"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  BFS与DFS
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/07/24/BFS%E4%B8%8EDFS/" class="article-date">
+  <time datetime="2020-07-24T02:10:00.000Z" itemprop="datePublished">2020-07-24</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/C-%E7%AC%94%E8%AE%B0/">C++笔记</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">2.1k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">10 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h4 id="BFS与DFS"><a href="#BFS与DFS" class="headerlink" title="BFS与DFS"></a>BFS与DFS</h4><p>**DFS:**使用栈保存未被检测的结点，结点按照深度优先的次序被访问并依次被压入栈中，并以相反的次序出栈进行新的检测。</p>
+<p>类似树的先序遍历</p>
+<p>深搜例子:走迷宫,你没有办法用分身术站在每个走过的位置.不撞南墙不回头.</p>
+<p>**BFS:**使用队列保存未被检测的结点。结点按照宽度优先的次序被访问和进出队列。</p>
+<p>类似树的按层次遍历的过程</p>
+<p>广搜例子:你的眼镜掉在地上以后,你趴在地板上找.你总是先摸最接近你的地方,如果没有,再摸远一点的地方…</p>
+<h4 id="DFS模板框架与例子"><a href="#DFS模板框架与例子" class="headerlink" title="DFS模板框架与例子"></a>DFS模板框架与例子</h4><p><strong>DFS:模板</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">bool vis[maxn][maxn]; &#x2F;&#x2F; 访问标记</span><br><span class="line">vector&lt;vector&lt;int&gt;&gt; dxy &#x3D; &#123;&#123;-1, 0&#125;, &#123;1, 0&#125;, &#123;0, 1&#125;, &#123;0, -1&#125;&#125;;&#x2F;&#x2F;方向矩阵</span><br><span class="line">bool dfs(参数,i,j)</span><br><span class="line">&#123;</span><br><span class="line">	if(不满足或者不符合) return false;</span><br><span class="line">	if(搜到了或者达到条件)</span><br><span class="line">	&#123;</span><br><span class="line">		&#x2F;&#x2F;计数或进行其他操作;</span><br><span class="line">		return true;</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">        vis[i][j]&#x3D;true;&#x2F;&#x2F;标记已经搜索过的节点</span><br><span class="line">        </span><br><span class="line">	for(auto xy:dxy)&#x2F;&#x2F;查找当前点的周围的点</span><br><span class="line">	&#123;</span><br><span class="line">        	int x &#x3D; xy[0] + i;</span><br><span class="line">        	int y &#x3D; xy[1] + j;</span><br><span class="line">	   	if(边界判断和访问标记判断) continue;</span><br><span class="line">         	else</span><br><span class="line">		    if(dfs(进一步深搜)) return true;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">        vis[i][j]&#x3D;false;取消标记;</span><br><span class="line">        return false;&#x2F;&#x2F;本次搜索无效;</span><br><span class="line">       &#125;</span><br><span class="line">       </span><br><span class="line">       </span><br><span class="line">     </span><br><span class="line">       &#x2F;&#x2F;dfs参数中的0表示查到word的第几个字符.</span><br><span class="line">        bool main(vector&lt;vector&lt;char&gt;&gt;&amp; board, string word)&#123;</span><br><span class="line">	      for(int i &#x3D; 0;i &lt; rows; i++)&#123;&#x2F;&#x2F;row行</span><br><span class="line">                for(int j &#x3D; 0; j &lt; cols; j++)&#123;&#x2F;&#x2F;cols列</span><br><span class="line">                if(board[i][j] &#x3D;&#x3D; word[0])&#123; </span><br><span class="line">                    if(dfs(board, i, j, word, 0)) return true;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>DFS:例子</strong></p>
+<p>请设计一个函数，用来判断在一个矩阵中是否存在一条包含某字符串所有字符的路径。路径可以从矩阵中的任意一格开始，每一步可以在矩阵中向左、右、上、下移动一格。如果一条路径经过了矩阵的某一格，那么该路径不能再次进入该格子。例如，在下面的3×4的矩阵中包含一条字符串“bfce”的路径。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[[&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;e&quot;],</span><br><span class="line">[&quot;s&quot;,&quot;f&quot;,&quot;c&quot;,&quot;s&quot;],</span><br><span class="line">[&quot;a&quot;,&quot;d&quot;,&quot;e&quot;,&quot;e&quot;]]</span><br></pre></td></tr></table></figure>
+<p>但矩阵中不包含字符串“abfb”的路径，因为字符串的第一个字符b占据了矩阵中的第一行第二个格子之后，路径不能再次进入这个格子。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：board &#x3D; [[&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;E&quot;],[&quot;S&quot;,&quot;F&quot;,&quot;C&quot;,&quot;S&quot;],[&quot;A&quot;,&quot;D&quot;,&quot;E&quot;,&quot;E&quot;]], word &#x3D; &quot;ABCCED&quot;</span><br><span class="line">输出：true</span><br><span class="line"></span><br><span class="line">输入：board &#x3D; [[&quot;a&quot;,&quot;b&quot;],[&quot;c&quot;,&quot;d&quot;]], word &#x3D; &quot;abcd&quot;</span><br><span class="line">输出：false</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line"></span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; dxy &#x3D; &#123;&#123;-1, 0&#125;, &#123;1, 0&#125;, &#123;0, 1&#125;, &#123;0, -1&#125;&#125;;&#x2F;&#x2F;方向矩阵</span><br><span class="line">    int rows, cols;</span><br><span class="line">    bool dfs(vector&lt;vector&lt;char&gt;&gt;&amp; board, vector&lt;bool&gt;&amp; visit, int i, int j, string&amp; word, int idx)&#123;</span><br><span class="line">        if(board[i][j] !&#x3D; word[idx]) return false;&#x2F;&#x2F;不满足条件</span><br><span class="line">       </span><br><span class="line">        idx++;</span><br><span class="line">         if(idx &#x3D;&#x3D; word.size()) return  true;&#x2F;&#x2F;满足条件</span><br><span class="line">         visit[i*cols+j] &#x3D; true;&#x2F;&#x2F;标记已经访问</span><br><span class="line">        for(auto xy : dxy)&#123;&#x2F;&#x2F;查找当前点的周围的点</span><br><span class="line">            int x &#x3D; xy[0] + i;</span><br><span class="line">            int y &#x3D; xy[1] + j;</span><br><span class="line">            if(x &lt; 0 || x &gt;&#x3D; rows || y &lt; 0 || y &gt;&#x3D; cols || visit[x*cols+y]) continue;&#x2F;&#x2F;边界判断和访问标记判断</span><br><span class="line">            else&#123;</span><br><span class="line">                if(dfs(board, visit, x, y, word, idx)) return true;&#x2F;&#x2F;进一步深搜</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        visit[i*cols+j] &#x3D; false;&#x2F;&#x2F;取消标记</span><br><span class="line">       </span><br><span class="line">        return false;&#x2F;&#x2F;本次搜索无效;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    bool exist(vector&lt;vector&lt;char&gt;&gt;&amp; board, string word) &#123;</span><br><span class="line">        if(word &#x3D;&#x3D; &quot;&quot;)  return false;</span><br><span class="line">        rows &#x3D; board.size();</span><br><span class="line">        cols &#x3D; board[0].size();</span><br><span class="line">        vector&lt;bool&gt; visit(rows * cols, false);&#x2F;&#x2F;标记矩阵</span><br><span class="line">        for(int i &#x3D; 0;i &lt; rows; i++)&#123;</span><br><span class="line">            for(int j &#x3D; 0; j &lt; cols; j++)&#123;</span><br><span class="line">                if(board[i][j] &#x3D;&#x3D; word[0])&#123;</span><br><span class="line">                    if(dfs(board, visit, i, j, word, 0)) return true;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="BFS模板框架与例子"><a href="#BFS模板框架与例子" class="headerlink" title="BFS模板框架与例子"></a>BFS模板框架与例子</h4><p><strong>BFS:模板</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">void bfs(起始点)</span><br><span class="line">&#123;</span><br><span class="line">	将起始点放入队列中;</span><br><span class="line">	标记起点已访问;</span><br><span class="line">    </span><br><span class="line">	while(队列不为空)</span><br><span class="line">	&#123;</span><br><span class="line">		访问队列中首元素x;</span><br><span class="line">      ...一些操作</span><br><span class="line">		删除队首元素;</span><br><span class="line">		for(x所有相邻点)</span><br><span class="line">		&#123;</span><br><span class="line">			if(该点未被访问过且合法)</span><br><span class="line">				将该点加入队列末尾;</span><br><span class="line">                 		标记该点已访问</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	队列为空，广搜结束; </span><br><span class="line">&#125; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>BFS:例子</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">打印指定点附近相同值的点的坐标</span><br><span class="line">bool vis[maxn][maxn]; &#x2F;&#x2F; 访问标记</span><br><span class="line">vector&lt;vector&lt;int&gt;&gt; dxy &#x3D; &#123;&#123;-1, 0&#125;, &#123;1, 0&#125;, &#123;0, 1&#125;, &#123;0, -1&#125;&#125;;&#x2F;&#x2F;方向矩阵</span><br><span class="line">board[5][5];&#x2F;&#x2F;矩阵内容1和0</span><br><span class="line">bfs()&#123;</span><br><span class="line">	int val&#x3D;board[i][j];&#x2F;&#x2F;i,j为初始点坐标</span><br><span class="line">	queue&lt;pair&lt;int,int&gt;&gt; q;</span><br><span class="line">  	q.push(make_pair(i,j));</span><br><span class="line">   	vis[i][j]&#x3D;true;&#x2F;&#x2F;标记</span><br><span class="line">   </span><br><span class="line">      while(!q.empty)&#123;</span><br><span class="line">        pair&lt;int,int&gt; tmp&#x3D;q.front();&#x2F;&#x2F;取出</span><br><span class="line">        q.pop();</span><br><span class="line">        cout&lt;&lt;tmp.first&lt;&lt;tmp.second&lt;&lt;endl;&#x2F;&#x2F;一些操作</span><br><span class="line">        </span><br><span class="line">        for(auto xy: dxy)&#123;</span><br><span class="line">        	int x&#x3D;tmp.first+xy[0];</span><br><span class="line">          	int y&#x3D;tmp.second+xy[1];</span><br><span class="line">          	if(x&gt;&#x3D;0 &amp;&amp; x&lt;5 &amp;&amp; y&gt;&#x3D;0 &amp;&amp; y&lt;5 &amp;&amp; vis[x][y]!&#x3D;true &amp;&amp; board[x][y]&#x3D;&#x3D;val)&#123;</span><br><span class="line">            		q.push(make_pair(x,y));&#x2F;&#x2F;广搜符合条件放进队列</span><br><span class="line">            		vis[x][y]&#x3D;true; &#x2F;&#x2F;标记已经访问</span><br><span class="line">            &#125;    		</span><br><span class="line">        &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>BFS:例子</strong><br>现在一个紧急的任务是打开一个密码锁。 密码由四位数字组成，每个数字从1到9进行编码。每次可以对任何一位数字加1或减1。当将9加1时，数字将变为1，当将1减1时，数字将变为9.你也可以交换相邻数字，每一个行动记作异步。现在你的任务是使用最小的步骤来打开锁。注意：最左边的数字不与最右边的数字相邻。</p>
+<p>输入：<br>第一行输入四个数字，表示密码锁的初始状态。<br>第二行输入四个数字，表示开锁的密码。</p>
+<p>输出：<br>最小步数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;queue&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">struct node&#123;</span><br><span class="line">	int num[4],step;&#x2F;&#x2F;num存的密码,step是到这一步的步数</span><br><span class="line">&#125;first,last;</span><br><span class="line">int vis[11][11][11][11];&#x2F;&#x2F;访问标记</span><br><span class="line">void bfs()</span><br><span class="line">&#123;</span><br><span class="line">	int i;</span><br><span class="line">	node a,next;</span><br><span class="line">	queue&lt;node&gt; q;</span><br><span class="line">	a&#x3D;first;</span><br><span class="line">	a.step&#x3D;0;</span><br><span class="line">	q.push(a);&#x2F;&#x2F;初始点</span><br><span class="line">	memset(vis,0,sizeof(vis));</span><br><span class="line">	vis[a.num[0]][a.num[1]][a.num[2]][a.num[3]]&#x3D;1;&#x2F;&#x2F;标记已经访问</span><br><span class="line">	while(!q.empty())</span><br><span class="line">	&#123;</span><br><span class="line">		a&#x3D;q.front();&#x2F;&#x2F;取出访问</span><br><span class="line">		q.pop();</span><br><span class="line">		if(a.num[0]&#x3D;&#x3D;last.num[0]&amp;&amp;a.num[1]&#x3D;&#x3D;last.num[1]&amp;&amp;a.num[2]&#x3D;&#x3D;last.num[2]&amp;&amp;a.num[3]&#x3D;&#x3D;last.num[3])&#x2F;&#x2F;一些操作,即判断是否符合要求.</span><br><span class="line">		&#123;</span><br><span class="line">			printf(&quot;%d\n&quot;,a.step);</span><br><span class="line">			return;</span><br><span class="line">		&#125;</span><br><span class="line">		for(i&#x3D;0;i&lt;4;++i)		&#x2F;&#x2F;+1   周围相邻点合法且未被访问的放入,放入后标记已经访问</span><br><span class="line">		&#123;</span><br><span class="line">			next&#x3D;a;</span><br><span class="line">			++next.num[i];</span><br><span class="line">			if(next.num[i]&#x3D;&#x3D;10)</span><br><span class="line">				next.num[i]&#x3D;1;</span><br><span class="line">			if(!vis[next.num[0]][next.num[1]][next.num[2]][next.num[3]])</span><br><span class="line">			&#123;</span><br><span class="line">				vis[next.num[0]][next.num[1]][next.num[2]][next.num[3]]&#x3D;1;</span><br><span class="line">				++next.step;</span><br><span class="line">				q.push(next);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		for(i&#x3D;0;i&lt;4;++i)		&#x2F;&#x2F;-1  周围相邻点合法且未被访问的放入,放入后标记已经访问</span><br><span class="line">		&#123;</span><br><span class="line">			next&#x3D;a;</span><br><span class="line">			--next.num[i];</span><br><span class="line">			if(next.num[i]&#x3D;&#x3D;0)</span><br><span class="line">				next.num[i]&#x3D;9;</span><br><span class="line">			if(!vis[next.num[0]][next.num[1]][next.num[2]][next.num[3]])</span><br><span class="line">			&#123;</span><br><span class="line">				vis[next.num[0]][next.num[1]][next.num[2]][next.num[3]]&#x3D;1;</span><br><span class="line">				++next.step;</span><br><span class="line">				q.push(next);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		for(i&#x3D;0;i&lt;3;++i)		&#x2F;&#x2F;交换  周围相邻点合法且未被访问的放入,放入后标记已经访问</span><br><span class="line">		&#123;</span><br><span class="line">			next&#x3D;a;</span><br><span class="line">			next.num[i]&#x3D;a.num[i+1];</span><br><span class="line">			next.num[i+1]&#x3D;a.num[i];</span><br><span class="line">			if(!vis[next.num[0]][next.num[1]][next.num[2]][next.num[3]])</span><br><span class="line">			&#123;</span><br><span class="line">				vis[next.num[0]][next.num[1]][next.num[2]][next.num[3]]&#x3D;1;</span><br><span class="line">				++next.step;</span><br><span class="line">				q.push(next);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int i,j;</span><br><span class="line">	for(i&#x3D;0;i&lt;4;++i)</span><br><span class="line">		scanf(&quot;%d&quot;,&amp;first.num[i]);</span><br><span class="line">	for(i&#x3D;0;i&lt;4;++i)</span><br><span class="line">		scanf(&quot;%d&quot;,&amp;last.num[i]);</span><br><span class="line">	bfs();</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/07/24/BFS%E4%B8%8EDFS/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2020/07/24/%E5%89%91-13-%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%9A%84%E8%BF%90%E5%8A%A8%E8%8C%83%E5%9B%B4/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            剑-13 机器人的运动范围(DFS+BFS)
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/07/24/%E5%89%91-12-%E7%9F%A9%E9%98%B5%E4%B8%AD%E7%9A%84%E8%B7%AF%E5%BE%84/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">剑-12 矩阵中的路径(DFS)</div>
+      </a>
+    
+  </nav>
+
+  
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020
+        <i class="ri-heart-fill heart_icon"></i> John Doe
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="寒"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">文档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+
+<script src="/js/clickBoom2.js"></script>
+
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+</body>
+
+</html>

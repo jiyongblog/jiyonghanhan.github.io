@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    deque(双头队列) |  寒
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-deque"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  deque(双头队列)
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/08/16/deque/" class="article-date">
+  <time datetime="2020-08-16T01:25:00.000Z" itemprop="datePublished">2020-08-16</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/STL%E5%AE%B9%E5%99%A8/">STL容器</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">1.7k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">8 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h4 id="deque初始化"><a href="#deque初始化" class="headerlink" title="deque初始化"></a>deque初始化</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deque&lt;int&gt; a; &#x2F;&#x2F; 定义一个int类型的双端队列a</span><br><span class="line">deque&lt;int&gt; a(10); &#x2F;&#x2F; 定义一个int类型的双端队列a，并设置初始大小为10</span><br><span class="line">deque&lt;int&gt; a(10, 1); &#x2F;&#x2F; 定义一个int类型的双端队列a，并设置初始大小为10且初始值都为1</span><br><span class="line">deque&lt;int&gt; b(a); &#x2F;&#x2F; 定义并用双端队列a初始化双端队列b</span><br><span class="line">deque&lt;int&gt; b(a.begin(), a.begin()+3); &#x2F;&#x2F; 将双端队列a中从第0个到第2个(共3个)作为双端队列b的初始值</span><br></pre></td></tr></table></figure>
+<p>除此之外，还可以直接使用数组来初始化向量：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">int n[] &#x3D; &#123; 1, 2, 3, 4, 5 &#125;;</span><br><span class="line">&#x2F;&#x2F; 将数组n的前5个元素作为双端队列a的初值</span><br><span class="line">&#x2F;&#x2F; 说明：当然不包括arr[4]元素，末尾指针都是指结束元素的下一个元素，</span><br><span class="line">&#x2F;&#x2F; 这个主要是为了和deque.end()指针统一。</span><br><span class="line">deque&lt;int&gt; a(n, n + 5); </span><br><span class="line">deque&lt;int&gt; a(&amp;n[1], &amp;n[4]); &#x2F;&#x2F; 将n[1]、n[2]、n[3]作为双端队列a的初值</span><br></pre></td></tr></table></figure>
+<h4 id="基本操作函数"><a href="#基本操作函数" class="headerlink" title="基本操作函数"></a>基本操作函数</h4><p><label style="color:red"> 容量函数</label></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">容器大小：deq.size();</span><br><span class="line">容器最大容量：deq.max_size();</span><br><span class="line">更改容器大小：deq.resize();</span><br><span class="line">容器判空：deq.empty();</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	deque&lt;int&gt; deq;</span><br><span class="line">	for (int i &#x3D; 0; i&lt;6; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		deq.push_back(i);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; deq.size() &lt;&lt; endl; &#x2F;&#x2F; 输出：6</span><br><span class="line">	cout &lt;&lt; deq.max_size() &lt;&lt; endl; &#x2F;&#x2F; 输出：1073741823</span><br><span class="line">	deq.resize(0); &#x2F;&#x2F; 更改容器大小</span><br><span class="line">	cout &lt;&lt; deq.size() &lt;&lt; endl; &#x2F;&#x2F; 输出：0</span><br><span class="line">	if (deq.empty())</span><br><span class="line">		cout &lt;&lt; &quot;元素为空&quot; &lt;&lt; endl; &#x2F;&#x2F; 输出：元素为空</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><label style="color:red"> 添加函数</label></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">头部添加元素：deq.push_front(const T&amp; x);</span><br><span class="line">末尾添加元素：deq.push_back(const T&amp; x);</span><br><span class="line">任意位置插入一个元素：deq.insert(iterator it, const T&amp; x);</span><br><span class="line">任意位置插入 n 个相同元素：deq.insert(iterator it, int n, const T&amp; x);</span><br><span class="line">插入另一个向量的 [forst,last) 间的数据：deq.insert(iterator it, iterator first, iterator last);</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	deque&lt;int&gt; deq;</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F; 头部增加元素</span><br><span class="line">	deq.push_front(4);</span><br><span class="line">	&#x2F;&#x2F; 末尾添加元素</span><br><span class="line">	deq.push_back(5);</span><br><span class="line">	&#x2F;&#x2F; 任意位置插入一个元素</span><br><span class="line">	deque&lt;int&gt;::iterator it &#x3D; deq.begin();</span><br><span class="line">	deq.insert(it, 2);</span><br><span class="line">	&#x2F;&#x2F; 任意位置插入n个相同元素</span><br><span class="line">	it &#x3D; deq.begin(); &#x2F;&#x2F; 必须要有这句</span><br><span class="line">	deq.insert(it, 3, 9);</span><br><span class="line">	&#x2F;&#x2F; 插入另一个向量的[forst,last]间的数据</span><br><span class="line">	deque&lt;int&gt; deq2(5,8);</span><br><span class="line">	it &#x3D; deq.begin(); &#x2F;&#x2F; 必须要有这句</span><br><span class="line">	deq.insert(it, deq2.end() - 1, deq2.end());</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F; 遍历显示</span><br><span class="line">	for (it &#x3D; deq.begin(); it !&#x3D; deq.end(); it++)</span><br><span class="line">		cout &lt;&lt; *it &lt;&lt; &quot; &quot;; &#x2F;&#x2F; 输出：8 9 9 9 2 4 5</span><br><span class="line">	cout &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><label style="color:red"> 删除函数</label></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">头部删除元素：deq.pop_front();</span><br><span class="line">末尾删除元素：deq.pop_back();</span><br><span class="line">任意位置删除一个元素：deq.erase(iterator it);</span><br><span class="line">删除 [first,last)之间的元素：deq.erase(iterator first, iterator last);</span><br><span class="line">清空所有元素：deq.clear();</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	deque&lt;int&gt; deq;</span><br><span class="line">	for (int i &#x3D; 0; i &lt; 8; i++)</span><br><span class="line">		deq.push_back(i);</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F; 头部删除元素</span><br><span class="line">	deq.pop_front();</span><br><span class="line">	&#x2F;&#x2F; 末尾删除元素</span><br><span class="line">	deq.pop_back();</span><br><span class="line">	&#x2F;&#x2F; 任意位置删除一个元素</span><br><span class="line">	deque&lt;int&gt;::iterator it &#x3D; deq.begin();</span><br><span class="line">	deq.erase(it);</span><br><span class="line">	&#x2F;&#x2F; 删除[first,last]之间的元素</span><br><span class="line">	deq.erase(deq.begin(), deq.begin()+1);</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F; 遍历显示</span><br><span class="line">	for (it &#x3D; deq.begin(); it !&#x3D; deq.end(); it++)</span><br><span class="line">		cout &lt;&lt; *it &lt;&lt; &quot; &quot;;&#x2F;&#x2F; 输出：3 4 5 6</span><br><span class="line">	cout &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F; 清空所有元素</span><br><span class="line">	deq.clear();</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><label style="color:red"> 访问函数</label></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">下标访问：deq[1]; &#x2F;&#x2F; 并不会检查是否越界</span><br><span class="line">at 方法访问：deq.at(1); &#x2F;&#x2F; 以上两者的区别就是 at 会检查是否越界，是则抛出 out of range 异常</span><br><span class="line">访问第一个元素：deq.front();</span><br><span class="line">访问最后一个元素：deq.back();</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	deque&lt;int&gt; deq;</span><br><span class="line">	for (int i &#x3D; 0; i &lt; 6; i++)</span><br><span class="line">		deq.push_back(i);</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F; 下标访问</span><br><span class="line">	cout &lt;&lt; deq[0] &lt;&lt; endl; &#x2F;&#x2F; 输出：0</span><br><span class="line">	&#x2F;&#x2F; at方法访问</span><br><span class="line">	cout &lt;&lt; deq.at(0) &lt;&lt; endl; &#x2F;&#x2F; 输出：0</span><br><span class="line">	&#x2F;&#x2F; 访问第一个元素</span><br><span class="line">	cout &lt;&lt; deq.front() &lt;&lt; endl; &#x2F;&#x2F; 输出：0</span><br><span class="line">	&#x2F;&#x2F; 访问最后一个元素</span><br><span class="line">	cout &lt;&lt; deq.back() &lt;&lt; endl; &#x2F;&#x2F; 输出：5</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><label style="color:red"> 其他函数</label></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">多个元素赋值：deq.assign(int nSize, const T&amp; x); &#x2F;&#x2F; 类似于初始化时用数组进行赋值</span><br><span class="line">交换两个同类型容器的元素：swap(deque&amp;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">int main(int argc, char* argv[])</span><br><span class="line">&#123;</span><br><span class="line">	&#x2F;&#x2F; 多个元素赋值</span><br><span class="line">	deque&lt;int&gt; deq;</span><br><span class="line">	deq.assign(3, 1);</span><br><span class="line">	deque&lt;int&gt; deq2;</span><br><span class="line">	deq2.assign(3, 2);</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F; 交换两个容器的元素</span><br><span class="line">	deq.swap(deq2);</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F; 遍历显示</span><br><span class="line">	cout &lt;&lt; &quot;deq: &quot;;</span><br><span class="line">	for (int i &#x3D; 0; i &lt; deq.size(); i++)</span><br><span class="line">		cout &lt;&lt; deq[i] &lt;&lt; &quot; &quot;; &#x2F;&#x2F; 输出：2 2 2</span><br><span class="line">	cout &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	&#x2F;&#x2F; 遍历显示</span><br><span class="line">	cout &lt;&lt; &quot;deq2: &quot;;</span><br><span class="line">	for (int i &#x3D; 0; i &lt; deq2.size(); i++)</span><br><span class="line">		cout &lt;&lt; deq2[i] &lt;&lt; &quot; &quot;; &#x2F;&#x2F; 输出：1 1 1</span><br><span class="line">	cout &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="迭代器与算法"><a href="#迭代器与算法" class="headerlink" title="迭代器与算法"></a>迭代器与算法</h4><p><label style="color:red"> 迭代器</label></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">开始迭代器指针：deq.begin();，iterator</span><br><span class="line">末尾迭代器指针：deq.end(); &#x2F;&#x2F; 指向最后一个元素的下一个位置</span><br><span class="line">指向常量的开始迭代器指针：deq.cbegin(); &#x2F;&#x2F; 意思就是不能通过这个指针来修改所指的内容，但还是可以通过其他方式修改的，而且指针也是可以移动的。</span><br><span class="line">指向常量的末尾迭代器指针：deq.cend();</span><br><span class="line">反向迭代器指针，指向最后一个元素：deq.rbegin();，reverse_iterator</span><br><span class="line">反向迭代器指针，指向第一个元素的前一个元素：deq.rend();</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	deque&lt;int&gt; deq;</span><br><span class="line">	deq.push_back(1);</span><br><span class="line">	deq.push_back(2);</span><br><span class="line">	deq.push_back(3);</span><br><span class="line"></span><br><span class="line">	cout &lt;&lt; *(deq.begin()) &lt;&lt; endl; &#x2F;&#x2F; 输出：1</span><br><span class="line">	cout &lt;&lt; *(--deq.end()) &lt;&lt; endl; &#x2F;&#x2F; 输出：3</span><br><span class="line">	cout &lt;&lt; *(deq.cbegin()) &lt;&lt; endl; &#x2F;&#x2F; 输出：1</span><br><span class="line">	cout &lt;&lt; *(--deq.cend()) &lt;&lt; endl; &#x2F;&#x2F; 输出：3</span><br><span class="line">	cout &lt;&lt; *(deq.rbegin()) &lt;&lt; endl; &#x2F;&#x2F; 输出：3</span><br><span class="line">	cout &lt;&lt; *(--deq.rend()) &lt;&lt; endl; &#x2F;&#x2F; 输出：1</span><br><span class="line">	cout &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><label style="color:red"> 算法</label></p>
+<p>遍历元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">deque&lt;int&gt;::iterator it;</span><br><span class="line">for (it &#x3D; deq.begin(); it !&#x3D; deq.end(); it++)</span><br><span class="line">    cout &lt;&lt; *it &lt;&lt; endl;</span><br><span class="line">&#x2F;&#x2F; 或者</span><br><span class="line">for (int i &#x3D; 0; i &lt; deq.size(); i++) &#123;</span><br><span class="line">    cout &lt;&lt; deq.at(i) &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>元素翻转</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;algorithm&gt;</span><br><span class="line">reverse(deq.begin(), deq.end());</span><br></pre></td></tr></table></figure>
+<p>元素排序</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;algorithm&gt;</span><br><span class="line">sort(deq.begin(), deq.end()); &#x2F;&#x2F; 采用的是从小到大的排序</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 如果想从大到小排序，可以采用先排序后反转的方式，也可以采用下面方法:</span><br><span class="line">&#x2F;&#x2F; 自定义从大到小的比较器，用来改变排序方式</span><br><span class="line">bool Comp(const int&amp; a, const int&amp; b) &#123;</span><br><span class="line">    return a &gt; b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sort(deq.begin(), deq.end(), Comp);</span><br></pre></td></tr></table></figure> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/08/16/deque/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2020/08/16/map/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            map、unordered_map、pair
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/08/15/queue/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">queue(队列与优先队列)</div>
+      </a>
+    
+  </nav>
+
+  
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020
+        <i class="ri-heart-fill heart_icon"></i> John Doe
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="寒"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">文档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+
+<script src="/js/clickBoom2.js"></script>
+
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+</body>
+
+</html>

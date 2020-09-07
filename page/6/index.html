@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+     寒
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      
+<section class="cover">
+    
+  <div class="cover-frame">
+    <div class="bg-box">
+      <img src="/images/cover2.jpg" alt="image frame" />
+    </div>
+    <div class="cover-inner text-center text-white">
+      <h1><a href="/">寒</a></h1>
+      <div id="subtitle-box">
+        
+        <span id="subtitle"></span>
+        
+      </div>
+      <div>
+        
+      </div>
+    </div>
+  </div>
+  <div class="cover-learn-more">
+    <a href="javascript:void(0)" class="anchor"><i class="ri-arrow-down-line"></i></a>
+  </div>
+</section>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js"></script>
+
+
+<!-- Subtitle -->
+
+  <script>
+    try {
+      var typed = new Typed("#subtitle", {
+        strings: ['思念，是淡淡的幸福', '最美好的事，是看见寒寒的微笑', '吟诵诗千卷，才发现最美的诗是你'],
+        startDelay: 0,
+        typeSpeed: 200,
+        loop: true,
+        backSpeed: 100,
+        showCursor: true
+      });
+    } catch (err) {
+      console.log(err)
+    }
+  </script>
+  
+<div id="main">
+  <section class="outer">
+  <article class="articles">
+    
+    
+    
+    
+    <article
+  id="post-剑-52-两个链表的第一个公共节点"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/03/%E5%89%91-52-%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%AC%E5%85%B1%E8%8A%82%E7%82%B9/"
+    >剑-52 两个链表的第一个公共节点(AB，BA，拼接)</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/08/03/%E5%89%91-52-%E4%B8%A4%E4%B8%AA%E9%93%BE%E8%A1%A8%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%85%AC%E5%85%B1%E8%8A%82%E7%82%B9/" class="article-date">
+  <time datetime="2020-08-03T11:52:00.000Z" itemprop="datePublished">2020-08-03</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/">刷题</a> / <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/%E5%89%91%E6%8C%87/">剑指</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="两个链表的第一个公共节点"><a href="#两个链表的第一个公共节点" class="headerlink" title="两个链表的第一个公共节点"></a>两个链表的第一个公共节点</h3><p>输入两个链表，找出它们的第一个公共节点。</p>
+<p>如下面的两个链表：</p>
+<p><img src="/img/11.png"></p>
+<p>在节点 c1 开始相交。</p>
+<p>示例 1：</p>
+<p><img src="/img/12.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入：intersectVal &#x3D; 8, listA &#x3D; [4,1,8,4,5], listB &#x3D; [5,0,1,8,4,5], skipA &#x3D; 2, skipB &#x3D; 3</span><br><span class="line">输出：Reference of the node with value &#x3D; 8</span><br><span class="line"></span><br><span class="line">输入解释：相交节点的值为 8 （注意，如果两个列表相交则不能为 0）。</span><br><span class="line">从各自的表头开始算起，链表 A 为 [4,1,8,4,5]，链表 B 为 [5,0,1,8,4,5]。</span><br><span class="line">在 A 中，相交节点前有 2 个节点；在 B 中，相交节点前有 3 个节点。</span><br></pre></td></tr></table></figure>
+
+<p>示例 2：</p>
+<p><img src="/img/13.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入：intersectVal &#x3D; 2, listA &#x3D; [0,9,1,2,4], listB &#x3D; [3,2,4], skipA &#x3D; 3, skipB &#x3D; 1</span><br><span class="line">输出：Reference of the node with value &#x3D; 2</span><br><span class="line"></span><br><span class="line">输入解释：相交节点的值为 2 （注意，如果两个列表相交则不能为 0）。</span><br><span class="line">从各自的表头开始算起，链表 A 为 [0,9,1,2,4]，链表 B 为 [3,2,4]。</span><br><span class="line">在 A 中，相交节点前有 3 个节点；在 B 中，相交节点前有 1 个节点。</span><br></pre></td></tr></table></figure>
+
+<p>示例 3：</p>
+<p><img src="/img/10.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">输入：intersectVal &#x3D; 0, listA &#x3D; [2,6,4], listB &#x3D; [1,5], skipA &#x3D; 3, skipB &#x3D; 2</span><br><span class="line">输出：null</span><br><span class="line"></span><br><span class="line">输入解释：从各自的表头开始算起，链表 A 为 [2,6,4]，链表 B 为 [1,5]。</span><br><span class="line">由于这两个链表不相交，所以 intersectVal 必须为 0，而 skipA 和 skipB 可以是任意值。</span><br><span class="line">解释：这两个链表不相交，因此返回 null。</span><br></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">如果两个链表没有交点，返回 null.</span><br><span class="line">在返回结果后，两个链表仍须保持原有的结构。</span><br><span class="line">可假定整个链表结构中没有循环。</span><br><span class="line">程序尽量满足 O(n) 时间复杂度，且仅用 O(1) 内存。</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><p>我们使用两个指针 node1，node2 分别指向两个链表 headA，headB 的头结点，然后同时分别逐结点遍历，当 node1 到达链表 headA 的末尾时，重新定位到链表 headB 的头结点；当 node2 到达链表 headB 的末尾时，重新定位到链表 headA 的头结点。</p>
+<p>这样，当它们相遇时，所指向的结点就是第一个公共结点。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * struct ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode *next;</span><br><span class="line"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span><br><span class="line"> * &#125;;</span><br><span class="line"> *&#x2F;</span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) &#123;</span><br><span class="line">         if (!headA || !headB)&#123;</span><br><span class="line">            return nullptr;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode *pA &#x3D; headA, *pB &#x3D; headB;</span><br><span class="line">        while (pA !&#x3D; pB) &#123;</span><br><span class="line">            pA &#x3D; pA &#x3D;&#x3D; nullptr ? headB : pA-&gt;next;</span><br><span class="line">            pB &#x3D; pB &#x3D;&#x3D; nullptr ? headA : pB-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        return pA;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>如果链表相交，则链表公共节点都在尾部。</p>
+<p>先计算两个链表长度。<br>让长链表指针先走多出长度，然后两个链表同时走，如果相遇则为相交节点。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * struct ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode *next;</span><br><span class="line"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span><br><span class="line"> * &#125;;</span><br><span class="line"> *&#x2F;</span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) &#123;</span><br><span class="line">            if (!headA || !headB) return nullptr;</span><br><span class="line">            int len1 &#x3D; len(headA), len2 &#x3D; len(headB);        </span><br><span class="line">            if (len1 &gt;&#x3D; len2) &#123;&#x2F;&#x2F;让长链表指针先走多出长度</span><br><span class="line">                int move &#x3D; len1 - len2;</span><br><span class="line">                while (move--) &#123;</span><br><span class="line">                    headA &#x3D; headA-&gt;next;                </span><br><span class="line">                &#125;     </span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                int move &#x3D; len2 - len1;</span><br><span class="line">                while (move--) &#123;</span><br><span class="line">                    headB &#x3D; headB-&gt;next;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            while (headA !&#x3D; headB) &#123;&#x2F;&#x2F;两个链表同时走，如果相遇则为相交节点            </span><br><span class="line">                headA &#x3D; headA-&gt;next;</span><br><span class="line">                headB &#x3D; headB-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            return headA;</span><br><span class="line">        &#125;</span><br><span class="line">	&#x2F;&#x2F;计算链表长度</span><br><span class="line">        int len(ListNode *head) &#123;</span><br><span class="line">            int len &#x3D; 0;</span><br><span class="line">            while (head) &#123;</span><br><span class="line">                ++len;</span><br><span class="line">                head &#x3D; head-&gt;next;</span><br><span class="line">            &#125;</span><br><span class="line">            return len;</span><br><span class="line">        &#125;  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%91%E6%8C%87%E7%95%99%E6%84%8F/" rel="tag">剑指留意</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+</article>
+
+    
+    <article
+  id="post-剑-51-数组中的逆序对"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/03/%E5%89%91-51-%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%80%86%E5%BA%8F%E5%AF%B9/"
+    >剑-51 数组中的逆序对(归并排序)</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/08/03/%E5%89%91-51-%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%80%86%E5%BA%8F%E5%AF%B9/" class="article-date">
+  <time datetime="2020-08-03T08:28:00.000Z" itemprop="datePublished">2020-08-03</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/">刷题</a> / <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/%E5%89%91%E6%8C%87/">剑指</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="数组中的逆序对"><a href="#数组中的逆序对" class="headerlink" title="数组中的逆序对"></a>数组中的逆序对</h3><p>在数组中的两个数字，如果前面一个数字大于后面的数字，则这两个数字组成一个逆序对。输入一个数组，求出这个数组中的逆序对的总数。</p>
+<p> </p>
+<p>示例 1:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [7,5,6,4]</span><br><span class="line">输出: 5</span><br></pre></td></tr></table></figure>
+
+<p>限制：0 &lt;= 数组长度 &lt;= 50000</p>
+<h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><p><label style="color:red"> 「归并排序」是分治思想的典型应用，它包含这样三个步骤：</label></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">分解： 待排序的区间为[l,r]，令 m &#x3D;(l+r)&#x2F;2 ，我们把[l,r]分成[l,m]和[m+1,r]</span><br><span class="line">解决： 使用归并排序递归地排序两个子序列</span><br><span class="line">合并： 把两个已经排好序的子序列 [l, m][l,m] 和 [m + 1, r][m+1,r] 合并起来</span><br></pre></td></tr></table></figure>
+<p>在待排序序列长度为 11 的时候，递归开始「回升」，因为我们默认长度为 11 的序列是排好序的。</p>
+<p><label style="color:red">思路: </label></p>
+<p>那么求逆序对和归并排序又有什么关系呢？关键就在于「归并」当中「并」的过程。我们通过一个实例来看看。假设我们有两个已排序的序列等待合并，分别是 L ={ 8, 12, 16, 22, 100 }和 R = R={9,26,55,64,91}。一开始我们用指针 lPtr = 0 指向 L 的首部，rPtr = 0 指向 R 的头部。记已经合并好的部分为 M。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">L &#x3D; [8, 12, 16, 22, 100]   R &#x3D; [9, 26, 55, 64, 91]  M &#x3D; []</span><br><span class="line">     |                          |</span><br><span class="line">   lPtr                       rPtr</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>我们发现 lPtr 指向的元素小于 rPtr 指向的元素，于是把 lPtr 指向的元素放入答案，并把 lPtr 后移一位。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">L &#x3D; [8, 12, 16, 22, 100]   R &#x3D; [9, 26, 55, 64, 91]  M &#x3D; [8]</span><br><span class="line">        |                       |</span><br><span class="line">      lPtr                     rPtr</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>接着我们继续合并，此时 lPtr 指向 12，rPtr指向的 9 小于12，则12到100都比9大，贡献为mid-i+1。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">L &#x3D; [8, 12, 16, 22, 100]   R &#x3D; [9, 26, 55, 64, 91]  M &#x3D; [8, 9]</span><br><span class="line">        |                          |</span><br><span class="line">       lPtr                       rPtr</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<p><strong><label style="color:red"> 实现代码</label></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int reversePairs(vector&lt;int&gt;&amp; nums) &#123;           </span><br><span class="line">        vector&lt;int&gt; temp(nums.size(), 0);</span><br><span class="line">        int kk&#x3D;nums.size()-1;</span><br><span class="line">        sort(nums,0,kk,temp);</span><br><span class="line">        return this-&gt;count;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void sort(vector&lt;int&gt;&amp; arr,int left,int right,vector&lt;int&gt;&amp; temp)&#123;</span><br><span class="line">        if(left&lt;right)&#123;</span><br><span class="line">            int mid &#x3D; (left+right)&#x2F;2;</span><br><span class="line">            sort(arr,left,mid,temp);&#x2F;&#x2F;左边归并排序，使得左子序列有序</span><br><span class="line">            sort(arr,mid+1,right,temp);&#x2F;&#x2F;右边归并排序，使得右子序列有序</span><br><span class="line">            merge(arr,left,mid,right,temp);&#x2F;&#x2F;将两个有序子数组合并操作</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void merge(vector&lt;int&gt;&amp; arr,int left,int mid,int right,vector&lt;int&gt;&amp; temp)&#123;</span><br><span class="line">        int i &#x3D; left;&#x2F;&#x2F;左序列指针</span><br><span class="line">        int j &#x3D; mid+1;&#x2F;&#x2F;右序列指针</span><br><span class="line">        int t &#x3D; 0;&#x2F;&#x2F;临时数组指针</span><br><span class="line">        while (i&lt;&#x3D;mid &amp;&amp; j&lt;&#x3D;right)&#123;</span><br><span class="line">            if(arr[i]&lt;&#x3D;arr[j])&#123;</span><br><span class="line">                temp[t++] &#x3D; arr[i++];</span><br><span class="line">            &#125;else &#123;</span><br><span class="line">                temp[t++] &#x3D; arr[j++];</span><br><span class="line">                this-&gt;count&#x3D;this-&gt;count+mid-i+1;&#x2F;&#x2F;归并排序添加的一行,左侧i到mid的元素都比j的元素大。</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        while(i&lt;&#x3D;mid)&#123;&#x2F;&#x2F;将左边剩余元素填充进temp中</span><br><span class="line">            temp[t++] &#x3D; arr[i++];</span><br><span class="line">        &#125;</span><br><span class="line">        while(j&lt;&#x3D;right)&#123;&#x2F;&#x2F;将右序列剩余元素填充进temp中</span><br><span class="line">            temp[t++] &#x3D; arr[j++];</span><br><span class="line">        &#125;</span><br><span class="line">        t &#x3D; 0;</span><br><span class="line">        &#x2F;&#x2F;将temp中的元素全部拷贝到原数组中</span><br><span class="line">        while(left &lt;&#x3D; right)&#123;</span><br><span class="line">            arr[left++] &#x3D; temp[t++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">private:</span><br><span class="line">    int count&#x3D;0;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%91%E6%8C%87%E7%95%99%E6%84%8F/" rel="tag">剑指留意</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+</article>
+
+    
+    <article
+  id="post-剑-50-第一个只出现一次的字符"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/03/%E5%89%91-50-%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E5%AD%97%E7%AC%A6/"
+    >剑-50 第一个只出现一次的字符(哈希表)</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/08/03/%E5%89%91-50-%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E5%AD%97%E7%AC%A6/" class="article-date">
+  <time datetime="2020-08-03T06:41:00.000Z" itemprop="datePublished">2020-08-03</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/">刷题</a> / <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/%E5%89%91%E6%8C%87/">剑指</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="第一个只出现一次的字符"><a href="#第一个只出现一次的字符" class="headerlink" title="第一个只出现一次的字符"></a>第一个只出现一次的字符</h3><p>在字符串 s 中找出第一个只出现一次的字符。如果没有，返回一个单空格。 s 只包含小写字母。</p>
+<p>示例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">s &#x3D; &quot;abaccdeff&quot;</span><br><span class="line">返回 &quot;b&quot;</span><br><span class="line"></span><br><span class="line">s &#x3D; &quot;&quot; </span><br><span class="line">返回 &quot; &quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>限制：0 &lt;= s 的长度 &lt;= 50000</p>
+<h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    char firstUniqChar(string s) &#123;</span><br><span class="line">         if(s &#x3D;&#x3D; &quot;&quot;)</span><br><span class="line">            return &#39; &#39;;</span><br><span class="line">        &#x2F;&#x2F;map中是对应字符出现的次数</span><br><span class="line">        unordered_map&lt;char,int&gt; cmap;</span><br><span class="line">        for(auto i &#x3D; 0;i &lt; s.size();i++)</span><br><span class="line">        &#123;</span><br><span class="line">            cmap[s[i]]++;</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F;按字符串的顺序在map中查找到第一个出现一次的字符</span><br><span class="line">        for(auto i &#x3D; 0;i &lt; s.size();i++)</span><br><span class="line">        &#123;</span><br><span class="line">            if(cmap[s[i]] &#x3D;&#x3D; 1)</span><br><span class="line">                return s[i];</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F;没有找到</span><br><span class="line">        return &#39; &#39;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+</article>
+
+    
+    <article
+  id="post-剑-49-丑数"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/03/%E5%89%91-49-%E4%B8%91%E6%95%B0/"
+    >剑-49 丑数(合并三个有序序列)</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/08/03/%E5%89%91-49-%E4%B8%91%E6%95%B0/" class="article-date">
+  <time datetime="2020-08-03T06:22:00.000Z" itemprop="datePublished">2020-08-03</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/">刷题</a> / <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/%E5%89%91%E6%8C%87/">剑指</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="丑数"><a href="#丑数" class="headerlink" title="丑数"></a>丑数</h3><p>我们把只包含质因子 2、3 和 5 的数称作丑数（Ugly Number）。求按从小到大的顺序的第 n 个丑数。</p>
+<p> </p>
+<p>示例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: n &#x3D; 10</span><br><span class="line">输出: 12</span><br><span class="line">解释: 1, 2, 3, 4, 5, 6, 8, 9, 10, 12 是前 10 个丑数。</span><br></pre></td></tr></table></figure>
+<p>说明:   1 是丑数。n 不超过1690。</p>
+<h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><p>丑数的排列<br>假设当前存在 3 个数组 nums2, nums3, nums5 分别代表丑数序列从 1 开始分别乘以 2, 3, 5 的序列， 即</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nums2 &#x3D; &#123;1*2, 2*2, 3*2, 4*2, 5*2, 6*2, 8*2...&#125;</span><br><span class="line">nums3 &#x3D; &#123;1*3, 2*3, 3*3, 4*3, 5*3, 6*3, 8*3...&#125;</span><br><span class="line">nums5 &#x3D; &#123;1*5, 2*5, 3*5, 4*5, 5*5, 6*5, 8*5...&#125;</span><br><span class="line"># 注意 7 不是丑数. </span><br><span class="line"># 2, 3, 5 这前 3 个丑数一定要乘以其它的丑数， 所得的结果才是新的丑数， 所以上例中没有出现 7*2, 7*3, 7*5</span><br></pre></td></tr></table></figure>
+<p>那么， 最终的丑数序列实际上就是这 3 个有序序列对的合并结果。</p>
+<p>合并 3 个有序序列， 最简单的方法就是每一个序列都各自维护一个指针， 然后比较指针指向的元素的值， 将最小的放入最终的合并数组中， 并将相应指针向后移动一个元素。</p>
+<p><label style="color:red"> nums2, nums3, nums5 中是存在重复的解的</label>， 例如 nums2[2] == 3<em>2, nums3[1] == 2</em>3 都计算出了 6 这个结果， 所以在合并 3 个有序数组的过程中， 还需要跳过相同的结果， 这也就是为什么在比较的时候， 需要使用 3 个并列的 if… if… if… 而不是 if… else if… else 这种结构的原因。 当比较到元素 6 时， if (dp[i] == dp[p2] * 2)…if (dp[i] == dp[p3] * 3)… 可以同时指向 nums2, nums3 中 元素 6 的下一个元素。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 1, 2, 3, 4, 5, 6, 8, 9, 10, 12</span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">	int nthUglyNumber(int n) &#123;</span><br><span class="line">		vector&lt;int&gt; dp(n, 0);</span><br><span class="line">		dp[0] &#x3D; 1;</span><br><span class="line">		int p2 &#x3D; 0, p3 &#x3D; 0, p5 &#x3D; 0;</span><br><span class="line">		for (int i &#x3D; 1; i &lt; n; i++)&#123;</span><br><span class="line">			dp[i] &#x3D; min(min(dp[p2] * 2, dp[p3] * 3), dp[p5] * 5);</span><br><span class="line">			if (dp[i] &#x3D;&#x3D; dp[p2] * 2) </span><br><span class="line">                		p2++;</span><br><span class="line">			if (dp[i] &#x3D;&#x3D; dp[p3] * 3) </span><br><span class="line">                		p3++;</span><br><span class="line">			if (dp[i] &#x3D;&#x3D; dp[p5] * 5) </span><br><span class="line">                		p5++;</span><br><span class="line">		&#125;</span><br><span class="line">		return dp[n - 1];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+</article>
+
+    
+    <article
+  id="post-剑-48-最长不含重复字符的子字符串"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/03/%E5%89%91-48-%E6%9C%80%E9%95%BF%E4%B8%8D%E5%90%AB%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2/"
+    >剑-48 最长不含重复字符的子字符串(哈希表)</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/08/03/%E5%89%91-48-%E6%9C%80%E9%95%BF%E4%B8%8D%E5%90%AB%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E5%AD%90%E5%AD%97%E7%AC%A6%E4%B8%B2/" class="article-date">
+  <time datetime="2020-08-03T05:30:00.000Z" itemprop="datePublished">2020-08-03</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/">刷题</a> / <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/%E5%89%91%E6%8C%87/">剑指</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="最长不含重复字符的子字符串"><a href="#最长不含重复字符的子字符串" class="headerlink" title="最长不含重复字符的子字符串"></a>最长不含重复字符的子字符串</h3><p>请从字符串中找出一个最长的不包含重复字符的子字符串，计算该最长子字符串的长度。</p>
+<p> </p>
+<p>示例 1:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;abcabcbb&quot;</span><br><span class="line">输出: 3 </span><br><span class="line">解释: 因为无重复字符的最长子串是 &quot;abc&quot;，所以其长度为 3。</span><br></pre></td></tr></table></figure>
+<p>示例 2:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;bbbbb&quot;</span><br><span class="line">输出: 1</span><br><span class="line">解释: 因为无重复字符的最长子串是 &quot;b&quot;，所以其长度为 1。</span><br></pre></td></tr></table></figure>
+<p>示例 3:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;pwwkew&quot;</span><br><span class="line">输出: 3</span><br><span class="line">解释: 因为无重复字符的最长子串是 &quot;wke&quot;，所以其长度为 3。</span><br><span class="line">     请注意，你的答案必须是 子串 的长度，&quot;pwke&quot; 是一个子序列，不是子串。</span><br></pre></td></tr></table></figure>
+
+<p>提示：<br>s.length &lt;= 40000</p>
+<h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><p>我们可以使用哈希表记录每个字符的下一个索引，然后尽量向右移动尾指针来拓展窗口，并更新窗口的最大长度。如果尾指针指向的元素重复，则将头指针直接移动到窗口中重复元素的右侧。</p>
+<p><strong>算法</strong><br>tail 指针向末尾方向移动；<br>如果尾指针指向的元素存在于哈希表中：<br>head 指针跳跃到重复字符的下一位；<br>更新哈希表和窗口长度。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int lengthOfLongestSubstring(string s) &#123;</span><br><span class="line">        map&lt;char, int&gt; m;</span><br><span class="line">        int ret &#x3D; 0, l &#x3D; 0, r &#x3D; 0;</span><br><span class="line">        while (r &lt; s.size()) &#123;</span><br><span class="line">        &#x2F;&#x2F;用find函数来定位数据出现位置，它返回的一个迭代器，当数据出现时，它返回数据所在位置的迭代器.</span><br><span class="line">        &#x2F;&#x2F;如果map中没有要查找的数据，它返回的迭代器等于end函数返回的迭代器</span><br><span class="line">            if (m.find(s[r]) !&#x3D; m.end()) &#123;</span><br><span class="line">                l &#x3D; max(l, m[s[r]] + 1);&#x2F;&#x2F;更新左指针</span><br><span class="line">            &#125;</span><br><span class="line">            m[s[r]] &#x3D; r;&#x2F;&#x2F;哈希表更新</span><br><span class="line">            r++;</span><br><span class="line">            ret &#x3D; max(r - l, ret);更新窗口大小</span><br><span class="line">        &#125;</span><br><span class="line">        return ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+</article>
+
+    
+    <article
+  id="post-剑-47-礼物的最大价值"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/03/%E5%89%91-47-%E7%A4%BC%E7%89%A9%E7%9A%84%E6%9C%80%E5%A4%A7%E4%BB%B7%E5%80%BC/"
+    >剑-47 礼物的最大价值(数组记忆搜索)</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/08/03/%E5%89%91-47-%E7%A4%BC%E7%89%A9%E7%9A%84%E6%9C%80%E5%A4%A7%E4%BB%B7%E5%80%BC/" class="article-date">
+  <time datetime="2020-08-03T04:42:00.000Z" itemprop="datePublished">2020-08-03</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/">刷题</a> / <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/%E5%89%91%E6%8C%87/">剑指</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="礼物的最大价值"><a href="#礼物的最大价值" class="headerlink" title="礼物的最大价值"></a>礼物的最大价值</h3><p>在一个 m*n 的棋盘的每一格都放有一个礼物，每个礼物都有一定的价值（价值大于 0）。你可以从棋盘的左上角开始拿格子里的礼物，并每次向右或者向下移动一格、直到到达棋盘的右下角。给定一个棋盘及其上面的礼物的价值，请计算你最多能拿到多少价值的礼物？</p>
+<p> </p>
+<p>示例 1:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">输入: </span><br><span class="line">[</span><br><span class="line">  [1,3,1],</span><br><span class="line">  [1,5,1],</span><br><span class="line">  [4,2,1]</span><br><span class="line">]</span><br><span class="line">输出: 12</span><br><span class="line">解释: 路径 1→3→5→2→1 可以拿到最多价值的礼物</span><br></pre></td></tr></table></figure>
+
+<p>提示：0 &lt; grid.length &lt;= 200, 0 &lt; grid[0].length &lt;= 200</p>
+<h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><p>迭代，记忆搜索，二维数组存储走到每个位置的最大值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int maxValue(vector&lt;vector&lt;int&gt;&gt;&amp; grid) &#123;</span><br><span class="line">        int row &#x3D; grid.size();</span><br><span class="line">        int col &#x3D; grid[0].size();</span><br><span class="line">        vector&lt;vector&lt;int&gt;&gt; res(row, vector&lt;int&gt;(col, 0));</span><br><span class="line">        for (int i &#x3D; 0; i &lt; row; ++i) &#123;</span><br><span class="line">            for (int j &#x3D; 0; j &lt; col; ++j) &#123;</span><br><span class="line">                if (i &#x3D;&#x3D; 0 &amp;&amp; j &#x3D;&#x3D; 0)</span><br><span class="line">                    res[i][j] &#x3D; grid[0][0];</span><br><span class="line">                else if (i &#x3D;&#x3D; 0)</span><br><span class="line">                    res[i][j] &#x3D; res[i][j - 1] + grid[i][j];</span><br><span class="line">                else if (j &#x3D;&#x3D; 0)</span><br><span class="line">                    res[i][j] &#x3D; res[i - 1][j] + grid[i][j];</span><br><span class="line">                else</span><br><span class="line">                    res[i][j] &#x3D; max(res[i - 1][j], res[i][j - 1]) + grid[i][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return res[row - 1][col - 1];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>状态表示：dp[i][j]表示到达i,j位置处的最大价值</p>
+<p>转移方程：dp[i][j] = max{dp[i-1][j],dp[i][j-1]} + grid[i][j];</p>
+<p>dp数组初始状态：dp[0][j] = {0}, dp[i][0] = {0} (就是将第一行和第一列全部设为0)</p>
+<p>其实这里的dp数组我们可以将它优化成一维的，优化之后的一维dp保存的是当前上一行的最大价值，然后我们从做到有去更新这个数组即可</p>
+<p>dp[0]一直是0，dp[i]存的是当前上一行最大值，dp[i-1]是dp[i]左侧最大值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int maxValue(vector&lt;vector&lt;int&gt;&gt;&amp; grid) &#123;</span><br><span class="line">       int r &#x3D; grid.size(), c &#x3D; grid[0].size();</span><br><span class="line">        vector&lt;int&gt; dp(c+1,0);</span><br><span class="line">        for(int i &#x3D; 0; i &lt; r; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            for(int j &#x3D; 0; j &lt; c; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                dp[j+1] &#x3D; max(dp[j],dp[j+1]) + grid[i][j];   </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[c];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+</article>
+
+    
+    <article
+  id="post-剑-46-把数字翻译成字符串"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/03/%E5%89%91-46-%E6%8A%8A%E6%95%B0%E5%AD%97%E7%BF%BB%E8%AF%91%E6%88%90%E5%AD%97%E7%AC%A6%E4%B8%B2/"
+    >剑-46 把数字翻译成字符串(递归)</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/08/03/%E5%89%91-46-%E6%8A%8A%E6%95%B0%E5%AD%97%E7%BF%BB%E8%AF%91%E6%88%90%E5%AD%97%E7%AC%A6%E4%B8%B2/" class="article-date">
+  <time datetime="2020-08-03T01:00:00.000Z" itemprop="datePublished">2020-08-03</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/">刷题</a> / <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/%E5%89%91%E6%8C%87/">剑指</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="把数字翻译成字符串"><a href="#把数字翻译成字符串" class="headerlink" title="把数字翻译成字符串"></a>把数字翻译成字符串</h3><p>给定一个数字，我们按照如下规则把它翻译为字符串：0 翻译成 “a” ，1 翻译成 “b”，……，11 翻译成 “l”，……，25 翻译成 “z”。一个数字可能有多个翻译。请编程实现一个函数，用来计算一个数字有多少种不同的翻译方法。</p>
+<p> </p>
+<p>示例 1:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入: 12258</span><br><span class="line">输出: 5</span><br><span class="line">解释: 12258有5种不同的翻译，分别是&quot;bccfi&quot;, &quot;bwfi&quot;, &quot;bczi&quot;, &quot;mcfi&quot;和&quot;mzi&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>提示：0 &lt;= num &lt; 2^31</p>
+<h4 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h4><p>1.每次取最后两位数,rem = num % 100<br>2.若rem &gt; 25,则无法表示,即rem的个位和十位无法合一起，则用translateNum(num/10),表示前进一位<br>3.若在00 &lt;= rem &lt;= 09,则无法表示，即rem的个位和十位无法合一起，所以用translateNum(num/10)<br>如num = 506,其只有一种表示为fag,不可表示为fg，所以0是无法和6组合一起成为06<br>4.若在10 &lt;= rem &lt;= 25,则可以分出两种表示方法,所以用translateNum(num/10) + translateNum(num/100)递归来计算数量<br>5.所以总结以上就是：<br>if (num &lt; 10),则加1<br>if (num%100 &lt; 10 || num%100 &gt; 25) translateNum(num/10);<br>if (10 &lt;= num % 100 &lt;= 25) translateNum(num/10) + translateNum(num/100);</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int translateNum(int num) &#123;</span><br><span class="line">        if (num &lt; 10) return 1;</span><br><span class="line">        return (num%100 &lt; 10 || num%100 &gt; 25) ? translateNum(num&#x2F;10) : translateNum(num&#x2F;10) + translateNum(num&#x2F;100);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>同一思路，实现方式差不多。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int backtrack(string&amp; s, int idx)&#123;</span><br><span class="line">        int n &#x3D; s.size();</span><br><span class="line">        if(idx &#x3D;&#x3D; n) return 1;&#x2F;&#x2F;idx到n越界，结束。</span><br><span class="line">        </span><br><span class="line">         &#x2F;&#x2F;idx &#x3D;&#x3D; n - 1，因为只剩最后俩个数12时，1单独翻译只有一种方法。</span><br><span class="line">        &#x2F;&#x2F;所以到了最后一个元素n-1，不需要判断s.substr(idx, 2)。</span><br><span class="line">        </span><br><span class="line">        if(idx &#x3D;&#x3D; n - 1 || s[idx] &#x3D;&#x3D; &#39;0&#39; || s.substr(idx, 2) &gt; &quot;25&quot;)</span><br><span class="line">            return backtrack(s, idx + 1);</span><br><span class="line">        return backtrack(s, idx + 1) + backtrack(s, idx + 2);</span><br><span class="line">    &#125;</span><br><span class="line">    int translateNum(int num) &#123;</span><br><span class="line">        string s &#x3D; to_string(num);</span><br><span class="line">        return backtrack(s, 0);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+</article>
+
+    
+    <article
+  id="post-剑-45-把数组排成最小的数"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/02/%E5%89%91-45-%E6%8A%8A%E6%95%B0%E7%BB%84%E6%8E%92%E6%88%90%E6%9C%80%E5%B0%8F%E7%9A%84%E6%95%B0/"
+    >剑-45 把数组排成最小的数(sort改写，比较字符串)</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/08/02/%E5%89%91-45-%E6%8A%8A%E6%95%B0%E7%BB%84%E6%8E%92%E6%88%90%E6%9C%80%E5%B0%8F%E7%9A%84%E6%95%B0/" class="article-date">
+  <time datetime="2020-08-02T02:43:00.000Z" itemprop="datePublished">2020-08-02</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/">刷题</a> / <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/%E5%89%91%E6%8C%87/">剑指</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="把数组排成最小的数"><a href="#把数组排成最小的数" class="headerlink" title="把数组排成最小的数"></a>把数组排成最小的数</h3><p>输入一个非负整数数组，把数组里所有数字拼接起来排成一个数，打印能拼接出的所有数字中最小的一个。</p>
+<p> </p>
+<p>示例 1:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [10,2]</span><br><span class="line">输出: &quot;102&quot;</span><br></pre></td></tr></table></figure>
+<p>示例 2:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: [3,30,34,5,9]</span><br><span class="line">输出: &quot;3033459&quot;</span><br></pre></td></tr></table></figure>
+
+<p>提示:<br>0 &lt; nums.length &lt;= 100</p>
+<p>说明:</p>
+<p>输出结果可能非常大，所以你需要返回一个字符串而不是整数<br>拼接起来的数字可能会有前导 0，最后结果不需要去掉前导 0</p>
+<h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><p>我们这里说的排列大小比较和字符串大小有点区别，比如 3 和 30，明显 30 排在前面比较好，所以我们要重构比较，我们组合 s1 和 s2 ，如果 s1 + s2 &gt; s2 + s1，那么 s1 &gt; s2</p>
+<p>方法一：直接改写sort</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    static bool compare(string sa, string sb)</span><br><span class="line">    &#123;return sa+sb &lt; sb+sa;&#125;</span><br><span class="line">    </span><br><span class="line">    string minNumber(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        &#x2F;&#x2F; 选取使字符串组合更小的排序规则</span><br><span class="line">        vector&lt;string&gt; tmp;</span><br><span class="line">        for(int n : nums)&#123;</span><br><span class="line">            tmp.push_back(to_string(n));</span><br><span class="line">        &#125;</span><br><span class="line">        sort(tmp.begin(), tmp.end(), compare);</span><br><span class="line">        string ans &#x3D; &quot;&quot;;</span><br><span class="line">        for(string s : tmp) ans +&#x3D; s;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>方法二：匿名函数lambda表达式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    string minNumber(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        &#x2F;&#x2F; 选取使字符串组合更小的排序规则</span><br><span class="line">        &#x2F;&#x2F;auto compare &#x3D; [](string sa, string sb)&#123;return sa+sb &lt; sb+sa;&#125;;</span><br><span class="line">        vector&lt;string&gt; tmp;</span><br><span class="line">        for(int n : nums)&#123;</span><br><span class="line">            tmp.push_back(to_string(n));</span><br><span class="line">        &#125;</span><br><span class="line">        sort(tmp.begin(), tmp.end(), [](string s1, string s2)&#123;return s1 + s2 &lt; s2 + s1;&#125;);</span><br><span class="line">        &#x2F;&#x2F;sort(tmp.begin(), tmp.end(), compare);</span><br><span class="line">        string ans &#x3D; &quot;&quot;;</span><br><span class="line">        for(string s : tmp) ans +&#x3D; s;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+</article>
+
+    
+    <article
+  id="post-剑-44-数字序列中某一位的数字"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/02/%E5%89%91-44-%E6%95%B0%E5%AD%97%E5%BA%8F%E5%88%97%E4%B8%AD%E6%9F%90%E4%B8%80%E4%BD%8D%E7%9A%84%E6%95%B0%E5%AD%97/"
+    >剑-44 数字序列中某一位的数字</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/08/02/%E5%89%91-44-%E6%95%B0%E5%AD%97%E5%BA%8F%E5%88%97%E4%B8%AD%E6%9F%90%E4%B8%80%E4%BD%8D%E7%9A%84%E6%95%B0%E5%AD%97/" class="article-date">
+  <time datetime="2020-08-02T01:14:00.000Z" itemprop="datePublished">2020-08-02</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/">刷题</a> / <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/%E5%89%91%E6%8C%87/">剑指</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="数字序列中某一位的数字"><a href="#数字序列中某一位的数字" class="headerlink" title="数字序列中某一位的数字"></a>数字序列中某一位的数字</h3><p>数字以0123456789101112131415…的格式序列化到一个字符序列中。在这个序列中，第5位（从下标0开始计数）是5，第13位是1，第19位是4，等等。</p>
+<p>请写一个函数，求任意第n位对应的数字。</p>
+<p> </p>
+<p>示例 1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n &#x3D; 3</span><br><span class="line">输出：3</span><br></pre></td></tr></table></figure>
+<p>示例 2：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n &#x3D; 11</span><br><span class="line">输出：0</span><br></pre></td></tr></table></figure>
+
+<p>限制：<br>0 &lt;= n &lt; 2^31</p>
+<h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><p><img src="/img/9.png"></p>
+<p>观察得除0外，个位数9个占0.9 * 10(1) *  1个位置，十位数90个占0.9* 10(2) * 2位置，百位数900个占0.9* 10(3)*3位置，依次类推。</p>
+<p><strong>解题思想：</strong></p>
+<p>可以根据n所在多少位，先求出n所在的数字；</p>
+<p>再将该数字转化为字符串；</p>
+<p>最后求出n在字符串的第几位并将该位输出即可。</p>
+<p><strong>注意点：</strong></p>
+<p>1： 本题解中主要处理个数的问题，每前进一段，就将上一段的长度给砍掉。</p>
+<p>2： 题目中是从0开始到n的，也就是一开始有n+1个数。当取n = 0时，i也应该为0， 不满足循环公式（会出错），所以在while循环之前，单独处理了0段，即将n+1个数减1，表示去除了0段之后，还剩n个数。</p>
+<p>3： <label style="color:red"> (n-1)/i 中的n-1是为了在求n所在数字时，低位从0开始。即，”564”第0个是5。</label>pow（10，i-1）是为了求n所在数字段的起始基础。<br>如从基础100开始，通过n-1可以保证从0开始计数，即100+n-1可以取到100，否则只能从101开始，取不到100，导致错误。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int findNthDigit(int n) &#123;</span><br><span class="line">        int i &#x3D; 1;</span><br><span class="line">        while(n &gt; 0.9*pow(10,i)*i) n -&#x3D; 0.9*pow(10,i)*i,i++;            &#x2F;&#x2F;大于则前进</span><br><span class="line">        string res &#x3D; to_string(pow(10, i-1) + (n-1)&#x2F;i);                 &#x2F;&#x2F;求出n所在的数字，并转化位字符串</span><br><span class="line">        &#x2F;&#x2F;pow(10, i-1)是起始点，可以100代入理解，pow(10, i-1)起始100，而100-99后还有1。所以(n-1)&#x2F;i，用n-1。</span><br><span class="line">        return res[(n-1)%i] - &#39;0&#39;;                                      </span><br><span class="line">        &#x2F;&#x2F;求出n在第几位，输出。此处的n-1是因为字符从第0位开始的。</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%91%E6%8C%87%E7%95%99%E6%84%8F/" rel="tag">剑指留意</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+</article>
+
+    
+    <article
+  id="post-剑-43-1～n整数中1出现的次数"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/01/%E5%89%91-43-1%EF%BD%9En%E6%95%B4%E6%95%B0%E4%B8%AD1%E5%87%BA%E7%8E%B0%E7%9A%84%E6%AC%A1%E6%95%B0/"
+    >剑-43 1～n整数中1出现的次数</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/08/01/%E5%89%91-43-1%EF%BD%9En%E6%95%B4%E6%95%B0%E4%B8%AD1%E5%87%BA%E7%8E%B0%E7%9A%84%E6%AC%A1%E6%95%B0/" class="article-date">
+  <time datetime="2020-08-01T10:03:00.000Z" itemprop="datePublished">2020-08-01</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/">刷题</a> / <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/%E5%89%91%E6%8C%87/">剑指</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="1～n整数中1出现的次数"><a href="#1～n整数中1出现的次数" class="headerlink" title="1～n整数中1出现的次数"></a>1～n整数中1出现的次数</h3><p>输入一个整数 n ，求1～n这n个整数的十进制表示中1出现的次数。</p>
+<p>例如，输入12，1～12这些整数中包含1 的数字有1、10、11和12，1一共出现了5次。</p>
+<p> </p>
+<p>示例 1：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n &#x3D; 12</span><br><span class="line">输出：5</span><br></pre></td></tr></table></figure>
+<p>示例 2：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：n &#x3D; 13</span><br><span class="line">输出：6</span><br></pre></td></tr></table></figure>
+
+<p>限制：<br>1 &lt;= n &lt; 2^31</p>
+<h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><p>第i个位置出现 1 的次数</p>
+<p>================================================<br>具体思路：<br>因为是要求所有情况下1出现的次数，所以可以将该问题分解成每个位置上1出现的次数，最后将每个位置上出现的次数求和。<br>假设i为数字n从低到高的第i位，比第i位高的称为高位，比第i位低的称为低位。分情况讨论第i位置上的数。</p>
+<p>====当i位置上的数字大于1时<br>第i位置大于1，此时低位部分的每一个位置都可以取到0-9，所以次数为<br>(高位数字大小+1)*10^(i-1)<br>上述公式中加1是高位全0的情况</p>
+<p>======当i位置上的数字等于1时<br>此时分成两种情况讨论</p>
+<p>高位取最大值数值。这时低位部分的每个位置不能取到0-9，低位的个数为 低位数字大小+1。<br>因此1出现的次数为 1 * (低位数字大小+1)。加1也是全为0的情况。<br>高位不取最大值。这时低位部分是可取到0-9的，所以1出现的次数为 （高位数字大小-1+1)*10^(i-1)<br>综上，当i位置上的数字为1时，出现的总次数为：<br>高位数字大小 *10^(i-1)+低位数字大小+1</p>
+<p>========当i位置上的数字为0时<br>这时i位置要想为1，就必须向高位借1，因此此时低位部分是都可以取到0-9的。所以次数为：<br>(高位数字大小-1+1) * 10^(i-1)=高位数字大小*10^(i-1)</p>
+<p>方法一：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int countDigitOne(int n) &#123;</span><br><span class="line">       int count &#x3D; 0;</span><br><span class="line">       long i &#x3D; 1;&#x2F;&#x2F;指向遍历的位数，如i&#x3D;1即个位，i&#x3D;10即十位，...，因为n可以有31位，所以10^31用long存储</span><br><span class="line">       while(n&#x2F;i!&#x3D;0)&#123;</span><br><span class="line">           &#x2F;&#x2F;n&#x2F;i控制遍历的次数，将所有的位数都遍历完毕</span><br><span class="line">            long high &#x3D; n&#x2F;(10*i);&#x2F;&#x2F;将当前位之前的所有高位都存在high中</span><br><span class="line">            long cur &#x3D; (n&#x2F;i)%10;&#x2F;&#x2F;将当前位记录在cur中，即我们每次都需要统计当前位上1出现的次数</span><br><span class="line">            long low &#x3D; n-(n&#x2F;i)*i;</span><br><span class="line">            if(cur &#x3D;&#x3D; 0)&#123;</span><br><span class="line">                count +&#x3D; high * i;</span><br><span class="line">            &#125; else if(cur &#x3D;&#x3D; 1)&#123;</span><br><span class="line">                count +&#x3D; high * i + low + 1;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                count +&#x3D; high * i + i;</span><br><span class="line">            &#125;</span><br><span class="line">            i &#x3D; i * 10;&#x2F;&#x2F;准备遍历下一位</span><br><span class="line">       &#125;</span><br><span class="line">       return count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>方法二：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int countDigitOne(int n) &#123;</span><br><span class="line">        string s &#x3D; to_string(n);</span><br><span class="line">        int length &#x3D; s.size();</span><br><span class="line">        int index &#x3D; 1;</span><br><span class="line">        int count &#x3D; 0;</span><br><span class="line">        while(index&lt;&#x3D;length)&#123;&#x2F;&#x2F;从低位往高位遍历</span><br><span class="line">            int currentNum &#x3D; s[length-index] - &#39;0&#39;;</span><br><span class="line">            if(currentNum&gt;1)&#x2F;&#x2F;公式一：</span><br><span class="line">                count +&#x3D; (getDigitHigh(s,length,index)+1)*pow(10,index-1);</span><br><span class="line">            else if(currentNum &#x3D;&#x3D; 1)&#x2F;&#x2F;公式二：</span><br><span class="line">                count +&#x3D; (getDigitHigh(s,length,index)*pow(10,index-1)+getDigitLow(s,length,index)+1);</span><br><span class="line">            else&#x2F;&#x2F;公式三：</span><br><span class="line">                count +&#x3D; getDigitHigh(s,length,index)*pow(10,index-1);</span><br><span class="line">            index ++;</span><br><span class="line">        &#125;</span><br><span class="line">        return count;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    int getDigitHigh(string s, int length, int currentLength)&#123; &#x2F;&#x2F;截取获取高位数字</span><br><span class="line">        s &#x3D; s.substr(0,length-currentLength);</span><br><span class="line">        if(s!&#x3D;&quot;\0&quot;)&#x2F;&#x2F;&quot;\0&quot;等同于&quot;&quot;</span><br><span class="line">            return stoi(s);</span><br><span class="line">        else</span><br><span class="line">            return 0;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    int getDigitLow(string s, int length, int currentLength)&#123;&#x2F;&#x2F;获取低位数字</span><br><span class="line">        s &#x3D; s.substr(length-currentLength+1);</span><br><span class="line">        if(s!&#x3D;&quot;\0&quot;)</span><br><span class="line">            return stoi(s);</span><br><span class="line">        else</span><br><span class="line">            return 0;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%91%E6%8C%87%E7%95%99%E6%84%8F/" rel="tag">剑指留意</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+</article>
+
+    
+  </article>
+  
+
+  
+  <nav class="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/5/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/7/">下一页</a>
+  </nav>
+  
+</section>
+</div>
+
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020
+        <i class="ri-heart-fill heart_icon"></i> John Doe
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="寒"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">文档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+
+<script src="/js/clickBoom2.js"></script>
+
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+</body>
+
+</html>

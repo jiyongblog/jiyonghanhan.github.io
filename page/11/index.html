@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+     寒
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      
+<section class="cover">
+    
+  <div class="cover-frame">
+    <div class="bg-box">
+      <img src="/images/cover2.jpg" alt="image frame" />
+    </div>
+    <div class="cover-inner text-center text-white">
+      <h1><a href="/">寒</a></h1>
+      <div id="subtitle-box">
+        
+        <span id="subtitle"></span>
+        
+      </div>
+      <div>
+        
+      </div>
+    </div>
+  </div>
+  <div class="cover-learn-more">
+    <a href="javascript:void(0)" class="anchor"><i class="ri-arrow-down-line"></i></a>
+  </div>
+</section>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js"></script>
+
+
+<!-- Subtitle -->
+
+  <script>
+    try {
+      var typed = new Typed("#subtitle", {
+        strings: ['思念，是淡淡的幸福', '最美好的事，是看见寒寒的微笑', '吟诵诗千卷，才发现最美的诗是你'],
+        startDelay: 0,
+        typeSpeed: 200,
+        loop: true,
+        backSpeed: 100,
+        showCursor: true
+      });
+    } catch (err) {
+      console.log(err)
+    }
+  </script>
+  
+<div id="main">
+  <section class="outer">
+  <article class="articles">
+    
+    
+    
+    
+    <article
+  id="post-jpeglib压缩"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/07/23/jpeglib%E5%8E%8B%E7%BC%A9/"
+    >jpeglib压缩</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/07/23/jpeglib%E5%8E%8B%E7%BC%A9/" class="article-date">
+  <time datetime="2020-07-23T01:59:00.000Z" itemprop="datePublished">2020-07-23</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/jpeglib%E5%8E%8B%E7%BC%A9/">jpeglib压缩</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line"><span class="comment">#include &lt;string.h&gt;</span></span><br><span class="line"><span class="comment">#include &lt;fstream&gt;</span></span><br><span class="line">extern <span class="string">&quot;C&quot;</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="comment">#include &quot;jpeglib.h&quot;</span></span><br><span class="line">&#125;;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int rgb2jpeg(unsigned char* rgb_buffer, int width, int height,int depth ,int quality, unsigned char* jpeg_buffer, unsigned long&amp; jpeg_size)</span><br><span class="line">&#123;</span><br><span class="line">//    unsigned char *pTempDst = new unsigned char[width * abs(height) * depth / 8];</span><br><span class="line">//   // Bgra2Rgb(rgb_buffer, width, height, depth / 8, rgb);</span><br><span class="line">//    //unsigned char* pTempDst = rgb;</span><br><span class="line">//    <span class="keyword">for</span> (int i = 0; i &lt; abs(height); i++)</span><br><span class="line">//    &#123;</span><br><span class="line">//        const unsigned char* pTempSrc = nullptr;</span><br><span class="line">//        <span class="keyword">if</span> (height &gt; 0)</span><br><span class="line">//        &#123;</span><br><span class="line">//            pTempSrc = rgb_buffer + width * i *(depth / 8) ;</span><br><span class="line">//        &#125;</span><br><span class="line">//        <span class="keyword">else</span></span><br><span class="line">//        &#123;</span><br><span class="line">//            pTempSrc = rgb_buffer + width * abs(i + height + 1) * (depth / 8);</span><br><span class="line">//        &#125;</span><br><span class="line"></span><br><span class="line">//        <span class="keyword">for</span> (int j = 0; j &lt; width; j++)</span><br><span class="line">//        &#123;</span><br><span class="line">//            *(pTempDst) = *(pTempSrc + 2);</span><br><span class="line">//            *(pTempDst + 1) = *(pTempSrc + 1);</span><br><span class="line">//            *(pTempDst + 2) = *(pTempSrc);</span><br><span class="line">//            pTempDst += 3;</span><br><span class="line">//            pTempSrc += (depth / 8);</span><br><span class="line">//        &#125;</span><br><span class="line">//    &#125;</span><br><span class="line"></span><br><span class="line">    //pTempDst新的rgb</span><br><span class="line">    //rgb_buffer旧的rgb</span><br><span class="line"></span><br><span class="line">    //压缩</span><br><span class="line">    unsigned char* outbuffer;</span><br><span class="line">    outbuffer=NULL;</span><br><span class="line"></span><br><span class="line">    struct jpeg_compress_struct cinfo;</span><br><span class="line">    struct jpeg_error_mgr jerr;</span><br><span class="line">    cinfo.err=jpeg_std_error(&amp;jerr);</span><br><span class="line">    jpeg_create_compress(&amp;cinfo);</span><br><span class="line"></span><br><span class="line">    jpeg_mem_dest(&amp;cinfo,&amp;outbuffer,&amp;jpeg_size);</span><br><span class="line"></span><br><span class="line">    cinfo.image_width=width;</span><br><span class="line">    cinfo.image_height=height;</span><br><span class="line">    cinfo.input_components=1;//channels;//3   1</span><br><span class="line">    cinfo.in_color_space=JCS_GRAYSCALE;//JCS_GRAYSCALE;//JCS_RGB</span><br><span class="line"></span><br><span class="line">    jpeg_set_defaults(&amp;cinfo);</span><br><span class="line">    cinfo.dct_method=JDCT_FASTEST;</span><br><span class="line">    jpeg_set_quality(&amp;cinfo, quality, TRUE /* <span class="built_in">limit</span> to baseline-JPEG values */);</span><br><span class="line"></span><br><span class="line">    jpeg_start_compress(&amp;cinfo,TRUE);</span><br><span class="line"></span><br><span class="line">    //JSAMPROW row_pointer[1];        /* pointer to JSAMPLE row[s] */</span><br><span class="line">    JSAMPROW row_pointer[height];</span><br><span class="line"></span><br><span class="line">    int     row_stride;             /* physical row width <span class="keyword">in</span> image buffer */</span><br><span class="line">    row_stride = width * depth/8; /* JSAMPLEs per row <span class="keyword">in</span> image_buffer */</span><br><span class="line">    //========压缩方式一</span><br><span class="line">    int i=0;</span><br><span class="line">    <span class="keyword">while</span>(i&lt;height)</span><br><span class="line">    &#123;</span><br><span class="line">         row_pointer[i]=&amp;rgb_buffer[i*row_stride];</span><br><span class="line">        i++;</span><br><span class="line">     &#125;</span><br><span class="line">    <span class="built_in">float</span> start = getTickCount();</span><br><span class="line">     (void)jpeg_write_scanlines(&amp;cinfo,row_pointer,height);</span><br><span class="line">        <span class="built_in">float</span> end = getTickCount();</span><br><span class="line"></span><br><span class="line">        <span class="built_in">float</span> last = end-start;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;time consume: &quot;</span> &lt;&lt; (last / getTickFrequency() * 1000) &lt;&lt; endl;</span><br><span class="line">    //=======压缩方式二</span><br><span class="line">//    <span class="keyword">while</span>(cinfo.next_scanline&lt;cinfo.image_height)</span><br><span class="line">//   &#123;</span><br><span class="line">//     row_pointer[0]=&amp;rgb_buffer[cinfo.next_scanline*row_stride];</span><br><span class="line"></span><br><span class="line">//     (void)jpeg_write_scanlines(&amp;cinfo,row_pointer,1);</span><br><span class="line">//   &#125;</span><br><span class="line">    //======</span><br><span class="line"></span><br><span class="line">   jpeg_finish_compress(&amp;cinfo);</span><br><span class="line">   <span class="keyword">for</span>(int i=0;i&lt;jpeg_size;i++)</span><br><span class="line">   &#123;</span><br><span class="line">       jpeg_buffer[i]=outbuffer[i];</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">if</span>(NULL!=outbuffer)</span><br><span class="line">   &#123;</span><br><span class="line">       free(outbuffer);</span><br><span class="line">       outbuffer=NULL;</span><br><span class="line">   &#125;</span><br><span class="line">   jpeg_destroy_compress(&amp;cinfo);</span><br><span class="line">   <span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="function"><span class="title">main</span></span>()&#123;</span><br><span class="line"></span><br><span class="line">    int  width=4024;</span><br><span class="line">    int height=3036;</span><br><span class="line">    int depth=8;</span><br><span class="line">    unsigned char *kk = new unsigned char[width * abs(height) * depth / 8];</span><br><span class="line">    unsigned long imgsize;</span><br><span class="line">    Mat input_image=imread(<span class="string">&quot;11.bmp&quot;</span>,0);</span><br><span class="line">    unsigned char *brga=input_image.data;</span><br><span class="line">    int quality=1;</span><br><span class="line">  </span><br><span class="line">    rgb2jpeg(brga,  width,  height, depth , quality,  kk,  imgsize);</span><br><span class="line">    </span><br><span class="line">	  //brga:原图，width:原图宽，height:原图高</span><br><span class="line">     //depth:图像深度，灰度:8,彩图:24</span><br><span class="line">     //kk:压缩后的图片，imgsize:压缩后的图像大小</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="解压缩"><a href="#解压缩" class="headerlink" title="解压缩"></a>解压缩</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">struct my_error_mgr &#123;</span><br><span class="line">	struct jpeg_error_mgr pub;  /* <span class="string">&quot;public&quot;</span> fields */</span><br><span class="line">	jmp_buf setjmp_buffer;    /* <span class="keyword">for</span> <span class="built_in">return</span> to <span class="built_in">caller</span> */</span><br><span class="line">&#125;;</span><br><span class="line">typedef struct my_error_mgr * my_error_ptr;</span><br><span class="line"></span><br><span class="line">void my_error_exit(j_common_ptr cinfo)</span><br><span class="line">&#123;</span><br><span class="line">	my_error_ptr myerr = (my_error_ptr)cinfo-&gt;err;</span><br><span class="line">	(*cinfo-&gt;err-&gt;output_message) (cinfo);</span><br><span class="line">	longjmp(myerr-&gt;setjmp_buffer, 1);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int jpeg2rgb(unsigned char* jpeg_buffer, int jpeg_size, unsigned char* rgb_buffer, int* size, int* width, int* height)</span><br><span class="line">&#123;</span><br><span class="line">	struct jpeg_decompress_struct cinfo;</span><br><span class="line">	struct my_error_mgr jerr;</span><br><span class="line"></span><br><span class="line">	JSAMPARRAY buffer;</span><br><span class="line">	int row_stride = 0;</span><br><span class="line">	unsigned char* tmp_buffer = NULL;</span><br><span class="line">	int rgb_size;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (jpeg_buffer == NULL)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;no jpeg buffer here.\n&quot;</span>);</span><br><span class="line">		<span class="built_in">return</span> -1;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (rgb_buffer == NULL)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;you need to alloc rgb buffer.\n&quot;</span>);</span><br><span class="line">		<span class="built_in">return</span> -1;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	cinfo.err = jpeg_std_error(&amp;jerr.pub);</span><br><span class="line">	jerr.pub.error_exit = my_error_exit;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (setjmp(jerr.setjmp_buffer))</span><br><span class="line">	&#123;</span><br><span class="line">		jpeg_destroy_decompress(&amp;cinfo);</span><br><span class="line">		<span class="built_in">return</span> -1;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	jpeg_create_decompress(&amp;cinfo);</span><br><span class="line">	jpeg_mem_src(&amp;cinfo, jpeg_buffer, jpeg_size);</span><br><span class="line">	jpeg_read_header(&amp;cinfo, TRUE);</span><br><span class="line">	//cinfo.out_color_space = JCS_RGB; //JCS_YCbCr;  // 设置输出格式</span><br><span class="line">	jpeg_start_decompress(&amp;cinfo);</span><br><span class="line"></span><br><span class="line">	row_stride = cinfo.output_width * cinfo.output_components;</span><br><span class="line">	*width = cinfo.output_width;</span><br><span class="line">	*height = cinfo.output_height;</span><br><span class="line"></span><br><span class="line">	rgb_size = row_stride * cinfo.output_height; // 总大小</span><br><span class="line">	*size = rgb_size;</span><br><span class="line">    </span><br><span class="line">	buffer = (*cinfo.mem-&gt;alloc_sarray)((j_common_ptr)&amp;cinfo, JPOOL_IMAGE, row_stride, 1);</span><br><span class="line">	//===========</span><br><span class="line">	/*<span class="built_in">printf</span>(<span class="string">&quot;debug--:\nrgb_size: %d, size: %d w: %d h: %d row_stride: %d \n&quot;</span>, rgb_size,</span><br><span class="line">		cinfo.image_width*cinfo.image_height * 3,</span><br><span class="line">		cinfo.image_width,</span><br><span class="line">		cinfo.image_height,</span><br><span class="line">		row_stride);*/</span><br><span class="line">	tmp_buffer = rgb_buffer;</span><br><span class="line">	<span class="keyword">while</span> (cinfo.output_scanline &lt; cinfo.output_height) // 解压每一行</span><br><span class="line">	&#123;</span><br><span class="line">		jpeg_read_scanlines(&amp;cinfo, buffer, 1);</span><br><span class="line">		// 复制到内存</span><br><span class="line">		memcpy(tmp_buffer, buffer[0], row_stride);</span><br><span class="line">		tmp_buffer += row_stride;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	jpeg_finish_decompress(&amp;cinfo);</span><br><span class="line">	jpeg_destroy_decompress(&amp;cinfo);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br><span class="line">int <span class="function"><span class="title">main</span></span>()&#123;</span><br><span class="line"></span><br><span class="line">	 char* kk = new  char[4024 * 3036 ];</span><br><span class="line">     </span><br><span class="line">	 unsigned char *rgb = new unsigned char[4024 * 3036 ];</span><br><span class="line">	 int size;</span><br><span class="line">	 int rgb_w;</span><br><span class="line">	 int rgb_h;</span><br><span class="line"></span><br><span class="line">	 jpeg2rgb((unsigned char*)kk, cc, rgb, &amp;size, &amp;rgb_w, &amp;rgb_h);</span><br><span class="line">     //kk:压缩图片 cc:压缩图片大小 </span><br><span class="line">     //rgb:解压后的图片 size:解压后图片大小</span><br><span class="line">     //rgb_w:解压后图片宽</span><br><span class="line">     //rgb_h:解压后图片高</span><br><span class="line">     </span><br><span class="line">      Mat mat(3036, 4024, CV_8UC1, rgb);</span><br><span class="line">	  namedWindow(<span class="string">&quot;11&quot;</span>, WINDOW_NORMAL);</span><br><span class="line">	  resizeWindow(<span class="string">&quot;11&quot;</span>, 1006, 759);</span><br><span class="line">	  imshow(<span class="string">&quot;11&quot;</span>, mat);</span><br><span class="line">	  waitKey();</span><br><span class="line"></span><br><span class="line">	  system(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">	  <span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+</article>
+
+    
+    <article
+  id="post-socket传输"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/07/23/socket%E4%BC%A0%E8%BE%93/"
+    >socket传输</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/07/23/socket%E4%BC%A0%E8%BE%93/" class="article-date">
+  <time datetime="2020-07-23T00:12:00.000Z" itemprop="datePublished">2020-07-23</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/socket%E9%80%9A%E4%BF%A1/">socket通信</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="服务器-Linux"><a href="#服务器-Linux" class="headerlink" title="服务器(Linux)"></a>服务器(Linux)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">//头文件</span><br><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line"><span class="comment">#include &lt;string.h&gt;</span></span><br><span class="line"><span class="comment">#include &lt;fstream&gt;</span></span><br><span class="line"><span class="comment">#include &lt;sys/stat.h&gt;</span></span><br><span class="line"><span class="comment">#include &lt;sys/types.h&gt;</span></span><br><span class="line"><span class="comment">#include &lt;sys/socket.h&gt;</span></span><br><span class="line"><span class="comment">#include &lt;netinet/in.h&gt;</span></span><br><span class="line"><span class="comment">#include &lt;arpa/inet.h&gt;</span></span><br><span class="line"><span class="comment">#include &lt;unistd.h&gt;</span></span><br><span class="line"><span class="comment">#include &lt;errno.h&gt;</span></span><br><span class="line"><span class="comment">#include &lt;opencv2/opencv.hpp&gt;</span></span><br><span class="line"><span class="comment">#include &lt;pthread.h&gt;</span></span><br><span class="line">using namespace cv;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">const char* IP = <span class="string">&quot;192.168.2.10&quot;</span>;//IP地址</span><br><span class="line"><span class="comment">#define port 8000 //端口号</span></span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Server begin!&quot;</span> &lt;&lt; endl;</span><br><span class="line">    int socketServer = socket(AF_INET, SOCK_STREAM, 0);</span><br><span class="line">    //设置服务器套接字ip和端口</span><br><span class="line">    struct sockaddr_in serverSockaddr;</span><br><span class="line">    serverSockaddr.sin_family = AF_INET;</span><br><span class="line">    serverSockaddr.sin_port = htons(8000);</span><br><span class="line">    serverSockaddr.sin_addr.s_addr = inet_addr(IP);</span><br><span class="line">	//绑定操作</span><br><span class="line">    <span class="built_in">bind</span>(socketServer,(struct sockaddr*)&amp;serverSockaddr,sizeof(serverSockaddr))</span><br><span class="line">   //监听操作</span><br><span class="line">    listen(socketServer,5)</span><br><span class="line">   //接受客户端请求</span><br><span class="line">    struct sockaddr_in clientSockaddr;//客户端套接字</span><br><span class="line">    socklen_t nAddrlen = sizeof(clientSockaddr);</span><br><span class="line">int socketClient = accept(socketServer,(struct sockaddr*)&amp;clientSockaddr,&amp;nAddrlen);</span><br><span class="line">     </span><br><span class="line">  //开始数据传输</span><br><span class="line">  //==============================================</span><br><span class="line">    Mat input_image=imread(<span class="string">&quot;11.bmp&quot;</span>,0);</span><br><span class="line">    unsigned char *brga=input_image.data;</span><br><span class="line">    unsigned long imgsize=1000;//brga的数据大小</span><br><span class="line">    </span><br><span class="line">    char revData[2048];</span><br><span class="line">    char tt[16]=&#123;0&#125;;</span><br><span class="line"></span><br><span class="line">    int ai=100;</span><br><span class="line">    <span class="keyword">while</span>(ai&gt;0)&#123;</span><br><span class="line">     	sprintf(tt,<span class="string">&quot;%lu&quot;</span>,imgsize);//数字转字符，然后进行传输</span><br><span class="line">         send(socketClient,tt,sizeof(tt),0);</span><br><span class="line">         recv(socketClient,revData,2048,0);//服务器接受后发一个消息表示收到</span><br><span class="line">         send(socketClient,brga,imgsize,0);//发送数据</span><br><span class="line">         ai--;</span><br><span class="line">       &#125;</span><br><span class="line">   //=======================数据发送完毕</span><br><span class="line">    </span><br><span class="line">    shutdown(socketClient,SHUT_WR);//文件读取完毕，断开输出流，向客户端发送FIN包  </span><br><span class="line">    recv(socketClient,revData,2048,0);//阻塞，等待客户端接收完毕</span><br><span class="line">    close(socketClient);</span><br><span class="line">    close(socketServer);</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;The app exit！&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="客户端-Windows"><a href="#客户端-Windows" class="headerlink" title="客户端(Windows)"></a>客户端(Windows)</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#define _CRT_SECURE_NO_WARNINGS</span></span><br><span class="line"><span class="comment">#include &lt;stdio.h&gt;  </span></span><br><span class="line"><span class="comment">#include &lt;winsock2.h&gt;  </span></span><br><span class="line"><span class="comment">#include &lt;Windows.h&gt;  </span></span><br><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line"><span class="comment">#include &lt;time.h&gt;</span></span><br><span class="line"><span class="comment">#include&lt;opencv2/opencv.hpp&gt;</span></span><br><span class="line"><span class="comment">#pragma comment(lib, &quot;ws2_32.lib&quot;)  </span></span><br><span class="line"></span><br><span class="line">const char* IP = <span class="string">&quot;192.168.2.10&quot;</span>;</span><br><span class="line"><span class="comment">#define BUF_SIZE  2048</span></span><br><span class="line">using namespace std;</span><br><span class="line">using namespace cv;</span><br><span class="line">int <span class="function"><span class="title">main</span></span>()&#123;</span><br><span class="line"></span><br><span class="line">	WSADATA wsaData;</span><br><span class="line">	WSAStartup(MAKEWORD(2, 2), &amp;wsaData);</span><br><span class="line">	SOCKET sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP); //IPPROTO_TCP</span><br><span class="line">	//定义套接字绑定ip和端口</span><br><span class="line">	sockaddr_in sockAddr;</span><br><span class="line">	memset(&amp;sockAddr, 0, sizeof(sockAddr));</span><br><span class="line">	sockAddr.sin_family = AF_INET;</span><br><span class="line">	sockAddr.sin_port = htons(8000);</span><br><span class="line">	sockAddr.sin_addr.s_addr = inet_addr(IP);</span><br><span class="line">	//进行连接</span><br><span class="line">	int ret=connect(sock, (SOCKADDR*)&amp;sockAddr, sizeof(sockAddr));</span><br><span class="line">    //===========================开始传输 =================</span><br><span class="line">    char tt[16];</span><br><span class="line">    char* s = <span class="string">&quot;1&quot;</span>;</span><br><span class="line">    int needrecv;</span><br><span class="line">    int cc = 0;</span><br><span class="line">    int nCount;</span><br><span class="line">    char* kk = new  char[4024 * 3036 ];</span><br><span class="line">    </span><br><span class="line">    int ai = 20;</span><br><span class="line">	 <span class="keyword">while</span> (ai&gt;0)&#123;</span><br><span class="line">		 cc = 0;</span><br><span class="line">		 recv(sock, tt, sizeof(tt), 0);</span><br><span class="line">		 needrecv = strtoul(tt, 0, 10);//接受传过来的数据大小</span><br><span class="line">		 send(sock, s, 100, 0);//发消息告诉服务器，收到数据了</span><br><span class="line">			</span><br><span class="line">		<span class="keyword">while</span> (cc&lt;needrecv)&#123;	</span><br><span class="line">           //接受数据存放在kk里面</span><br><span class="line">			 nCount = recv(sock, kk + cc, needrecv-cc, 0);</span><br><span class="line">			 cc += nCount;</span><br><span class="line">			 <span class="keyword">if</span> (nCount &lt; 0)</span><br><span class="line">			 <span class="built_in">break</span>;</span><br><span class="line">		 &#125;</span><br><span class="line">		 ai--;</span><br><span class="line">	 &#125;</span><br><span class="line">	cout&lt;&lt;<span class="string">&quot;File transfer success!&quot;</span>&lt;&lt;endl;</span><br><span class="line">	//文件接收完毕后直接关闭套接字，无需调用shutdown()  </span><br><span class="line">	closesocket(sock);</span><br><span class="line">	WSACleanup();</span><br><span class="line">	system(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">	<span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+</article>
+
+    
+    <article
+  id="post-剑-06-从尾到头打印链表"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/07/22/%E5%89%91-06-%E4%BB%8E%E5%B0%BE%E5%88%B0%E5%A4%B4%E6%89%93%E5%8D%B0%E9%93%BE%E8%A1%A8/"
+    >剑-06 从尾到头打印链表(改变链表结构)</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/07/22/%E5%89%91-06-%E4%BB%8E%E5%B0%BE%E5%88%B0%E5%A4%B4%E6%89%93%E5%8D%B0%E9%93%BE%E8%A1%A8/" class="article-date">
+  <time datetime="2020-07-22T03:50:00.000Z" itemprop="datePublished">2020-07-22</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/">刷题</a> / <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/%E5%89%91%E6%8C%87/">剑指</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="从尾到头打印链表"><a href="#从尾到头打印链表" class="headerlink" title="从尾到头打印链表"></a>从尾到头打印链表</h3><p>输入一个链表的头节点，从尾到头反过来返回每个节点的值（用数组返回）。</p>
+<p>示例 1：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1,3,2]</span><br><span class="line">输出：[2,3,1]</span><br></pre></td></tr></table></figure>
+
+<p>限制：0 &lt;= 链表长度 &lt;= 10000</p>
+<h3 id="解答：改变链表结构"><a href="#解答：改变链表结构" class="headerlink" title="解答：改变链表结构"></a>解答：改变链表结构</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition <span class="keyword">for</span> singly-linked list.</span><br><span class="line"> * struct ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode *next;</span><br><span class="line"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span><br><span class="line"> * &#125;;</span><br><span class="line"> */</span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; reversePrint(ListNode* head) &#123;</span><br><span class="line">        vector&lt;int&gt; a;</span><br><span class="line">        <span class="keyword">if</span>(head==NULL )&#123;</span><br><span class="line">            <span class="built_in">return</span> a;</span><br><span class="line">        &#125;</span><br><span class="line">         <span class="keyword">if</span>( head-&gt;next==NULL )&#123;</span><br><span class="line">            a.push_back(head-&gt;val);</span><br><span class="line">            <span class="built_in">return</span> a;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode *p=head;//不动</span><br><span class="line">        //俩个不断变换，实现链表反转。</span><br><span class="line">        ListNode *list=head;//前一个</span><br><span class="line">        ListNode *pN=head-&gt;next;//当前</span><br><span class="line">        <span class="keyword">while</span>(pN!=NULL)&#123;</span><br><span class="line">            p-&gt;next=pN-&gt;next;/保存当前结点的下一个节点</span><br><span class="line">            pN-&gt;next=list;//当前结点指向前一个节点，反向改变指针</span><br><span class="line">            list=pN;//更新前一个节点</span><br><span class="line">            pN=p-&gt;next;//更新当前结点</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(list!=NULL)&#123;</span><br><span class="line">            a.push_back(list-&gt;val);</span><br><span class="line">            list=list-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p> 解答：还可以采用递归，入栈法。</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%91%E6%8C%87%E7%95%99%E6%84%8F/" rel="tag">剑指留意</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+</article>
+
+    
+    <article
+  id="post-剑-05-替换空格"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/07/22/%E5%89%91-05-%E6%9B%BF%E6%8D%A2%E7%A9%BA%E6%A0%BC/"
+    >剑-05 替换空格</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/07/22/%E5%89%91-05-%E6%9B%BF%E6%8D%A2%E7%A9%BA%E6%A0%BC/" class="article-date">
+  <time datetime="2020-07-22T01:21:00.000Z" itemprop="datePublished">2020-07-22</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/">刷题</a> / <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/%E5%89%91%E6%8C%87/">剑指</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="替换空格"><a href="#替换空格" class="headerlink" title="替换空格"></a>替换空格</h3><p>请实现一个函数，把字符串 s 中的每个空格替换成”%20”。 </p>
+<p>示例 1：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;We are happy.&quot;</span></span><br><span class="line">输出：<span class="string">&quot;We%20are%20happy.&quot;</span></span><br></pre></td></tr></table></figure>
+<p>限制：<br>0 &lt;= s 的长度 &lt;= 10000</p>
+<h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><p>方法一</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    string replaceSpace(string s) &#123;</span><br><span class="line">        string res;</span><br><span class="line">        <span class="keyword">for</span>(auto c : s)&#123; //auto即char</span><br><span class="line">            <span class="keyword">if</span>(c == <span class="string">&#x27; &#x27;</span>)</span><br><span class="line">                res += <span class="string">&quot;%20&quot;</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                res += c;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>方法二</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">	 //和方法一差不多区别在于string的操作方式</span><br><span class="line">    string replaceSpace(string s) &#123;</span><br><span class="line">        string ss;</span><br><span class="line">        <span class="keyword">for</span>(int i=0;i&lt;s.size();i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(s[i]==<span class="string">&#x27; &#x27;</span>)&#123;</span><br><span class="line">                ss.push_back(<span class="string">&#x27;%&#x27;</span>);</span><br><span class="line">                ss.push_back(<span class="string">&#x27;2&#x27;</span>);</span><br><span class="line">                ss.push_back(<span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                ss.push_back(s[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">return</span> ss;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%91%E6%8C%87%E7%95%99%E6%84%8F/" rel="tag">剑指留意</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+</article>
+
+    
+    <article
+  id="post-剑-04-二维数组中的查找"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/07/22/%E5%89%91-04-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9F%A5%E6%89%BE/"
+    >剑-04 二维数组中的查找</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/07/22/%E5%89%91-04-%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9F%A5%E6%89%BE/" class="article-date">
+  <time datetime="2020-07-22T01:04:00.000Z" itemprop="datePublished">2020-07-22</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/">刷题</a> / <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/%E5%89%91%E6%8C%87/">剑指</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="二维数组中的查找"><a href="#二维数组中的查找" class="headerlink" title="二维数组中的查找"></a>二维数组中的查找</h3><p>在一个 n * m 的二维数组中，每一行都按照从左到右递增的顺序排序，每一列都按照从上到下递增的顺序排序。请完成一个函数，输入这样的一个二维数组和一个整数，判断数组中是否含有该整数。</p>
+<p>示例:</p>
+<p>现有矩阵 matrix 如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  [1,   4,  7, 11, 15],</span><br><span class="line">  [2,   5,  8, 12, 19],</span><br><span class="line">  [3,   6,  9, 16, 22],</span><br><span class="line">  [10, 13, 14, 17, 24],</span><br><span class="line">  [18, 21, 23, 26, 30]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>给定 target = 5，返回 true。</p>
+<p>给定 target = 20，返回 false。</p>
+<p>限制：<br>0 &lt;= n &lt;= 1000;<br>0 &lt;= m &lt;= 1000</p>
+<h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    bool findNumberIn2DArray(vector&lt;vector&lt;int&gt;&gt;&amp; matrix, int target) &#123;</span><br><span class="line">        <span class="keyword">if</span>(matrix.size()==0)&#123; //考虑边界</span><br><span class="line">            <span class="built_in">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        int n=matrix.size();</span><br><span class="line">        int m=matrix[0].size();</span><br><span class="line">        int i=n-1;</span><br><span class="line">        int j=0;</span><br><span class="line">        <span class="keyword">while</span>(i&gt;=0&amp;&amp;j&lt;m)&#123;</span><br><span class="line">            <span class="keyword">if</span>(matrix[i][j]==target)&#123;</span><br><span class="line">                <span class="built_in">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(matrix[i][j]&gt;target)&#123;</span><br><span class="line">                i--;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                j++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+</article>
+
+    
+    <article
+  id="post-剑-03"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/07/22/%E5%89%91-03/"
+    >剑-03 数组中重复的数字(哈希表思想)</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/07/22/%E5%89%91-03/" class="article-date">
+  <time datetime="2020-07-22T00:51:00.000Z" itemprop="datePublished">2020-07-22</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/">刷题</a> / <a class="article-category-link" href="/categories/%E5%88%B7%E9%A2%98/%E5%89%91%E6%8C%87/">剑指</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="找出数组中重复的数字。"><a href="#找出数组中重复的数字。" class="headerlink" title="找出数组中重复的数字。"></a>找出数组中重复的数字。</h3><p>在一个长度为 n 的数组 nums 里的所有数字都在 0～n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。</p>
+<p>示例 1：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：</span><br><span class="line">[2, 3, 1, 0, 2, 5, 3]</span><br><span class="line">输出：2 或 3 </span><br></pre></td></tr></table></figure>
+<p>限制：<br>2 &lt;= n &lt;= 100000</p>
+<h3 id="解答：哈希表思想。"><a href="#解答：哈希表思想。" class="headerlink" title="解答：哈希表思想。"></a>解答：哈希表思想。</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int findRepeatNumber(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line"></span><br><span class="line">        int* a=new int[nums.size()];</span><br><span class="line">        memset(a,0,nums.size());//给数组初始话赋值</span><br><span class="line">        </span><br><span class="line">        //哈希表思想</span><br><span class="line">        <span class="keyword">for</span> (int i=0;i&lt;nums.size();i++) &#123;    </span><br><span class="line">           <span class="keyword">if</span>(a[nums[i]]==1)&#123;</span><br><span class="line">               <span class="built_in">return</span> nums[i];</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">else</span>&#123;</span><br><span class="line">               a[nums[i]]=1;</span><br><span class="line">           &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">return</span> -1;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%89%91%E6%8C%87%E7%95%99%E6%84%8F/" rel="tag">剑指留意</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+   
+</article>
+
+    
+    <article
+  id="post-C-数据输入cin"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/07/21/C-%E6%95%B0%E6%8D%AE%E8%BE%93%E5%85%A5cin/"
+    >C++数据输入cin</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/07/21/C-%E6%95%B0%E6%8D%AE%E8%BE%93%E5%85%A5cin/" class="article-date">
+  <time datetime="2020-07-21T07:09:00.000Z" itemprop="datePublished">2020-07-21</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/C-%E7%AC%94%E8%AE%B0/">C++笔记</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="cin-get-与cin-peek"><a href="#cin-get-与cin-peek" class="headerlink" title="cin.get()与cin.peek()"></a>cin.get()与cin.peek()</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ char c;</span><br><span class="line">$ c=cin.peek();</span><br><span class="line">//查看放回缓存区。如果要访问的字符是文件结束符，则函数值是EOF（-1）。</span><br><span class="line"></span><br><span class="line">$ ch=cin.get();//从输入流中读取一个字符,会读取回车</span><br><span class="line">$ cin.get(ch);// 把值直接赋值给ch</span><br><span class="line">$ cin.get(ch, len + 1, <span class="string">&#x27;a&#x27;</span>);</span><br><span class="line">$ char _char[10];               // input: sdsdsdafd</span><br><span class="line">$ cin.get(_char, 10 + 1, <span class="string">&#x27;a&#x27;</span>);  // _char = <span class="string">&quot;sdsdsd&quot;</span>，之后光标停留在 <span class="string">&#x27;a&#x27;</span> 处</span><br><span class="line"></span><br><span class="line">$ cin.ignore()</span><br><span class="line">$ cin.ignore(a, ch)</span><br><span class="line">//如果忽略计数值达到 a 或者被抛弃的字符是 ch ，则cin.ignore() 函数执行终止；</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="cin-getline"><a href="#cin-getline" class="headerlink" title="cin.getline():"></a>cin.getline():</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ char char[20]; </span><br><span class="line">$ cin.getline(char, len + 1, <span class="string">&#x27;a&#x27;</span>);//+1是为了末尾的<span class="string">&#x27;\0&#x27;</span></span><br><span class="line">$ cin.getline(char, len + 1);//第三个参数系统默认为<span class="string">&#x27;\0&#x27;</span> </span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">char char[10];              // input: sdsdsdafd</span><br><span class="line">cin.getline(char, 10, <span class="string">&#x27;a&#x27;</span>); // char = <span class="string">&quot;sdsdsd&quot;</span>，之后光标停留在 <span class="string">&#x27;f&#x27;</span>处。</span><br><span class="line"></span><br><span class="line">string _string;</span><br><span class="line">getline(cin, _string);//会删除回车符，get()回车会留在缓存区里面</span><br><span class="line">getline(cin, _string, <span class="string">&#x27;a&#x27;</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="单行多项数据"><a href="#单行多项数据" class="headerlink" title="单行多项数据"></a>单行多项数据</h3><p><label style="color:red">分隔符为空白符</label></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ string temp;</span><br><span class="line">$ getline(cin, temp);</span><br><span class="line">$ istringstream is(temp);</span><br><span class="line">$ vector&lt;string&gt; _v;</span><br><span class="line">$ copy(istream_iterator&lt;string&gt;(is), istream_iterator&lt;string&gt;(), back_inserter(_v));</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><label style="color:red">分隔符为空白符，个数未知</label></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">string temp;</span><br><span class="line">getline(cin, temp);</span><br><span class="line">istringstream is(temp); //需要<span class="comment">#include &lt;sstream&gt;</span></span><br><span class="line"></span><br><span class="line">string part;</span><br><span class="line">vector&lt;string&gt; _v;</span><br><span class="line"><span class="keyword">while</span>(is &gt;&gt; part)</span><br><span class="line">&#123;</span><br><span class="line">	_v.push_back(part);</span><br><span class="line">	cout &lt;&lt; part &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><label style="color:red">分隔符不为空白符，个数未知</label></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">string temp;</span><br><span class="line">getline(cin, temp);</span><br><span class="line">istringstream is(temp);</span><br><span class="line"></span><br><span class="line">string part;</span><br><span class="line">vector&lt;string&gt; result;</span><br><span class="line"><span class="keyword">while</span>(getline(is, part, <span class="string">&#x27;;&#x27;</span>))//getline会跳过<span class="string">&#x27;;&#x27;</span></span><br><span class="line">&#123;</span><br><span class="line">    result.push_back(part);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h3 id="多行多项数据"><a href="#多行多项数据" class="headerlink" title="多行多项数据"></a>多行多项数据</h3><p><label style="color:red">Eg1:</label></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;* </span><br><span class="line">	input: </span><br><span class="line">   	[1,2,3,4,5,6]</span><br><span class="line">*&#x2F;</span><br><span class="line"></span><br><span class="line">vector&lt;int&gt; result;</span><br><span class="line">string temp;</span><br><span class="line">cin.get();&#x2F;&#x2F;去除第一个&#39;[&#39;；</span><br><span class="line">getline(cin, temp, &#39;]&#39;);</span><br><span class="line"></span><br><span class="line">istringstream is(temp);</span><br><span class="line">string part;</span><br><span class="line">while(getline(is, part, &#39;,&#39;))</span><br><span class="line">&#123;</span><br><span class="line">    result.push_back(stoi(part));</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><label style="color:red">Eg2:</label></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">	input:</span><br><span class="line">	3</span><br><span class="line">    1,10;32,45</span><br><span class="line">    78,94;5,16</span><br><span class="line">    80,100;200,220;16,32</span><br><span class="line">*/</span><br><span class="line">    int m;</span><br><span class="line">    cin &gt;&gt; m;</span><br><span class="line">    cin.get();//去除换行</span><br><span class="line"></span><br><span class="line">    vector&lt;pair&lt;int, int&gt; &gt; result;</span><br><span class="line">    <span class="keyword">for</span>(int _m = 0; _m &lt; m; ++_m)</span><br><span class="line">    &#123;</span><br><span class="line">        string total;</span><br><span class="line">        string part;</span><br><span class="line">        getline(cin, total);//读一行</span><br><span class="line">        istringstream is1(total);</span><br><span class="line">        <span class="keyword">while</span>(getline(is1, part, <span class="string">&#x27;;&#x27;</span>))//根据<span class="string">&#x27;;&#x27;</span>进行分割</span><br><span class="line">        &#123;</span><br><span class="line">            istringstream is2(part);</span><br><span class="line">            string s1;</span><br><span class="line">            string s2;</span><br><span class="line">            getline(is2, s1, <span class="string">&#x27;,&#x27;</span>);</span><br><span class="line">            getline(is2, s2);</span><br><span class="line">            result.push_back(&#123;stoi(s1), stoi(s2)&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><label style="color:red">Eg3:</label></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">    输入描述：第一行两个数，第一个数字表示用户的数目，第二个数字表示需要判断的用户序号。</span><br><span class="line">    第2 至 N+1 行表示序号为0到N-1的每个用户的朋友的序列列表。</span><br><span class="line">    例如：</span><br><span class="line">    input</span><br><span class="line">    5 0</span><br><span class="line">    1 2 3</span><br><span class="line">    0 4</span><br><span class="line">    0 4</span><br><span class="line">    0 4</span><br><span class="line">    1 2 3</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">int N = 0;</span><br><span class="line">int m = 0;</span><br><span class="line">cin &gt;&gt; N &gt;&gt; m;</span><br><span class="line">cin.get();//去除换行符</span><br><span class="line"></span><br><span class="line">vector&lt;vector&lt;int&gt; &gt; result(N);</span><br><span class="line"><span class="keyword">for</span>(int _n = 0; _n &lt; N; ++_n)</span><br><span class="line">&#123;</span><br><span class="line">    string temp;</span><br><span class="line">    getline(cin, temp);</span><br><span class="line">    istringstream is(temp);</span><br><span class="line">    copy(istream_iterator&lt;int&gt;(is), istream_iterator&lt;int&gt;(), back_inserter(result[_n]));</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+</article>
+
+    
+    <article
+  id="post-hello-world"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/07/21/hello-world/"
+    >Hello World</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/07/21/hello-world/" class="article-date">
+  <time datetime="2020-07-21T01:25:01.000Z" itemprop="datePublished">2020-07-21</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="更新博客代码顺序"><a href="#更新博客代码顺序" class="headerlink" title="更新博客代码顺序"></a>更新博客代码顺序</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean [清理]</span><br><span class="line">$ hexo generate [部署]</span><br><span class="line">$ hexo deploy [展示]</span><br><span class="line">$ hexo server [本地预览]</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;font size&#x3D;4&gt;&lt;&#x2F;font&gt;    &#x2F;&#x2F;设置字体大小</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;label style&#x3D;&quot;color:red&quot;&gt; &lt;&#x2F;label&gt;</span><br></pre></td></tr></table></figure>
+<p><label style="color:red">参考地址：<a target="_blank" rel="noopener" href="https://handsomesuperred.github.io/archives/"></label><br>https://handsomesuperred.github.io/archives/</a><br><label style="color:red"> </label></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+</article>
+
+    
+  </article>
+  
+
+  
+  <nav class="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/10/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span>
+  </nav>
+  
+</section>
+</div>
+
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020
+        <i class="ri-heart-fill heart_icon"></i> John Doe
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="寒"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">文档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+
+<script src="/js/clickBoom2.js"></script>
+
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+</body>
+
+</html>

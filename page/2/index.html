@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+     寒
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      
+<section class="cover">
+    
+  <div class="cover-frame">
+    <div class="bg-box">
+      <img src="/images/cover2.jpg" alt="image frame" />
+    </div>
+    <div class="cover-inner text-center text-white">
+      <h1><a href="/">寒</a></h1>
+      <div id="subtitle-box">
+        
+        <span id="subtitle"></span>
+        
+      </div>
+      <div>
+        
+      </div>
+    </div>
+  </div>
+  <div class="cover-learn-more">
+    <a href="javascript:void(0)" class="anchor"><i class="ri-arrow-down-line"></i></a>
+  </div>
+</section>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js"></script>
+
+
+<!-- Subtitle -->
+
+  <script>
+    try {
+      var typed = new Typed("#subtitle", {
+        strings: ['思念，是淡淡的幸福', '最美好的事，是看见寒寒的微笑', '吟诵诗千卷，才发现最美的诗是你'],
+        startDelay: 0,
+        typeSpeed: 200,
+        loop: true,
+        backSpeed: 100,
+        showCursor: true
+      });
+    } catch (err) {
+      console.log(err)
+    }
+  </script>
+  
+<div id="main">
+  <section class="outer">
+  <article class="articles">
+    
+    
+    
+    
+    <article
+  id="post-桶排序"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/18/%E6%A1%B6%E6%8E%92%E5%BA%8F/"
+    >桶排序</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/08/18/%E6%A1%B6%E6%8E%92%E5%BA%8F/" class="article-date">
+  <time datetime="2020-08-18T04:55:00.000Z" itemprop="datePublished">2020-08-18</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">排序算法</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p><strong>算法步骤</strong></p>
+<p>1.设置固定数量的空桶。</p>
+<p>2.把数据放到对应的桶中。</p>
+<p>3.对每个不为空的桶中数据进行排序。</p>
+<p>4.拼接不为空的桶中数据，得到结果</p>
+<p><img src="/img/42.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#x2F;*</span><br><span class="line"> * 桶排序</span><br><span class="line"> *</span><br><span class="line"> * 参数说明：</span><br><span class="line"> *     a -- 待排序数组</span><br><span class="line"> *     n -- 数组a的长度</span><br><span class="line"> *     max -- 数组a中最大值的范围</span><br><span class="line"> *&#x2F;</span><br><span class="line">void bucketSort(int* a, int n, int max)</span><br><span class="line">&#123;</span><br><span class="line">    int i, j;</span><br><span class="line">    int *buckets;</span><br><span class="line"></span><br><span class="line">    if (a&#x3D;&#x3D;NULL || n&lt;1 || max&lt;1)</span><br><span class="line">        return ;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 创建一个容量为max的数组buckets，并且将buckets中的所有数据都初始化为0。</span><br><span class="line">    if ((buckets &#x3D; new int[max])&#x3D;&#x3D;NULL)</span><br><span class="line">        return ;</span><br><span class="line">    memset(buckets, 0, max*sizeof(int));</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 1. 计数</span><br><span class="line">    for(i &#x3D; 0; i &lt; n; i++)</span><br><span class="line">        buckets[a[i]]++;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 2. 排序</span><br><span class="line">    for (i &#x3D; 0, j &#x3D; 0; i &lt; max; i++)</span><br><span class="line">        while( (buckets[i]--) &gt;0 )</span><br><span class="line">            a[j++] &#x3D; i;</span><br><span class="line"></span><br><span class="line">    delete[] buckets;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+</article>
+
+    
+    <article
+  id="post-计数排序"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/18/%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F/"
+    >计数排序</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/08/18/%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F/" class="article-date">
+  <time datetime="2020-08-18T04:33:00.000Z" itemprop="datePublished">2020-08-18</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">排序算法</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p><strong>算法步骤</strong></p>
+<p>1.花O(n)的时间扫描一下整个序列 A，获取最小值 min 和最大值 max</p>
+<p>2.开辟一块新的空间创建新的数组 B，长度为 ( max - min + 1)</p>
+<p>3.数组 B 中 index 的元素记录的值是 A 中某元素出现的次数</p>
+<p>4.最后输出目标整数序列，具体的逻辑是遍历数组 B，输出相应元素以及对应的个数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">void coutSort(int* data, int length)</span><br><span class="line">&#123;</span><br><span class="line">    if (data &#x3D;&#x3D; nullptr || length &lt;&#x3D; 0)</span><br><span class="line">        return;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;确定数列最大值</span><br><span class="line">    int max &#x3D; data[0];</span><br><span class="line">    int min &#x3D; data[0];</span><br><span class="line">    for (int i &#x3D; 1; i &lt; length; ++i)&#123;</span><br><span class="line">        if (data[i] &gt; max)</span><br><span class="line">            max &#x3D; data[i];</span><br><span class="line">        if (data[i] &lt; min)</span><br><span class="line">            min &#x3D; data[i];</span><br><span class="line">    &#125;</span><br><span class="line">    int d &#x3D; max - min;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 确定统计数组长度并进行初始化</span><br><span class="line">    int* coutData &#x3D; new int[d + 1];</span><br><span class="line">    for (int i &#x3D; 0; i &lt;&#x3D; d; ++i)</span><br><span class="line">        coutData[i] &#x3D; 0;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 遍历数组，统计每个数出现的次数</span><br><span class="line">    for (int i &#x3D; 0; i &lt; length; ++i)</span><br><span class="line">            ++coutData[data[i] - min];</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 排序数组，某个数出现了几次，便在data里累计输出几次</span><br><span class="line">    int index &#x3D; 0;</span><br><span class="line">    for (int i &#x3D; 0; i &lt;&#x3D; max; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        for (int j &#x3D; 0; j &lt; coutData[i]; ++j)</span><br><span class="line">        &#123;</span><br><span class="line">            data[index++] &#x3D; i+min;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+</article>
+
+    
+    <article
+  id="post-堆排序"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/17/%E5%A0%86%E6%8E%92%E5%BA%8F/"
+    >堆排序</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/08/17/%E5%A0%86%E6%8E%92%E5%BA%8F/" class="article-date">
+  <time datetime="2020-08-17T10:56:00.000Z" itemprop="datePublished">2020-08-17</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">排序算法</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <p><strong>算法步骤</strong></p>
+<p>1.创建一个堆 H[0……n-1]；</p>
+<p>2.把堆首（最大值）和堆尾互换；</p>
+<p>3.把堆的尺寸缩小 1，并重新对array[0]进行处理，目的是把新的数组顶端数据调整到相应位置；</p>
+<p>4.重复步骤 2，直到堆的尺寸为 1。</p>
+<p><img src="/img/33.png"></p>
+<p>大顶堆：arr[i] &gt;= arr[2i+1] &amp;&amp; arr[i] &gt;= arr[2i+2]  </p>
+<p>小顶堆：arr[i] &lt;= arr[2i+1] &amp;&amp; arr[i] &lt;= arr[2i+2]  </p>
+<p>当前节点 arr[j] 的父节点为 arr[(j-1)/2] 。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">void buildHeap(int array[], int size)  &#x2F;&#x2F;将无序数组调整为堆。</span><br><span class="line">&#123;</span><br><span class="line">	int i, tmp, index;</span><br><span class="line">	for (i &#x3D; (size-1) &#x2F; 2; i &gt;&#x3D; 0; i--)  &#x2F;&#x2F;从第一个非叶子节点开始</span><br><span class="line">	&#123;</span><br><span class="line">		tmp &#x3D; array[i];  &#x2F;&#x2F;tmp保存的是当前节点</span><br><span class="line">		index &#x3D; 2 * i+1;  &#x2F;&#x2F;当前节点i的左子节点</span><br><span class="line">		while (index &lt;&#x3D; size)</span><br><span class="line">		&#123;</span><br><span class="line">			if (index &lt; size &amp;&amp; array[index + 1] &gt; array[index]) index++;  </span><br><span class="line">            		&#x2F;&#x2F;取左右子节点较大值的下标。</span><br><span class="line">			if (array[index] &lt; tmp) break;  &#x2F;&#x2F;当前节点比左右子树都大，结束。</span><br><span class="line">			array[(index - 1) &#x2F; 2] &#x3D; array[index];  &#x2F;&#x2F;将较大值赋值给父节点。</span><br><span class="line">			index &#x3D; 2 * index+1;</span><br><span class="line">		&#125;</span><br><span class="line">		array[(index - 1) &#x2F; 2] &#x3D; tmp;  &#x2F;&#x2F;将tmp放到正确位置</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#x2F;&#x2F;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">int main(void)</span><br><span class="line">&#123;</span><br><span class="line">	int  a[] &#x3D; &#123; 5, 3, 2, 1, 7, 6, 9, 8, 4 &#125;;</span><br><span class="line">	int size &#x3D; 9;</span><br><span class="line">	buildHeap(a, size-1); &#x2F;&#x2F;无序数组变成堆</span><br><span class="line"></span><br><span class="line">	for (int i &#x3D; size - 1; i &gt; 0; i--)&#123;   &#x2F;&#x2F;堆排序过程</span><br><span class="line">		int tt &#x3D; a[i];&#x2F;&#x2F;顶是最大值，和最后一个交换。</span><br><span class="line">		a[i] &#x3D; a[0];</span><br><span class="line">		a[0] &#x3D; tt;</span><br><span class="line"></span><br><span class="line">		size--;&#x2F;&#x2F;除去最大值后，重新构建堆。 </span><br><span class="line">		int tmp &#x3D; a[0];</span><br><span class="line">		int index &#x3D; 0;</span><br><span class="line"></span><br><span class="line">		index &#x3D; index * 2 + 1;</span><br><span class="line">		while (index &lt;&#x3D;size-1)</span><br><span class="line">		&#123;	</span><br><span class="line">			if ((index ) &lt; size-1 &amp;&amp; a[index + 1] &gt; a[index]) index++;</span><br><span class="line">			if (a[index] &lt; tmp) break;&#x2F;&#x2F;当前节点比左右子树都大，结束。</span><br><span class="line">			a[(index-1) &#x2F; 2] &#x3D; a[index];</span><br><span class="line">			index &#x3D; 2 * index+1;</span><br><span class="line">		&#125;</span><br><span class="line">		a[(index-1) &#x2F; 2] &#x3D; tmp;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	for (int i &#x3D; 0; i &lt; 9; i++)&#123;</span><br><span class="line">		cout &lt;&lt; a[i];</span><br><span class="line">	&#125;</span><br><span class="line">	cout &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">	system(&quot;pause&quot;);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><strong>无序数组构建堆图解</strong></p>
+<p>1.给定无序序列结构如下<img src="/img/34.png">  </p>
+<p>2.从最后一个非叶子结点开始，即从最后一个节点的父节点开始。<img src="/img/35.png"> </p>
+<p>3.下一个节点，即代码中buildHeap()中的 i- - 。 <img src="/img/36.png"><br>3.<br>          <img src="/img/37.png"></p>
+<p>4.将堆顶元素与末尾元素进行交换，使末尾元素最大。</p>
+<p><img src="/img/38.png"></p>
+<p>5.将剩余的元素重新调整，使其继续满足堆定义。<br><img src="/img/39.png"></p>
+<p>6.将堆顶元素与末尾元素进行交换，使末尾元素最大。</p>
+<p><img src="/img/40.png"><br>7.后续过程，继续进行调整，交换，如此反复进行，最终使得整个序列有序<br><img src="/img/41.png"></p>
+<p><label style="color:red"> 无序数组构建堆，是将非叶子节点一个个处理完。<br>后续交换则只需要对根节点进行处理。</label></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+</article>
+
+    
+    <article
+  id="post-快速排序"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/17/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/"
+    >快速排序</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/08/17/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" class="article-date">
+  <time datetime="2020-08-17T10:42:00.000Z" itemprop="datePublished">2020-08-17</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">排序算法</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h4 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h4><p><strong>算法步骤</strong></p>
+<p>1.从数列中挑出一个元素，称为 “基准”（pivot）;</p>
+<p>2.重新排序数列，所有元素比基准值小的摆放在基准前面，所有元素比基准值大的摆在基准的后面（相同的数可以到任一边）。在这个分区退出之后，该基准就处于数列的中间位置。这个称为分区（partition）操作；</p>
+<p>3.递归地（recursive）把小于基准值元素的子数列和大于基准值元素的子数列排序；</p>
+<p><img src="/img/28.png"><br><img src="/img/29.png"><br><img src="/img/30.png"><br><img src="/img/31.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;快速排序（从小到大）</span><br><span class="line">void quickSort(int left, int right, vector&lt;int&gt;&amp; arr)</span><br><span class="line">&#123;</span><br><span class="line">	if(left &gt;&#x3D; right)</span><br><span class="line">		return;</span><br><span class="line">        </span><br><span class="line">   	if(left &lt; 0 || right &gt;&#x3D; arr.size())</span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; &quot;error args! array bound.&quot; &lt;&lt; endl;</span><br><span class="line">		return;</span><br><span class="line">	&#125;&#x2F;&#x2F;非法输入判断,防止数组越界</span><br><span class="line">    </span><br><span class="line">	int i, j, base, temp;</span><br><span class="line">	i &#x3D; left, j &#x3D; right;</span><br><span class="line">	base &#x3D; arr[left];  &#x2F;&#x2F;取最左边的数为基准数</span><br><span class="line">	while (i &lt; j)</span><br><span class="line">	&#123;</span><br><span class="line">		while (arr[j] &gt;&#x3D; base &amp;&amp; i &lt; j)</span><br><span class="line">			j--;</span><br><span class="line">		while (arr[i] &lt;&#x3D; base &amp;&amp; i &lt; j)</span><br><span class="line">			i++;</span><br><span class="line">		if(i &lt; j)</span><br><span class="line">		&#123;</span><br><span class="line">			temp &#x3D; arr[i];</span><br><span class="line">			arr[i] &#x3D; arr[j];</span><br><span class="line">			arr[j] &#x3D; temp;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	&#x2F;&#x2F;基准数归位</span><br><span class="line">	arr[left] &#x3D; arr[i];</span><br><span class="line">	arr[i] &#x3D; base;</span><br><span class="line">	quickSort(left, i - 1, arr);&#x2F;&#x2F;递归左边</span><br><span class="line">	quickSort(i + 1, right, arr);&#x2F;&#x2F;递归右边</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+</article>
+
+    
+    <article
+  id="post-归并排序"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/17/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/"
+    >归并排序</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/08/17/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" class="article-date">
+  <time datetime="2020-08-17T09:56:00.000Z" itemprop="datePublished">2020-08-17</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">排序算法</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h4 id="归并排序"><a href="#归并排序" class="headerlink" title="归并排序"></a>归并排序</h4><p><strong>算法步骤</strong></p>
+<p>1.申请空间，使其大小为两个已经排序序列之和，该空间用来存放合并后的序列；</p>
+<p>2.设定两个指针，最初位置分别为两个已经排序序列的起始位置；</p>
+<p>3.比较两个指针所指向的元素，选择相对小的元素放入到合并空间，并移动指针到下一位置；</p>
+<p>4.重复步骤 3 直到某一指针达到序列尾；</p>
+<p>5.将另一序列剩下的所有元素直接复制到合并序列尾。</p>
+<p><img src="/img/27.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">void merge(int a[], int *left, int leftcount, int *right,int  rightcount)  &#x2F;&#x2F;合并过程</span><br><span class="line">&#123;</span><br><span class="line">	int i, j, k;</span><br><span class="line">	i &#x3D; 0, j &#x3D;0, k &#x3D; 0;</span><br><span class="line">	while (i &lt; leftcount&amp;&amp;j &lt; rightcount)</span><br><span class="line">	&#123;</span><br><span class="line">		if (left[i] &lt; right[j])</span><br><span class="line">			a[k++] &#x3D; left[i++];</span><br><span class="line">		else a[k++] &#x3D; right[j++];</span><br><span class="line">	&#125;</span><br><span class="line">	while (i &lt; leftcount)a[k++] &#x3D; left[i++];</span><br><span class="line">	while (j &lt; rightcount)a[k++] &#x3D; right[j++];</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">void mergeSort(int a[], int n)  &#x2F;&#x2F;排序过程</span><br><span class="line">&#123;</span><br><span class="line">	</span><br><span class="line">	if (n &lt; 2) return;</span><br><span class="line">    	int mid&#x3D;n&#x2F;2;</span><br><span class="line">	int *left &#x3D; new int[mid];</span><br><span class="line">	int *right &#x3D; new int[n - mid ];</span><br><span class="line">	for (int i &#x3D; 0; i &lt; mid; i++)</span><br><span class="line">		left[i] &#x3D; a[i];</span><br><span class="line">	for (int j &#x3D; mid ; j &lt; n; j++)</span><br><span class="line">		right[j-mid] &#x3D; a[j];</span><br><span class="line"> </span><br><span class="line">	mergeSort(left, mid);</span><br><span class="line">	mergeSort(right, n - mid);</span><br><span class="line">	merge(a,left,mid,right,n-mid);</span><br><span class="line"> </span><br><span class="line">	delete[] left;</span><br><span class="line">	delete[] right;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+</article>
+
+    
+    <article
+  id="post-插入排序"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/17/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/"
+    >插入排序,希尔排序</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/08/17/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/" class="article-date">
+  <time datetime="2020-08-17T09:37:00.000Z" itemprop="datePublished">2020-08-17</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">排序算法</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h4 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h4><p><strong>算法步骤</strong></p>
+<p>1.将第一待排序序列第一个元素看做一个有序序列，把第二个元素到最后一个元素当成是未排序序列。</p>
+<p>2.从头到尾依次扫描未排序序列，将扫描到的每个元素插入有序序列的适当位置。（如果待插入的元素与有序序列中的某个元素相等，则将待插入元素插入到相等元素的后面。）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">void InsertionSort(int *a, int len)</span><br><span class="line">&#123;</span><br><span class="line">	for (int j&#x3D;1; j&lt;len; j++)</span><br><span class="line">	&#123;</span><br><span class="line">		int key &#x3D; a[j];</span><br><span class="line">		int i &#x3D; j-1;</span><br><span class="line">		while (i&gt;&#x3D;0 &amp;&amp; a[i]&gt;key)</span><br><span class="line">		&#123;</span><br><span class="line">			a[i+1] &#x3D; a[i];</span><br><span class="line">			i--;</span><br><span class="line">		&#125;</span><br><span class="line">		a[i+1] &#x3D; key;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h4><p><strong>算法步骤</strong></p>
+<p>1.选择一个增量序列 t1，t2，……，tk，其中 ti &gt; tj, tk = 1；</p>
+<p>2.按增量序列个数 k，对序列进行 k 趟排序；</p>
+<p>3.每趟排序，根据对应的增量 ti，将待排序列分割成若干长度为 m 的子序列，分别对各子表进行直接插入排序。仅增量因子为 1 时，整个序列作为一个表来处理，表长度即为整个序列的长度。</p>
+<p><strong>算法示意图</strong></p>
+<p><img src="/img/26.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">void ShellSort(int *a, int len)</span><br><span class="line">&#123;</span><br><span class="line">	int h &#x3D; 1;</span><br><span class="line">	while( h&lt;len ) </span><br><span class="line">		h &#x3D; 3*h + 1;	&#x2F;&#x2F;h是选定的增量序列</span><br><span class="line">	while( h&gt;0 )</span><br><span class="line">	&#123;</span><br><span class="line">		for (int j&#x3D;h; j&lt;len; j++)	&#x2F;&#x2F;从h开始是因为插入排序默认第一个已经有序。</span><br><span class="line">		&#123;</span><br><span class="line">			int key &#x3D; a[j];</span><br><span class="line">			int i &#x3D; j-h;</span><br><span class="line">			while( i&gt;&#x3D;0 &amp;&amp; a[i]&gt;key )</span><br><span class="line">			&#123;</span><br><span class="line">				a[i+h] &#x3D; a[i];</span><br><span class="line">				i &#x3D; i-h;</span><br><span class="line">			&#125;</span><br><span class="line">			a[i+h] &#x3D; key;</span><br><span class="line">		&#125;</span><br><span class="line">		h  &#x3D; h&#x2F;3;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+</article>
+
+    
+    <article
+  id="post-冒泡排序"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/17/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/"
+    >冒泡排序,选择排序</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/08/17/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" class="article-date">
+  <time datetime="2020-08-17T09:30:00.000Z" itemprop="datePublished">2020-08-17</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">排序算法</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h4 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h4><p><strong>算法步骤</strong></p>
+<p>1.比较相邻的元素。如果第一个比第二个大，就交换他们两个。</p>
+<p>2.对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。这步做完后，最后的元素会是最大的数。</p>
+<p>3.针对所有的元素重复以上的步骤，除了最后一个。</p>
+<p>4.持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。</p>
+<h4 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h4><p><strong>算法步骤</strong></p>
+<p>1.首先在未排序序列中找到最小（大）元素，存放到排序序列的起始位置</p>
+<p>2.再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾</p>
+<p>3.重复第二步，直到所有元素均排序完毕</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+</article>
+
+    
+    <article
+  id="post-list"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/17/list/"
+    >list(链表)</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/08/17/list/" class="article-date">
+  <time datetime="2020-08-17T04:10:00.000Z" itemprop="datePublished">2020-08-17</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/STL%E5%AE%B9%E5%99%A8/">STL容器</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h4 id="list的初始化创建"><a href="#list的初始化创建" class="headerlink" title="list的初始化创建"></a>list的初始化创建</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">list() 声明一个空列表；</span><br><span class="line">list(n) 声明一个有n个元素的列表，每个元素都是由其默认构造函数T()构造出来的</span><br><span class="line">list(n,val) 声明一个由n个元素的列表，每个元素的值都是val得来的</span><br><span class="line">list(first,last) 声明一个列表，其元素的初始值来源于由区间所指定的序列中的元素</span><br></pre></td></tr></table></figure>
+
+<h4 id="list常用函数"><a href="#list常用函数" class="headerlink" title="list常用函数"></a>list常用函数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">iterator begin()&#x2F;&#x2F;迭代器</span><br><span class="line">iterator end()</span><br><span class="line">reverse_iterator rbegin()&#x2F;&#x2F;反向迭代器</span><br><span class="line">reverse_iterator rend()</span><br><span class="line"></span><br><span class="line">push_back()  &#x2F;&#x2F;从list的末端插入。</span><br><span class="line">push_front() &#x2F;&#x2F;从list的头部插入。</span><br><span class="line">pop_back() &#x2F;&#x2F;删除最后一个元素。</span><br><span class="line">pop_front() &#x2F;&#x2F;删除第一个元素。</span><br><span class="line">front()	&#x2F;&#x2F;获得list容器中的头部元素。</span><br><span class="line">back()	&#x2F;&#x2F;获得list容器的最后一个元素。</span><br><span class="line">resize()	&#x2F;&#x2F;如果调用resize(n)将list的长度改为只容纳n个元素，超出的元素将被删除。</span><br><span class="line">	&#x2F;&#x2F;如果需要扩展那么调用默认构造函数T()将元素加到list末端。</span><br><span class="line">    &#x2F;&#x2F;如果调用resize(n,val)，则扩展元素要调用构造函数T(val)函数进行元素构造，其余部分相同。</span><br><span class="line"></span><br><span class="line">erase()：删除一个元素或一个区域的元素(两个重载)</span><br><span class="line">	l1.erase(l1.begin()); 	&#x2F;&#x2F;将l1的第一个元素删除。</span><br><span class="line">	l1.erase(l1.begin(),l1.end()); 	&#x2F;&#x2F;将l1的从begin()到end()之间的元素删除。</span><br><span class="line">    </span><br><span class="line">assign()</span><br><span class="line">	l1.assign(n,val)	&#x2F;&#x2F;将 l1中元素变为n个T(val）。</span><br><span class="line">	l1.assign(l2.begin(),l2.end())	&#x2F;&#x2F;将l2中的从l2.begin()到l2.end()之间的数值赋值给l1。</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">empty() &#x2F;&#x2F; 判断list是否为空。</span><br><span class="line">clear() &#x2F;&#x2F; 清空list中的所有元素。</span><br><span class="line">size() &#x2F;&#x2F;返回容器中的元素数量</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sort()&#x2F;&#x2F;将链表从小到大排序</span><br><span class="line">remove (const T &amp; val) &#x2F;&#x2F;删除和 val 相等的元素</span><br><span class="line">unique() &#x2F;&#x2F;删除所有和前一个元素相等的元素，处理后相邻无重复</span><br><span class="line">merge() &#x2F;&#x2F;合并两个链表并使之默认升序(也可改)。</span><br><span class="line">	&#x2F;&#x2F;l1.merge(l2，greater&lt;int&gt;()); 调用结束后l2变为空，l1中元素包含原来l1 和 l2中的元素，并且排好序，升序。</span><br><span class="line">    </span><br><span class="line">splice(iterator i, list &lt;T&gt; &amp; x, iterator first, iterator last)</span><br><span class="line">	&#x2F;&#x2F;在位置 i 前面插入链表 x 中的区间 [first, last)，并在链表 x 中删除该区间。</span><br><span class="line">	&#x2F;&#x2F;链表自身和链表 x 可以是同一个链表，只要 i 不在 [first, last) 中即可</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+</article>
+
+    
+    <article
+  id="post-string"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/17/string/"
+    >string(字符串)</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/08/17/string/" class="article-date">
+  <time datetime="2020-08-17T01:02:00.000Z" itemprop="datePublished">2020-08-17</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/STL%E5%AE%B9%E5%99%A8/">STL容器</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h4 id="string对象的定义和初始化"><a href="#string对象的定义和初始化" class="headerlink" title="string对象的定义和初始化"></a>string对象的定义和初始化</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">string s1;		默认构造函数，s1位空串</span><br><span class="line">string s2(s1);		将s2初始化为s1的一个副本</span><br><span class="line">string s3(&quot;value&quot;);	将s3初始化为一个字符串字面值副本</span><br><span class="line">string s4(n,&#39;c&#39;)	将s4初始化为字符&#39;c&#39;的n个副本</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    string s1;</span><br><span class="line">    s1&#x3D;&quot;chenchen&quot;;</span><br><span class="line">    cout&lt;&lt;s1&lt;&lt;endl;</span><br><span class="line"> </span><br><span class="line">    string s2(s1);</span><br><span class="line">    cout&lt;&lt;s2&lt;&lt;endl;</span><br><span class="line"> </span><br><span class="line">    string s3(&quot;value&quot;);</span><br><span class="line">    cout&lt;&lt;s3&lt;&lt;endl;</span><br><span class="line"> </span><br><span class="line">    string s4(10,&#39;c&#39;);</span><br><span class="line">    cout&lt;&lt;s4&lt;&lt;endl;</span><br><span class="line"> </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/img/21.png"></p>
+<p>构造string对象的其他方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">string s(cp,n)		创建一个string对象，它被初始化为cp所指向数组的前n个元素副本</span><br><span class="line">string s(s2,pos2)	创建一个string对象，它被初始化为一个已存在的string对象s2中从下标pos2开始的字符的副本</span><br><span class="line">				如果pos2&gt;s.size(),则该操作未定义</span><br><span class="line"></span><br><span class="line">string s(s2,pos2,len2)	创建一个string对象，它被初始化为s2中从下标pos2开始的len2个字符的副本</span><br><span class="line">				如果pos2&gt;s2.size(),则该操作未定义</span><br><span class="line">				无论len2的值是多少，最多只能复制s2.size()-pos2个字符</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="string对象的操作"><a href="#string对象的操作" class="headerlink" title="string对象的操作"></a>string对象的操作</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">s.empty()		如果s为空串，则返回true，否则返回false</span><br><span class="line">s.size()		返回s 中字符的字符个数</span><br><span class="line">s[n]			返回s中位置为n的字符，位置从0开始计数</span><br><span class="line">s1+s2			把s1和s2链接成一个新的字符串，返回新生成的字符串</span><br><span class="line">s1&#x3D;s2			把s1内容替换为s2的副本</span><br><span class="line">v1&#x3D;&#x3D;v2			判断v1与v2的内容，相等则返回true，否则返回false</span><br><span class="line">!&#x3D;, &lt;, &lt;&#x3D;, &gt;, &gt;&#x3D;	保持这些操作的惯有含义</span><br></pre></td></tr></table></figure>
+<p><label style="color:red"> 因为string 的字符会很长，所以有了string::size_type 类型</label><br>注意s.size()返回的类型是string::size_type()类型，而不是int形，string::size_type 的类型长度是int的俩倍所以尽量让s.size()的返 回值给string::size_type 类型</p>
+<p><label style="color:red"> 和字符串字面值的连接问题</label>字符串字面值是一串常量字符</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line"> </span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    string s1&#x3D;&quot;hello&quot;;</span><br><span class="line">    string s2&#x3D;(&quot;world&quot;);</span><br><span class="line">    string s3&#x3D;s1+&quot;, &quot;;&#x2F;&#x2F;正确的</span><br><span class="line">    cout&lt;&lt;s3&lt;&lt;endl;</span><br><span class="line">&#x2F;&#x2F;    string s4&#x3D;&quot;hello&quot;+&quot;, &quot;;&#x2F;&#x2F;错误的</span><br><span class="line">    string s5&#x3D;s1+&quot;, &quot;+&quot;, &quot;+&quot;world&quot;;&#x2F;&#x2F;错误的</span><br><span class="line">&#x2F;&#x2F;    string s6&#x3D;&quot;hello&quot;+&quot;, &quot;+s2;&#x2F;&#x2F;错误的</span><br><span class="line">    cout&lt;&lt;s5&lt;&lt;endl;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><label style="color:red"> 注意俩个字符串字面值相加，是非法的</label></p>
+<h4 id="string-的遍历"><a href="#string-的遍历" class="headerlink" title="string 的遍历"></a>string 的遍历</h4><p><label style="color:red">注意：</label>除了一些特殊操作，string类型提供与vector容器相同的操作。string类型和vector容器不同的是，它不支持以栈方式操纵容器：在string类型中不能使用front,back,pop_back操作</p>
+<p>string 是支持push_back()的，因为string也是顺序容器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line"> </span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    string s(&quot;Hiya&quot;);</span><br><span class="line">    string::iterator it;</span><br><span class="line">    for(it&#x3D;s.begin();it!&#x3D;s.end();++it)</span><br><span class="line">        cout&lt;&lt;*it&lt;&lt;endl;</span><br><span class="line">    for(int i&#x3D;0;s[i];i++)</span><br><span class="line">        cout&lt;&lt;s[i]&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;s&lt;&lt;endl;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="修改string对象的其他方法"><a href="#修改string对象的其他方法" class="headerlink" title="修改string对象的其他方法"></a>修改string对象的其他方法</h4><p>与容器共有的string操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">s.insert(p,t)	在迭代器p指向的元素之前插入一个值为t的新元素。返回指向新插入元素的迭代器</span><br><span class="line">s.insert(p,n,t)	在迭代器p指向的元素之前插入n个值为t的新元素。返回void</span><br><span class="line">s.insert(p,b,e)	在迭代器p指向的元素之前插入b和e标记范围内所有的元素，返回void</span><br><span class="line">s.assign(b,e)	用迭代器b和e标记范围内的元素替换s。对于string类型，该操作返回s，对于容器类型，则返回void</span><br><span class="line">s.assign(n,t)	用值为t的n个副本替换s。对于string类型，该操作返回s，对于容器类型，返回void</span><br><span class="line">s.erase(p)	删除迭代器p指向的元素，返回一个迭代器，指向被删除元素后面的元素</span><br><span class="line">s.erase(b,e)	删除迭代器b和e标记范围内所有的元素，返回一个迭代器，指向被删除元素段后面的第一个元素</span><br><span class="line">reverse(b,e)	把迭代器b和e标记范围内的所有元素反转</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;bits&#x2F;stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    string s&#x3D;&quot;12345abcde&quot;;</span><br><span class="line">    string::iterator it;</span><br><span class="line">    it&#x3D;s.begin();</span><br><span class="line">    s.insert(it+2,&#39;s&#39;);</span><br><span class="line">    cout&lt;&lt;&quot;s&#x3D;&quot;&lt;&lt;s&lt;&lt;endl;</span><br><span class="line">    it&#x3D;s.begin();</span><br><span class="line">    s.insert(it+2,2,&#39;t&#39;);</span><br><span class="line">    cout&lt;&lt;s&lt;&lt;endl;</span><br><span class="line">    it&#x3D; s.begin();</span><br><span class="line">    s.assign(it,it+3);</span><br><span class="line">    cout&lt;&lt;s&lt;&lt;endl;</span><br><span class="line">    s.assign(10,&#39;c&#39;);</span><br><span class="line">    cout&lt;&lt;s&lt;&lt;endl;</span><br><span class="line">    string s1&#x3D;&quot;sfdfsaf&quot;;</span><br><span class="line">    s1.erase(s1.begin());</span><br><span class="line">    cout&lt;&lt;s1&lt;&lt;endl;</span><br><span class="line">    s1.erase(s1.begin(),s1.begin()+3);</span><br><span class="line">    cout&lt;&lt;s1&lt;&lt;endl;</span><br><span class="line">    reverse(s1.begin(),s1.end());</span><br><span class="line">    cout&lt;&lt;s1&lt;&lt;endl;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/22.png"></p>
+<p>string 类型特有的版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">s.insert(pos,n,c)			在下表pos的元素之前插入n个字符c</span><br><span class="line">s.insert(pos,s2)			在下标为pos的元素之前插入string对象s2的副本</span><br><span class="line">s.insert(pos,s2,pos2,len)		在下标为pos的元素之前插入s2中从下标pos2开始len个字符</span><br><span class="line">s.insert(pos,cp,len)			在下标为pos的元素之前插入s2中从下标pos2开始的len个字符</span><br><span class="line">s.insert(pos,cp)			在下标为pos的元素之前插入cp所指向的以空字符结束的字符串副本</span><br><span class="line">s.assign(s2)				用s2的副本替换s</span><br><span class="line">s.assign(s2,pos2,len)			用s2中从下标pos2开始的len个字符副本替换s</span><br><span class="line">s.assign(cp,len)			用cp所指向数组的前len个字符副本替换s</span><br><span class="line">s.assign(cp)				用cp所指向的以空字符结束的字符串副本替换s</span><br><span class="line">s.erase(pos,len)			删除从下标pos开始的len个字符</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;bits&#x2F;stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    string s&#x3D;&quot;12345abcde&quot;;</span><br><span class="line">    s.insert(2,2,&#39;s&#39;);</span><br><span class="line">    cout&lt;&lt;s&lt;&lt;endl;</span><br><span class="line">    string s2&#x3D;&quot;zyz&quot;;</span><br><span class="line">    s.insert(1,s2);</span><br><span class="line">    cout&lt;&lt;s&lt;&lt;endl;</span><br><span class="line">    s.insert(0,s2,0,2);</span><br><span class="line">    cout&lt;&lt;s&lt;&lt;endl;</span><br><span class="line">    char *cp&#x3D;&quot;Statelu pou&quot;;</span><br><span class="line">    s.insert(0,cp);</span><br><span class="line">    cout&lt;&lt;s&lt;&lt;endl;</span><br><span class="line">    s.insert(0,cp,2);</span><br><span class="line">    cout&lt;&lt;s&lt;&lt;endl;</span><br><span class="line">    string s3&#x3D;&quot;123456abc&quot;;</span><br><span class="line">    s.assign(s3);</span><br><span class="line">    cout&lt;&lt;s&lt;&lt;endl;</span><br><span class="line">    string s4&#x3D;&quot;987&quot;;</span><br><span class="line">    s.assign(s4,0,3);</span><br><span class="line">    cout&lt;&lt;s&lt;&lt;endl;</span><br><span class="line">    s.erase(1,6);</span><br><span class="line">    cout&lt;&lt;s&lt;&lt;endl;</span><br><span class="line"> </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/img/23.png"></p>
+<h4 id="string子串的操作"><a href="#string子串的操作" class="headerlink" title="string子串的操作"></a>string子串的操作</h4><p>substr函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s.substr(pos,n)	返回一个string类型的字符串，它包含s中从下标pos开始的n个字符</span><br><span class="line">s.substr(pos)	返回一个string类型的字符串，它包含从下标pos开始到s末为的所有字符</span><br><span class="line">s.substr()	返回s的副本</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;bits&#x2F;stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    string s(&quot;hello world&quot;);</span><br><span class="line">    string s2&#x3D;s.substr(6,5);</span><br><span class="line">    cout&lt;&lt;s2&lt;&lt;endl;</span><br><span class="line">    string s3&#x3D;s.substr(6);</span><br><span class="line">    cout&lt;&lt;s3&lt;&lt;endl;</span><br><span class="line"> </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>append和replace函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">s.append(args)		将args串接在s后面。返回s的引用</span><br><span class="line">s.replace(pos,len,args)	删除s中从下标pos开始的len个字符，用args指定的字符替换之，返回s的引用</span><br><span class="line">			这个版本中，args不能为b2，e2</span><br><span class="line"></span><br><span class="line">s.replace(b,e,args)	删除迭代器b和e标记的范围内所有的字符，用args代替之。返回s的引用</span><br><span class="line">			这个版本中，args不能为 s1,pos2,len2</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">s2			string类型的字符串s2</span><br><span class="line">s2,pos1,pos2		字符串s2中从下标pos2开始的len2个字符</span><br><span class="line">cp			指针cp指向的以空字符结束的数组</span><br><span class="line">cp,len2			cp指向的以空字符结束的数组中前len2个字符</span><br><span class="line">n,c			字符c的n个副本</span><br><span class="line">b2,e2			迭代器b2和e2标记的范围内所有字符</span><br><span class="line">                                      </span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;bits&#x2F;stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    string s(&quot;C++ Prime&quot;);</span><br><span class="line">    s.append(&quot; 3rd Ed&quot;);</span><br><span class="line">    cout&lt;&lt;s&lt;&lt;endl;</span><br><span class="line">    s.insert(s.size(),&quot;w&quot;);</span><br><span class="line">    cout&lt;&lt;s&lt;&lt;endl;</span><br><span class="line">    s.replace(10,3,&quot;4th&quot;);</span><br><span class="line">    cout&lt;&lt;s&lt;&lt;endl;</span><br><span class="line">    s.erase(10,3);</span><br><span class="line">    cout&lt;&lt;s&lt;&lt;endl;</span><br><span class="line">    s.insert(10,&quot;4th&quot;);</span><br><span class="line">    cout&lt;&lt;s&lt;&lt;endl;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/img/24.png"></p>
+<p>一系列find函数，用于查找string对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">s.find(args)			在s中查找args的第一次出现</span><br><span class="line">s.rfind(args)			在s中查找args的最后一次出现</span><br><span class="line">s.find_first_of(args)		在s中查args的任意字符的第一次出现</span><br><span class="line">s.find_last_of(args)		在s中查找args的任意字符的最后一次出现</span><br><span class="line">s.find_first_not_of(args)	在s中查找第一个不属于args的字符</span><br><span class="line">s.find_last_not_of(args)	在s中查找最后一个不属于args的字符</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">c,pos		在s中，从下标pos标记的位置开始，查找字符c、pos的默认值是0</span><br><span class="line">s2,pos		在s中，从下标pos标记的位置开始，查找string对象s2，pos的默认值为0</span><br><span class="line">cp,pos		在s中从下标pos标记的位置开始，查找cp所指向的c风格的以空格结束的字符串。pos默认值为0</span><br><span class="line">cp,pos,n	在s中，从下标pos标记的位置开始，查找指针cp所指向数组的前n个字符，pos和n都没有默认值</span><br></pre></td></tr></table></figure>
+<h4 id="string对象的比较"><a href="#string对象的比较" class="headerlink" title="string对象的比较"></a>string对象的比较</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">s.compare(s2)			比较s和s2</span><br><span class="line">s.compare(pos1,n1,s2)		让s中从pos下标位置开始的n1个字符与s2做比较</span><br><span class="line">s.compare(pos1,n1,s2,pos2,n2)	让s中从pos1下标位置开始的n1个字符与s2中从pos2下标位置开始的n2个字符做比较</span><br><span class="line">s.compare(cp)		比较s和cp所指向的以空字符结束的字符串</span><br><span class="line">s.compare(pos1,n1,cp)		让s从pos1下标位置开始的n1个字符与cp所指向的字符串做比较</span><br><span class="line">s.compare(pos1,n1,cp,n2)	让s中从pos1下标位置开始的n1个字符与cp所指向字符串的前n2个字符做比较</span><br></pre></td></tr></table></figure>
+<p>比如：s1.compare(args);<br>正数，此时s1大于args所代表的string对象<br>负数，此时s1小于args所代表的string对象<br>0,此时s1恰好等于args所代表的string对象</p>
+<h4 id="字符串和整数之间的互相转换"><a href="#字符串和整数之间的互相转换" class="headerlink" title="字符串和整数之间的互相转换"></a>字符串和整数之间的互相转换</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">to_string (int val);&#x2F;&#x2F;将数值转化为字符串。返回对应的字符串。</span><br><span class="line"></span><br><span class="line">string perfect &#x3D; to_string(9) + &quot; is a perfect number&quot;;</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">stoi（字符串，起始位置，n进制） &#x2F;&#x2F;将 n 进制的字符串转化为十进制</span><br><span class="line"></span><br><span class="line">int a &#x3D; 4;</span><br><span class="line">double b &#x3D; 3.14;</span><br><span class="line">string str1, str2;</span><br><span class="line">str1 &#x3D; to_string(a);</span><br><span class="line">str2 &#x3D; to_string(b);</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">int atoi(const char *str );&#x2F;&#x2F;把字符串转换成整型数。</span><br><span class="line"></span><br><span class="line">int a;</span><br><span class="line">char *ptr1 &#x3D; &quot;-12345&quot;;</span><br><span class="line">a &#x3D; atoi(ptr1);</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">char *itoa( int value, char *string,int radix);</span><br><span class="line">&#x2F;&#x2F;将整数value 转换成字符串存入string 指向的内存空间 ,radix 为转换时所用基数(保存到字符串中的数据的进制基数)。</span><br><span class="line"></span><br><span class="line">int num &#x3D; 10;</span><br><span class="line">char str[100];</span><br><span class="line">itoa(num, str, 2);</span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">c_str()的作用是将const string*转化为const char*</span><br><span class="line"></span><br><span class="line">string s1(&quot;1234567&quot;);</span><br><span class="line">int c &#x3D; atoi(s1.c_str());</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+</article>
+
+    
+    <article
+  id="post-stack"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2020/08/16/stack/"
+    >stack(栈)</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/08/16/stack/" class="article-date">
+  <time datetime="2020-08-16T11:39:00.000Z" itemprop="datePublished">2020-08-16</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/STL%E5%AE%B9%E5%99%A8/">STL容器</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h4 id="stack的常用成员函数"><a href="#stack的常用成员函数" class="headerlink" title="stack的常用成员函数"></a>stack的常用成员函数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">empty() 堆栈为空则返回真</span><br><span class="line">pop() 移除栈顶元素</span><br><span class="line">push() 在栈顶增加元素</span><br><span class="line">size() 返回栈中元素数目</span><br><span class="line">top() 返回栈顶元素</span><br></pre></td></tr></table></figure>
+<h4 id="应用例子"><a href="#应用例子" class="headerlink" title="应用例子"></a>应用例子</h4><p>定义栈的数据结构，请在该类型中实现一个能够得到栈中所含最小元素的min函数（时间复杂度应为O（1））。</p>
+<p><strong>分析</strong></p>
+<p>应用一个辅助栈，主栈A用来保存实际数据，辅栈B用来保存最小元素。压栈的时候，如果元素比B的栈顶小，则将该元素同时压入A栈和B栈，否则只压A栈；出栈的时候，若A栈顶元素等于B栈顶元素，则同时出栈，否则A出栈B不出栈。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    stack&lt;int&gt; stack1,stack2;</span><br><span class="line">    void push(int value) &#123;</span><br><span class="line">        stack1.push(value);</span><br><span class="line">        if(stack2.empty())</span><br><span class="line">            stack2.push(value);</span><br><span class="line">        else&#123;</span><br><span class="line">            if(value &lt; stack2.top())</span><br><span class="line">                stack2.push(value);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    void pop() &#123;</span><br><span class="line">        if(stack1.top() &#x3D;&#x3D; stack2.top())&#123;</span><br><span class="line">            stack2.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        stack1.pop();</span><br><span class="line">    &#125;</span><br><span class="line">    int top() &#123;</span><br><span class="line">        return stack1.top();</span><br><span class="line">    &#125;</span><br><span class="line">    int min() &#123;</span><br><span class="line">        return stack2.top();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+    </footer>
+  </div>
+
+   
+   
+</article>
+
+    
+  </article>
+  
+
+  
+  <nav class="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/3/">下一页</a>
+  </nav>
+  
+</section>
+</div>
+
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020
+        <i class="ri-heart-fill heart_icon"></i> John Doe
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="寒"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">文档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+
+<script src="/js/clickBoom2.js"></script>
+
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+</body>
+
+</html>

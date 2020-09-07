@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    jpeglib压缩 |  寒
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+</head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-jpeglib压缩"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  jpeglib压缩
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2020/07/23/jpeglib%E5%8E%8B%E7%BC%A9/" class="article-date">
+  <time datetime="2020-07-23T01:59:00.000Z" itemprop="datePublished">2020-07-23</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/jpeglib%E5%8E%8B%E7%BC%A9/">jpeglib压缩</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">799</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">4 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;iostream&gt;</span></span><br><span class="line"><span class="comment">#include &lt;string.h&gt;</span></span><br><span class="line"><span class="comment">#include &lt;fstream&gt;</span></span><br><span class="line">extern <span class="string">&quot;C&quot;</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="comment">#include &quot;jpeglib.h&quot;</span></span><br><span class="line">&#125;;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int rgb2jpeg(unsigned char* rgb_buffer, int width, int height,int depth ,int quality, unsigned char* jpeg_buffer, unsigned long&amp; jpeg_size)</span><br><span class="line">&#123;</span><br><span class="line">//    unsigned char *pTempDst = new unsigned char[width * abs(height) * depth / 8];</span><br><span class="line">//   // Bgra2Rgb(rgb_buffer, width, height, depth / 8, rgb);</span><br><span class="line">//    //unsigned char* pTempDst = rgb;</span><br><span class="line">//    <span class="keyword">for</span> (int i = 0; i &lt; abs(height); i++)</span><br><span class="line">//    &#123;</span><br><span class="line">//        const unsigned char* pTempSrc = nullptr;</span><br><span class="line">//        <span class="keyword">if</span> (height &gt; 0)</span><br><span class="line">//        &#123;</span><br><span class="line">//            pTempSrc = rgb_buffer + width * i *(depth / 8) ;</span><br><span class="line">//        &#125;</span><br><span class="line">//        <span class="keyword">else</span></span><br><span class="line">//        &#123;</span><br><span class="line">//            pTempSrc = rgb_buffer + width * abs(i + height + 1) * (depth / 8);</span><br><span class="line">//        &#125;</span><br><span class="line"></span><br><span class="line">//        <span class="keyword">for</span> (int j = 0; j &lt; width; j++)</span><br><span class="line">//        &#123;</span><br><span class="line">//            *(pTempDst) = *(pTempSrc + 2);</span><br><span class="line">//            *(pTempDst + 1) = *(pTempSrc + 1);</span><br><span class="line">//            *(pTempDst + 2) = *(pTempSrc);</span><br><span class="line">//            pTempDst += 3;</span><br><span class="line">//            pTempSrc += (depth / 8);</span><br><span class="line">//        &#125;</span><br><span class="line">//    &#125;</span><br><span class="line"></span><br><span class="line">    //pTempDst新的rgb</span><br><span class="line">    //rgb_buffer旧的rgb</span><br><span class="line"></span><br><span class="line">    //压缩</span><br><span class="line">    unsigned char* outbuffer;</span><br><span class="line">    outbuffer=NULL;</span><br><span class="line"></span><br><span class="line">    struct jpeg_compress_struct cinfo;</span><br><span class="line">    struct jpeg_error_mgr jerr;</span><br><span class="line">    cinfo.err=jpeg_std_error(&amp;jerr);</span><br><span class="line">    jpeg_create_compress(&amp;cinfo);</span><br><span class="line"></span><br><span class="line">    jpeg_mem_dest(&amp;cinfo,&amp;outbuffer,&amp;jpeg_size);</span><br><span class="line"></span><br><span class="line">    cinfo.image_width=width;</span><br><span class="line">    cinfo.image_height=height;</span><br><span class="line">    cinfo.input_components=1;//channels;//3   1</span><br><span class="line">    cinfo.in_color_space=JCS_GRAYSCALE;//JCS_GRAYSCALE;//JCS_RGB</span><br><span class="line"></span><br><span class="line">    jpeg_set_defaults(&amp;cinfo);</span><br><span class="line">    cinfo.dct_method=JDCT_FASTEST;</span><br><span class="line">    jpeg_set_quality(&amp;cinfo, quality, TRUE /* <span class="built_in">limit</span> to baseline-JPEG values */);</span><br><span class="line"></span><br><span class="line">    jpeg_start_compress(&amp;cinfo,TRUE);</span><br><span class="line"></span><br><span class="line">    //JSAMPROW row_pointer[1];        /* pointer to JSAMPLE row[s] */</span><br><span class="line">    JSAMPROW row_pointer[height];</span><br><span class="line"></span><br><span class="line">    int     row_stride;             /* physical row width <span class="keyword">in</span> image buffer */</span><br><span class="line">    row_stride = width * depth/8; /* JSAMPLEs per row <span class="keyword">in</span> image_buffer */</span><br><span class="line">    //========压缩方式一</span><br><span class="line">    int i=0;</span><br><span class="line">    <span class="keyword">while</span>(i&lt;height)</span><br><span class="line">    &#123;</span><br><span class="line">         row_pointer[i]=&amp;rgb_buffer[i*row_stride];</span><br><span class="line">        i++;</span><br><span class="line">     &#125;</span><br><span class="line">    <span class="built_in">float</span> start = getTickCount();</span><br><span class="line">     (void)jpeg_write_scanlines(&amp;cinfo,row_pointer,height);</span><br><span class="line">        <span class="built_in">float</span> end = getTickCount();</span><br><span class="line"></span><br><span class="line">        <span class="built_in">float</span> last = end-start;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;time consume: &quot;</span> &lt;&lt; (last / getTickFrequency() * 1000) &lt;&lt; endl;</span><br><span class="line">    //=======压缩方式二</span><br><span class="line">//    <span class="keyword">while</span>(cinfo.next_scanline&lt;cinfo.image_height)</span><br><span class="line">//   &#123;</span><br><span class="line">//     row_pointer[0]=&amp;rgb_buffer[cinfo.next_scanline*row_stride];</span><br><span class="line"></span><br><span class="line">//     (void)jpeg_write_scanlines(&amp;cinfo,row_pointer,1);</span><br><span class="line">//   &#125;</span><br><span class="line">    //======</span><br><span class="line"></span><br><span class="line">   jpeg_finish_compress(&amp;cinfo);</span><br><span class="line">   <span class="keyword">for</span>(int i=0;i&lt;jpeg_size;i++)</span><br><span class="line">   &#123;</span><br><span class="line">       jpeg_buffer[i]=outbuffer[i];</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">if</span>(NULL!=outbuffer)</span><br><span class="line">   &#123;</span><br><span class="line">       free(outbuffer);</span><br><span class="line">       outbuffer=NULL;</span><br><span class="line">   &#125;</span><br><span class="line">   jpeg_destroy_compress(&amp;cinfo);</span><br><span class="line">   <span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int <span class="function"><span class="title">main</span></span>()&#123;</span><br><span class="line"></span><br><span class="line">    int  width=4024;</span><br><span class="line">    int height=3036;</span><br><span class="line">    int depth=8;</span><br><span class="line">    unsigned char *kk = new unsigned char[width * abs(height) * depth / 8];</span><br><span class="line">    unsigned long imgsize;</span><br><span class="line">    Mat input_image=imread(<span class="string">&quot;11.bmp&quot;</span>,0);</span><br><span class="line">    unsigned char *brga=input_image.data;</span><br><span class="line">    int quality=1;</span><br><span class="line">  </span><br><span class="line">    rgb2jpeg(brga,  width,  height, depth , quality,  kk,  imgsize);</span><br><span class="line">    </span><br><span class="line">	  //brga:原图，width:原图宽，height:原图高</span><br><span class="line">     //depth:图像深度，灰度:8,彩图:24</span><br><span class="line">     //kk:压缩后的图片，imgsize:压缩后的图像大小</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="解压缩"><a href="#解压缩" class="headerlink" title="解压缩"></a>解压缩</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">struct my_error_mgr &#123;</span><br><span class="line">	struct jpeg_error_mgr pub;  /* <span class="string">&quot;public&quot;</span> fields */</span><br><span class="line">	jmp_buf setjmp_buffer;    /* <span class="keyword">for</span> <span class="built_in">return</span> to <span class="built_in">caller</span> */</span><br><span class="line">&#125;;</span><br><span class="line">typedef struct my_error_mgr * my_error_ptr;</span><br><span class="line"></span><br><span class="line">void my_error_exit(j_common_ptr cinfo)</span><br><span class="line">&#123;</span><br><span class="line">	my_error_ptr myerr = (my_error_ptr)cinfo-&gt;err;</span><br><span class="line">	(*cinfo-&gt;err-&gt;output_message) (cinfo);</span><br><span class="line">	longjmp(myerr-&gt;setjmp_buffer, 1);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int jpeg2rgb(unsigned char* jpeg_buffer, int jpeg_size, unsigned char* rgb_buffer, int* size, int* width, int* height)</span><br><span class="line">&#123;</span><br><span class="line">	struct jpeg_decompress_struct cinfo;</span><br><span class="line">	struct my_error_mgr jerr;</span><br><span class="line"></span><br><span class="line">	JSAMPARRAY buffer;</span><br><span class="line">	int row_stride = 0;</span><br><span class="line">	unsigned char* tmp_buffer = NULL;</span><br><span class="line">	int rgb_size;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (jpeg_buffer == NULL)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;no jpeg buffer here.\n&quot;</span>);</span><br><span class="line">		<span class="built_in">return</span> -1;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (rgb_buffer == NULL)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot;you need to alloc rgb buffer.\n&quot;</span>);</span><br><span class="line">		<span class="built_in">return</span> -1;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	cinfo.err = jpeg_std_error(&amp;jerr.pub);</span><br><span class="line">	jerr.pub.error_exit = my_error_exit;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (setjmp(jerr.setjmp_buffer))</span><br><span class="line">	&#123;</span><br><span class="line">		jpeg_destroy_decompress(&amp;cinfo);</span><br><span class="line">		<span class="built_in">return</span> -1;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	jpeg_create_decompress(&amp;cinfo);</span><br><span class="line">	jpeg_mem_src(&amp;cinfo, jpeg_buffer, jpeg_size);</span><br><span class="line">	jpeg_read_header(&amp;cinfo, TRUE);</span><br><span class="line">	//cinfo.out_color_space = JCS_RGB; //JCS_YCbCr;  // 设置输出格式</span><br><span class="line">	jpeg_start_decompress(&amp;cinfo);</span><br><span class="line"></span><br><span class="line">	row_stride = cinfo.output_width * cinfo.output_components;</span><br><span class="line">	*width = cinfo.output_width;</span><br><span class="line">	*height = cinfo.output_height;</span><br><span class="line"></span><br><span class="line">	rgb_size = row_stride * cinfo.output_height; // 总大小</span><br><span class="line">	*size = rgb_size;</span><br><span class="line">    </span><br><span class="line">	buffer = (*cinfo.mem-&gt;alloc_sarray)((j_common_ptr)&amp;cinfo, JPOOL_IMAGE, row_stride, 1);</span><br><span class="line">	//===========</span><br><span class="line">	/*<span class="built_in">printf</span>(<span class="string">&quot;debug--:\nrgb_size: %d, size: %d w: %d h: %d row_stride: %d \n&quot;</span>, rgb_size,</span><br><span class="line">		cinfo.image_width*cinfo.image_height * 3,</span><br><span class="line">		cinfo.image_width,</span><br><span class="line">		cinfo.image_height,</span><br><span class="line">		row_stride);*/</span><br><span class="line">	tmp_buffer = rgb_buffer;</span><br><span class="line">	<span class="keyword">while</span> (cinfo.output_scanline &lt; cinfo.output_height) // 解压每一行</span><br><span class="line">	&#123;</span><br><span class="line">		jpeg_read_scanlines(&amp;cinfo, buffer, 1);</span><br><span class="line">		// 复制到内存</span><br><span class="line">		memcpy(tmp_buffer, buffer[0], row_stride);</span><br><span class="line">		tmp_buffer += row_stride;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	jpeg_finish_decompress(&amp;cinfo);</span><br><span class="line">	jpeg_destroy_decompress(&amp;cinfo);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br><span class="line">int <span class="function"><span class="title">main</span></span>()&#123;</span><br><span class="line"></span><br><span class="line">	 char* kk = new  char[4024 * 3036 ];</span><br><span class="line">     </span><br><span class="line">	 unsigned char *rgb = new unsigned char[4024 * 3036 ];</span><br><span class="line">	 int size;</span><br><span class="line">	 int rgb_w;</span><br><span class="line">	 int rgb_h;</span><br><span class="line"></span><br><span class="line">	 jpeg2rgb((unsigned char*)kk, cc, rgb, &amp;size, &amp;rgb_w, &amp;rgb_h);</span><br><span class="line">     //kk:压缩图片 cc:压缩图片大小 </span><br><span class="line">     //rgb:解压后的图片 size:解压后图片大小</span><br><span class="line">     //rgb_w:解压后图片宽</span><br><span class="line">     //rgb_h:解压后图片高</span><br><span class="line">     </span><br><span class="line">      Mat mat(3036, 4024, CV_8UC1, rgb);</span><br><span class="line">	  namedWindow(<span class="string">&quot;11&quot;</span>, WINDOW_NORMAL);</span><br><span class="line">	  resizeWindow(<span class="string">&quot;11&quot;</span>, 1006, 759);</span><br><span class="line">	  imshow(<span class="string">&quot;11&quot;</span>, mat);</span><br><span class="line">	  waitKey();</span><br><span class="line"></span><br><span class="line">	  system(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">	  <span class="built_in">return</span> 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://yoursite.com/2020/07/23/jpeglib%E5%8E%8B%E7%BC%A9/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2020/07/23/vs2013%E7%BC%96%E8%AF%91jpeglib%E5%BA%93/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            编译jpeglib库
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2020/07/23/socket%E4%BC%A0%E8%BE%93/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">socket传输</div>
+      </a>
+    
+  </nav>
+
+  
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2020
+        <i class="ri-heart-fill heart_icon"></i> John Doe
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="寒"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">文档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+
+<script src="/js/clickBoom2.js"></script>
+
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+    
+  </div>
+</body>
+
+</html>
