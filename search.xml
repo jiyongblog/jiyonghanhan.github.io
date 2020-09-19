@@ -1,40 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>BFS与DFS</title>
-    <url>/2020/07/24/BFS%E4%B8%8EDFS/</url>
-    <content><![CDATA[<h4 id="BFS与DFS"><a href="#BFS与DFS" class="headerlink" title="BFS与DFS"></a>BFS与DFS</h4><p>**DFS:**使用栈保存未被检测的结点，结点按照深度优先的次序被访问并依次被压入栈中，并以相反的次序出栈进行新的检测。</p>
-<p>类似树的先序遍历</p>
-<p>深搜例子:走迷宫,你没有办法用分身术站在每个走过的位置.不撞南墙不回头.</p>
-<p>**BFS:**使用队列保存未被检测的结点。结点按照宽度优先的次序被访问和进出队列。</p>
-<p>类似树的按层次遍历的过程</p>
-<p>广搜例子:你的眼镜掉在地上以后,你趴在地板上找.你总是先摸最接近你的地方,如果没有,再摸远一点的地方…</p>
-<h4 id="DFS模板框架与例子"><a href="#DFS模板框架与例子" class="headerlink" title="DFS模板框架与例子"></a>DFS模板框架与例子</h4><p><strong>DFS:模板</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bool vis[maxn][maxn]; &#x2F;&#x2F; 访问标记</span><br><span class="line">vector&lt;vector&lt;int&gt;&gt; dxy &#x3D; &#123;&#123;-1, 0&#125;, &#123;1, 0&#125;, &#123;0, 1&#125;, &#123;0, -1&#125;&#125;;&#x2F;&#x2F;方向矩阵</span><br><span class="line">bool dfs(参数,i,j)</span><br><span class="line">&#123;</span><br><span class="line">	if(不满足或者不符合) return false;</span><br><span class="line">	if(搜到了或者达到条件)</span><br><span class="line">	&#123;</span><br><span class="line">		&#x2F;&#x2F;计数或进行其他操作;</span><br><span class="line">		return true;</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">        vis[i][j]&#x3D;true;&#x2F;&#x2F;标记已经搜索过的节点</span><br><span class="line">        </span><br><span class="line">	for(auto xy:dxy)&#x2F;&#x2F;查找当前点的周围的点</span><br><span class="line">	&#123;</span><br><span class="line">        	int x &#x3D; xy[0] + i;</span><br><span class="line">        	int y &#x3D; xy[1] + j;</span><br><span class="line">	   	if(边界判断和访问标记判断) continue;</span><br><span class="line">         	else</span><br><span class="line">		    if(dfs(进一步深搜)) return true;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">        vis[i][j]&#x3D;false;取消标记;</span><br><span class="line">        return false;&#x2F;&#x2F;本次搜索无效;</span><br><span class="line">       &#125;</span><br><span class="line">       </span><br><span class="line">       </span><br><span class="line">     </span><br><span class="line">       &#x2F;&#x2F;dfs参数中的0表示查到word的第几个字符.</span><br><span class="line">        bool main(vector&lt;vector&lt;char&gt;&gt;&amp; board, string word)&#123;</span><br><span class="line">	      for(int i &#x3D; 0;i &lt; rows; i++)&#123;&#x2F;&#x2F;row行</span><br><span class="line">                for(int j &#x3D; 0; j &lt; cols; j++)&#123;&#x2F;&#x2F;cols列</span><br><span class="line">                if(board[i][j] &#x3D;&#x3D; word[0])&#123; </span><br><span class="line">                    if(dfs(board, i, j, word, 0)) return true;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><strong>DFS:例子</strong></p>
-<p>请设计一个函数，用来判断在一个矩阵中是否存在一条包含某字符串所有字符的路径。路径可以从矩阵中的任意一格开始，每一步可以在矩阵中向左、右、上、下移动一格。如果一条路径经过了矩阵的某一格，那么该路径不能再次进入该格子。例如，在下面的3×4的矩阵中包含一条字符串“bfce”的路径。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[[&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;e&quot;],</span><br><span class="line">[&quot;s&quot;,&quot;f&quot;,&quot;c&quot;,&quot;s&quot;],</span><br><span class="line">[&quot;a&quot;,&quot;d&quot;,&quot;e&quot;,&quot;e&quot;]]</span><br></pre></td></tr></table></figure>
-<p>但矩阵中不包含字符串“abfb”的路径，因为字符串的第一个字符b占据了矩阵中的第一行第二个格子之后，路径不能再次进入这个格子。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：board &#x3D; [[&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;E&quot;],[&quot;S&quot;,&quot;F&quot;,&quot;C&quot;,&quot;S&quot;],[&quot;A&quot;,&quot;D&quot;,&quot;E&quot;,&quot;E&quot;]], word &#x3D; &quot;ABCCED&quot;</span><br><span class="line">输出：true</span><br><span class="line"></span><br><span class="line">输入：board &#x3D; [[&quot;a&quot;,&quot;b&quot;],[&quot;c&quot;,&quot;d&quot;]], word &#x3D; &quot;abcd&quot;</span><br><span class="line">输出：false</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line"></span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; dxy &#x3D; &#123;&#123;-1, 0&#125;, &#123;1, 0&#125;, &#123;0, 1&#125;, &#123;0, -1&#125;&#125;;&#x2F;&#x2F;方向矩阵</span><br><span class="line">    int rows, cols;</span><br><span class="line">    bool dfs(vector&lt;vector&lt;char&gt;&gt;&amp; board, vector&lt;bool&gt;&amp; visit, int i, int j, string&amp; word, int idx)&#123;</span><br><span class="line">        if(board[i][j] !&#x3D; word[idx]) return false;&#x2F;&#x2F;不满足条件</span><br><span class="line">       </span><br><span class="line">        idx++;</span><br><span class="line">         if(idx &#x3D;&#x3D; word.size()) return  true;&#x2F;&#x2F;满足条件</span><br><span class="line">         visit[i*cols+j] &#x3D; true;&#x2F;&#x2F;标记已经访问</span><br><span class="line">        for(auto xy : dxy)&#123;&#x2F;&#x2F;查找当前点的周围的点</span><br><span class="line">            int x &#x3D; xy[0] + i;</span><br><span class="line">            int y &#x3D; xy[1] + j;</span><br><span class="line">            if(x &lt; 0 || x &gt;&#x3D; rows || y &lt; 0 || y &gt;&#x3D; cols || visit[x*cols+y]) continue;&#x2F;&#x2F;边界判断和访问标记判断</span><br><span class="line">            else&#123;</span><br><span class="line">                if(dfs(board, visit, x, y, word, idx)) return true;&#x2F;&#x2F;进一步深搜</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        visit[i*cols+j] &#x3D; false;&#x2F;&#x2F;取消标记</span><br><span class="line">       </span><br><span class="line">        return false;&#x2F;&#x2F;本次搜索无效;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    bool exist(vector&lt;vector&lt;char&gt;&gt;&amp; board, string word) &#123;</span><br><span class="line">        if(word &#x3D;&#x3D; &quot;&quot;)  return false;</span><br><span class="line">        rows &#x3D; board.size();</span><br><span class="line">        cols &#x3D; board[0].size();</span><br><span class="line">        vector&lt;bool&gt; visit(rows * cols, false);&#x2F;&#x2F;标记矩阵</span><br><span class="line">        for(int i &#x3D; 0;i &lt; rows; i++)&#123;</span><br><span class="line">            for(int j &#x3D; 0; j &lt; cols; j++)&#123;</span><br><span class="line">                if(board[i][j] &#x3D;&#x3D; word[0])&#123;</span><br><span class="line">                    if(dfs(board, visit, i, j, word, 0)) return true;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h4 id="BFS模板框架与例子"><a href="#BFS模板框架与例子" class="headerlink" title="BFS模板框架与例子"></a>BFS模板框架与例子</h4><p><strong>BFS:模板</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void bfs(起始点)</span><br><span class="line">&#123;</span><br><span class="line">	将起始点放入队列中;</span><br><span class="line">	标记起点已访问;</span><br><span class="line">    </span><br><span class="line">	while(队列不为空)</span><br><span class="line">	&#123;</span><br><span class="line">		访问队列中首元素x;</span><br><span class="line">      ...一些操作</span><br><span class="line">		删除队首元素;</span><br><span class="line">		for(x所有相邻点)</span><br><span class="line">		&#123;</span><br><span class="line">			if(该点未被访问过且合法)</span><br><span class="line">				将该点加入队列末尾;</span><br><span class="line">                 		标记该点已访问</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	队列为空，广搜结束; </span><br><span class="line">&#125; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><strong>BFS:例子</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">打印指定点附近相同值的点的坐标</span><br><span class="line">bool vis[maxn][maxn]; &#x2F;&#x2F; 访问标记</span><br><span class="line">vector&lt;vector&lt;int&gt;&gt; dxy &#x3D; &#123;&#123;-1, 0&#125;, &#123;1, 0&#125;, &#123;0, 1&#125;, &#123;0, -1&#125;&#125;;&#x2F;&#x2F;方向矩阵</span><br><span class="line">board[5][5];&#x2F;&#x2F;矩阵内容1和0</span><br><span class="line">bfs()&#123;</span><br><span class="line">	int val&#x3D;board[i][j];&#x2F;&#x2F;i,j为初始点坐标</span><br><span class="line">	queue&lt;pair&lt;int,int&gt;&gt; q;</span><br><span class="line">  	q.push(make_pair(i,j));</span><br><span class="line">   	vis[i][j]&#x3D;true;&#x2F;&#x2F;标记</span><br><span class="line">   </span><br><span class="line">      while(!q.empty)&#123;</span><br><span class="line">        pair&lt;int,int&gt; tmp&#x3D;q.front();&#x2F;&#x2F;取出</span><br><span class="line">        q.pop();</span><br><span class="line">        cout&lt;&lt;tmp.first&lt;&lt;tmp.second&lt;&lt;endl;&#x2F;&#x2F;一些操作</span><br><span class="line">        </span><br><span class="line">        for(auto xy: dxy)&#123;</span><br><span class="line">        	int x&#x3D;tmp.first+xy[0];</span><br><span class="line">          	int y&#x3D;tmp.second+xy[1];</span><br><span class="line">          	if(x&gt;&#x3D;0 &amp;&amp; x&lt;5 &amp;&amp; y&gt;&#x3D;0 &amp;&amp; y&lt;5 &amp;&amp; vis[x][y]!&#x3D;true &amp;&amp; board[x][y]&#x3D;&#x3D;val)&#123;</span><br><span class="line">            		q.push(make_pair(x,y));&#x2F;&#x2F;广搜符合条件放进队列</span><br><span class="line">            		vis[x][y]&#x3D;true; &#x2F;&#x2F;标记已经访问</span><br><span class="line">            &#125;    		</span><br><span class="line">        &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>BFS:例子</strong><br>现在一个紧急的任务是打开一个密码锁。 密码由四位数字组成，每个数字从1到9进行编码。每次可以对任何一位数字加1或减1。当将9加1时，数字将变为1，当将1减1时，数字将变为9.你也可以交换相邻数字，每一个行动记作异步。现在你的任务是使用最小的步骤来打开锁。注意：最左边的数字不与最右边的数字相邻。</p>
-<p>输入：<br>第一行输入四个数字，表示密码锁的初始状态。<br>第二行输入四个数字，表示开锁的密码。</p>
-<p>输出：<br>最小步数：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;queue&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">struct node&#123;</span><br><span class="line">	int num[4],step;&#x2F;&#x2F;num存的密码,step是到这一步的步数</span><br><span class="line">&#125;first,last;</span><br><span class="line">int vis[11][11][11][11];&#x2F;&#x2F;访问标记</span><br><span class="line">void bfs()</span><br><span class="line">&#123;</span><br><span class="line">	int i;</span><br><span class="line">	node a,next;</span><br><span class="line">	queue&lt;node&gt; q;</span><br><span class="line">	a&#x3D;first;</span><br><span class="line">	a.step&#x3D;0;</span><br><span class="line">	q.push(a);&#x2F;&#x2F;初始点</span><br><span class="line">	memset(vis,0,sizeof(vis));</span><br><span class="line">	vis[a.num[0]][a.num[1]][a.num[2]][a.num[3]]&#x3D;1;&#x2F;&#x2F;标记已经访问</span><br><span class="line">	while(!q.empty())</span><br><span class="line">	&#123;</span><br><span class="line">		a&#x3D;q.front();&#x2F;&#x2F;取出访问</span><br><span class="line">		q.pop();</span><br><span class="line">		if(a.num[0]&#x3D;&#x3D;last.num[0]&amp;&amp;a.num[1]&#x3D;&#x3D;last.num[1]&amp;&amp;a.num[2]&#x3D;&#x3D;last.num[2]&amp;&amp;a.num[3]&#x3D;&#x3D;last.num[3])&#x2F;&#x2F;一些操作,即判断是否符合要求.</span><br><span class="line">		&#123;</span><br><span class="line">			printf(&quot;%d\n&quot;,a.step);</span><br><span class="line">			return;</span><br><span class="line">		&#125;</span><br><span class="line">		for(i&#x3D;0;i&lt;4;++i)		&#x2F;&#x2F;+1   周围相邻点合法且未被访问的放入,放入后标记已经访问</span><br><span class="line">		&#123;</span><br><span class="line">			next&#x3D;a;</span><br><span class="line">			++next.num[i];</span><br><span class="line">			if(next.num[i]&#x3D;&#x3D;10)</span><br><span class="line">				next.num[i]&#x3D;1;</span><br><span class="line">			if(!vis[next.num[0]][next.num[1]][next.num[2]][next.num[3]])</span><br><span class="line">			&#123;</span><br><span class="line">				vis[next.num[0]][next.num[1]][next.num[2]][next.num[3]]&#x3D;1;</span><br><span class="line">				++next.step;</span><br><span class="line">				q.push(next);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		for(i&#x3D;0;i&lt;4;++i)		&#x2F;&#x2F;-1  周围相邻点合法且未被访问的放入,放入后标记已经访问</span><br><span class="line">		&#123;</span><br><span class="line">			next&#x3D;a;</span><br><span class="line">			--next.num[i];</span><br><span class="line">			if(next.num[i]&#x3D;&#x3D;0)</span><br><span class="line">				next.num[i]&#x3D;9;</span><br><span class="line">			if(!vis[next.num[0]][next.num[1]][next.num[2]][next.num[3]])</span><br><span class="line">			&#123;</span><br><span class="line">				vis[next.num[0]][next.num[1]][next.num[2]][next.num[3]]&#x3D;1;</span><br><span class="line">				++next.step;</span><br><span class="line">				q.push(next);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		for(i&#x3D;0;i&lt;3;++i)		&#x2F;&#x2F;交换  周围相邻点合法且未被访问的放入,放入后标记已经访问</span><br><span class="line">		&#123;</span><br><span class="line">			next&#x3D;a;</span><br><span class="line">			next.num[i]&#x3D;a.num[i+1];</span><br><span class="line">			next.num[i+1]&#x3D;a.num[i];</span><br><span class="line">			if(!vis[next.num[0]][next.num[1]][next.num[2]][next.num[3]])</span><br><span class="line">			&#123;</span><br><span class="line">				vis[next.num[0]][next.num[1]][next.num[2]][next.num[3]]&#x3D;1;</span><br><span class="line">				++next.step;</span><br><span class="line">				q.push(next);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int i,j;</span><br><span class="line">	for(i&#x3D;0;i&lt;4;++i)</span><br><span class="line">		scanf(&quot;%d&quot;,&amp;first.num[i]);</span><br><span class="line">	for(i&#x3D;0;i&lt;4;++i)</span><br><span class="line">		scanf(&quot;%d&quot;,&amp;last.num[i]);</span><br><span class="line">	bfs();</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>C++笔记</category>
-      </categories>
-  </entry>
-  <entry>
     <title>C++数据输入cin</title>
     <url>/2020/07/21/C-%E6%95%B0%E6%8D%AE%E8%BE%93%E5%85%A5cin/</url>
     <content><![CDATA[<h3 id="cin-get-与cin-peek"><a href="#cin-get-与cin-peek" class="headerlink" title="cin.get()与cin.peek()"></a>cin.get()与cin.peek()</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ char c;</span><br><span class="line">$ c=cin.peek();</span><br><span class="line">//查看放回缓存区。如果要访问的字符是文件结束符，则函数值是EOF（-1）。</span><br><span class="line"></span><br><span class="line">$ ch=cin.get();//从输入流中读取一个字符,会读取回车</span><br><span class="line">$ cin.get(ch);// 把值直接赋值给ch</span><br><span class="line">$ cin.get(ch, len + 1, <span class="string">&#x27;a&#x27;</span>);</span><br><span class="line">$ char _char[10];               // input: sdsdsdafd</span><br><span class="line">$ cin.get(_char, 10 + 1, <span class="string">&#x27;a&#x27;</span>);  // _char = <span class="string">&quot;sdsdsd&quot;</span>，之后光标停留在 <span class="string">&#x27;a&#x27;</span> 处</span><br><span class="line"></span><br><span class="line">$ cin.ignore()</span><br><span class="line">$ cin.ignore(a, ch)</span><br><span class="line">//如果忽略计数值达到 a 或者被抛弃的字符是 ch ，则cin.ignore() 函数执行终止；</span><br></pre></td></tr></table></figure>
@@ -71,12 +37,37 @@
       </categories>
   </entry>
   <entry>
-    <title>各种排序时间复杂度对比</title>
-    <url>/2020/08/12/Untitled/</url>
-    <content><![CDATA[<p><img src="/img/25.png"></p>
-]]></content>
+    <title>BFS与DFS</title>
+    <url>/2020/07/24/BFS%E4%B8%8EDFS/</url>
+    <content><![CDATA[<h4 id="BFS与DFS"><a href="#BFS与DFS" class="headerlink" title="BFS与DFS"></a>BFS与DFS</h4><p>**DFS:**使用栈保存未被检测的结点，结点按照深度优先的次序被访问并依次被压入栈中，并以相反的次序出栈进行新的检测。</p>
+<p>类似树的先序遍历</p>
+<p>深搜例子:走迷宫,你没有办法用分身术站在每个走过的位置.不撞南墙不回头.</p>
+<p>**BFS:**使用队列保存未被检测的结点。结点按照宽度优先的次序被访问和进出队列。</p>
+<p>类似树的按层次遍历的过程</p>
+<p>广搜例子:你的眼镜掉在地上以后,你趴在地板上找.你总是先摸最接近你的地方,如果没有,再摸远一点的地方…</p>
+<h4 id="DFS模板框架与例子"><a href="#DFS模板框架与例子" class="headerlink" title="DFS模板框架与例子"></a>DFS模板框架与例子</h4><p><strong>DFS:模板</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bool vis[maxn][maxn]; &#x2F;&#x2F; 访问标记</span><br><span class="line">vector&lt;vector&lt;int&gt;&gt; dxy &#x3D; &#123;&#123;-1, 0&#125;, &#123;1, 0&#125;, &#123;0, 1&#125;, &#123;0, -1&#125;&#125;;&#x2F;&#x2F;方向矩阵</span><br><span class="line">bool dfs(参数,i,j)</span><br><span class="line">&#123;</span><br><span class="line">	if(不满足或者不符合) return false;</span><br><span class="line">	if(搜到了或者达到条件)</span><br><span class="line">	&#123;</span><br><span class="line">		&#x2F;&#x2F;计数或进行其他操作;</span><br><span class="line">		return true;</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">        vis[i][j]&#x3D;true;&#x2F;&#x2F;标记已经搜索过的节点</span><br><span class="line">        </span><br><span class="line">	for(auto xy:dxy)&#x2F;&#x2F;查找当前点的周围的点</span><br><span class="line">	&#123;</span><br><span class="line">        	int x &#x3D; xy[0] + i;</span><br><span class="line">        	int y &#x3D; xy[1] + j;</span><br><span class="line">	   	if(边界判断和访问标记判断) continue;</span><br><span class="line">         	else</span><br><span class="line">		    if(dfs(进一步深搜)) return true;</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">    </span><br><span class="line">        vis[i][j]&#x3D;false;取消标记;</span><br><span class="line">        return false;&#x2F;&#x2F;本次搜索无效;</span><br><span class="line">       &#125;</span><br><span class="line">       </span><br><span class="line">       </span><br><span class="line">     </span><br><span class="line">       &#x2F;&#x2F;dfs参数中的0表示查到word的第几个字符.</span><br><span class="line">        bool main(vector&lt;vector&lt;char&gt;&gt;&amp; board, string word)&#123;</span><br><span class="line">	      for(int i &#x3D; 0;i &lt; rows; i++)&#123;&#x2F;&#x2F;row行</span><br><span class="line">                for(int j &#x3D; 0; j &lt; cols; j++)&#123;&#x2F;&#x2F;cols列</span><br><span class="line">                if(board[i][j] &#x3D;&#x3D; word[0])&#123; </span><br><span class="line">                    if(dfs(board, i, j, word, 0)) return true;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>DFS:例子</strong></p>
+<p>请设计一个函数，用来判断在一个矩阵中是否存在一条包含某字符串所有字符的路径。路径可以从矩阵中的任意一格开始，每一步可以在矩阵中向左、右、上、下移动一格。如果一条路径经过了矩阵的某一格，那么该路径不能再次进入该格子。例如，在下面的3×4的矩阵中包含一条字符串“bfce”的路径。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[[&quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;e&quot;],</span><br><span class="line">[&quot;s&quot;,&quot;f&quot;,&quot;c&quot;,&quot;s&quot;],</span><br><span class="line">[&quot;a&quot;,&quot;d&quot;,&quot;e&quot;,&quot;e&quot;]]</span><br></pre></td></tr></table></figure>
+<p>但矩阵中不包含字符串“abfb”的路径，因为字符串的第一个字符b占据了矩阵中的第一行第二个格子之后，路径不能再次进入这个格子。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：board &#x3D; [[&quot;A&quot;,&quot;B&quot;,&quot;C&quot;,&quot;E&quot;],[&quot;S&quot;,&quot;F&quot;,&quot;C&quot;,&quot;S&quot;],[&quot;A&quot;,&quot;D&quot;,&quot;E&quot;,&quot;E&quot;]], word &#x3D; &quot;ABCCED&quot;</span><br><span class="line">输出：true</span><br><span class="line"></span><br><span class="line">输入：board &#x3D; [[&quot;a&quot;,&quot;b&quot;],[&quot;c&quot;,&quot;d&quot;]], word &#x3D; &quot;abcd&quot;</span><br><span class="line">输出：false</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line"></span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; dxy &#x3D; &#123;&#123;-1, 0&#125;, &#123;1, 0&#125;, &#123;0, 1&#125;, &#123;0, -1&#125;&#125;;&#x2F;&#x2F;方向矩阵</span><br><span class="line">    int rows, cols;</span><br><span class="line">    bool dfs(vector&lt;vector&lt;char&gt;&gt;&amp; board, vector&lt;bool&gt;&amp; visit, int i, int j, string&amp; word, int idx)&#123;</span><br><span class="line">        if(board[i][j] !&#x3D; word[idx]) return false;&#x2F;&#x2F;不满足条件</span><br><span class="line">       </span><br><span class="line">        idx++;</span><br><span class="line">         if(idx &#x3D;&#x3D; word.size()) return  true;&#x2F;&#x2F;满足条件</span><br><span class="line">         visit[i*cols+j] &#x3D; true;&#x2F;&#x2F;标记已经访问</span><br><span class="line">        for(auto xy : dxy)&#123;&#x2F;&#x2F;查找当前点的周围的点</span><br><span class="line">            int x &#x3D; xy[0] + i;</span><br><span class="line">            int y &#x3D; xy[1] + j;</span><br><span class="line">            if(x &lt; 0 || x &gt;&#x3D; rows || y &lt; 0 || y &gt;&#x3D; cols || visit[x*cols+y]) continue;&#x2F;&#x2F;边界判断和访问标记判断</span><br><span class="line">            else&#123;</span><br><span class="line">                if(dfs(board, visit, x, y, word, idx)) return true;&#x2F;&#x2F;进一步深搜</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        visit[i*cols+j] &#x3D; false;&#x2F;&#x2F;取消标记</span><br><span class="line">       </span><br><span class="line">        return false;&#x2F;&#x2F;本次搜索无效;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    bool exist(vector&lt;vector&lt;char&gt;&gt;&amp; board, string word) &#123;</span><br><span class="line">        if(word &#x3D;&#x3D; &quot;&quot;)  return false;</span><br><span class="line">        rows &#x3D; board.size();</span><br><span class="line">        cols &#x3D; board[0].size();</span><br><span class="line">        vector&lt;bool&gt; visit(rows * cols, false);&#x2F;&#x2F;标记矩阵</span><br><span class="line">        for(int i &#x3D; 0;i &lt; rows; i++)&#123;</span><br><span class="line">            for(int j &#x3D; 0; j &lt; cols; j++)&#123;</span><br><span class="line">                if(board[i][j] &#x3D;&#x3D; word[0])&#123;</span><br><span class="line">                    if(dfs(board, visit, i, j, word, 0)) return true;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="BFS模板框架与例子"><a href="#BFS模板框架与例子" class="headerlink" title="BFS模板框架与例子"></a>BFS模板框架与例子</h4><p><strong>BFS:模板</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void bfs(起始点)</span><br><span class="line">&#123;</span><br><span class="line">	将起始点放入队列中;</span><br><span class="line">	标记起点已访问;</span><br><span class="line">    </span><br><span class="line">	while(队列不为空)</span><br><span class="line">	&#123;</span><br><span class="line">		访问队列中首元素x;</span><br><span class="line">      ...一些操作</span><br><span class="line">		删除队首元素;</span><br><span class="line">		for(x所有相邻点)</span><br><span class="line">		&#123;</span><br><span class="line">			if(该点未被访问过且合法)</span><br><span class="line">				将该点加入队列末尾;</span><br><span class="line">                 		标记该点已访问</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	队列为空，广搜结束; </span><br><span class="line">&#125; </span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>BFS:例子</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">打印指定点附近相同值的点的坐标</span><br><span class="line">bool vis[maxn][maxn]; &#x2F;&#x2F; 访问标记</span><br><span class="line">vector&lt;vector&lt;int&gt;&gt; dxy &#x3D; &#123;&#123;-1, 0&#125;, &#123;1, 0&#125;, &#123;0, 1&#125;, &#123;0, -1&#125;&#125;;&#x2F;&#x2F;方向矩阵</span><br><span class="line">board[5][5];&#x2F;&#x2F;矩阵内容1和0</span><br><span class="line">bfs()&#123;</span><br><span class="line">	int val&#x3D;board[i][j];&#x2F;&#x2F;i,j为初始点坐标</span><br><span class="line">	queue&lt;pair&lt;int,int&gt;&gt; q;</span><br><span class="line">  	q.push(make_pair(i,j));</span><br><span class="line">   	vis[i][j]&#x3D;true;&#x2F;&#x2F;标记</span><br><span class="line">   </span><br><span class="line">      while(!q.empty)&#123;</span><br><span class="line">        pair&lt;int,int&gt; tmp&#x3D;q.front();&#x2F;&#x2F;取出</span><br><span class="line">        q.pop();</span><br><span class="line">        cout&lt;&lt;tmp.first&lt;&lt;tmp.second&lt;&lt;endl;&#x2F;&#x2F;一些操作</span><br><span class="line">        </span><br><span class="line">        for(auto xy: dxy)&#123;</span><br><span class="line">        	int x&#x3D;tmp.first+xy[0];</span><br><span class="line">          	int y&#x3D;tmp.second+xy[1];</span><br><span class="line">          	if(x&gt;&#x3D;0 &amp;&amp; x&lt;5 &amp;&amp; y&gt;&#x3D;0 &amp;&amp; y&lt;5 &amp;&amp; vis[x][y]!&#x3D;true &amp;&amp; board[x][y]&#x3D;&#x3D;val)&#123;</span><br><span class="line">            		q.push(make_pair(x,y));&#x2F;&#x2F;广搜符合条件放进队列</span><br><span class="line">            		vis[x][y]&#x3D;true; &#x2F;&#x2F;标记已经访问</span><br><span class="line">            &#125;    		</span><br><span class="line">        &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>BFS:例子</strong><br>现在一个紧急的任务是打开一个密码锁。 密码由四位数字组成，每个数字从1到9进行编码。每次可以对任何一位数字加1或减1。当将9加1时，数字将变为1，当将1减1时，数字将变为9.你也可以交换相邻数字，每一个行动记作异步。现在你的任务是使用最小的步骤来打开锁。注意：最左边的数字不与最右边的数字相邻。</p>
+<p>输入：<br>第一行输入四个数字，表示密码锁的初始状态。<br>第二行输入四个数字，表示开锁的密码。</p>
+<p>输出：<br>最小步数：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;queue&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">struct node&#123;</span><br><span class="line">	int num[4],step;&#x2F;&#x2F;num存的密码,step是到这一步的步数</span><br><span class="line">&#125;first,last;</span><br><span class="line">int vis[11][11][11][11];&#x2F;&#x2F;访问标记</span><br><span class="line">void bfs()</span><br><span class="line">&#123;</span><br><span class="line">	int i;</span><br><span class="line">	node a,next;</span><br><span class="line">	queue&lt;node&gt; q;</span><br><span class="line">	a&#x3D;first;</span><br><span class="line">	a.step&#x3D;0;</span><br><span class="line">	q.push(a);&#x2F;&#x2F;初始点</span><br><span class="line">	memset(vis,0,sizeof(vis));</span><br><span class="line">	vis[a.num[0]][a.num[1]][a.num[2]][a.num[3]]&#x3D;1;&#x2F;&#x2F;标记已经访问</span><br><span class="line">	while(!q.empty())</span><br><span class="line">	&#123;</span><br><span class="line">		a&#x3D;q.front();&#x2F;&#x2F;取出访问</span><br><span class="line">		q.pop();</span><br><span class="line">		if(a.num[0]&#x3D;&#x3D;last.num[0]&amp;&amp;a.num[1]&#x3D;&#x3D;last.num[1]&amp;&amp;a.num[2]&#x3D;&#x3D;last.num[2]&amp;&amp;a.num[3]&#x3D;&#x3D;last.num[3])&#x2F;&#x2F;一些操作,即判断是否符合要求.</span><br><span class="line">		&#123;</span><br><span class="line">			printf(&quot;%d\n&quot;,a.step);</span><br><span class="line">			return;</span><br><span class="line">		&#125;</span><br><span class="line">		for(i&#x3D;0;i&lt;4;++i)		&#x2F;&#x2F;+1   周围相邻点合法且未被访问的放入,放入后标记已经访问</span><br><span class="line">		&#123;</span><br><span class="line">			next&#x3D;a;</span><br><span class="line">			++next.num[i];</span><br><span class="line">			if(next.num[i]&#x3D;&#x3D;10)</span><br><span class="line">				next.num[i]&#x3D;1;</span><br><span class="line">			if(!vis[next.num[0]][next.num[1]][next.num[2]][next.num[3]])</span><br><span class="line">			&#123;</span><br><span class="line">				vis[next.num[0]][next.num[1]][next.num[2]][next.num[3]]&#x3D;1;</span><br><span class="line">				++next.step;</span><br><span class="line">				q.push(next);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		for(i&#x3D;0;i&lt;4;++i)		&#x2F;&#x2F;-1  周围相邻点合法且未被访问的放入,放入后标记已经访问</span><br><span class="line">		&#123;</span><br><span class="line">			next&#x3D;a;</span><br><span class="line">			--next.num[i];</span><br><span class="line">			if(next.num[i]&#x3D;&#x3D;0)</span><br><span class="line">				next.num[i]&#x3D;9;</span><br><span class="line">			if(!vis[next.num[0]][next.num[1]][next.num[2]][next.num[3]])</span><br><span class="line">			&#123;</span><br><span class="line">				vis[next.num[0]][next.num[1]][next.num[2]][next.num[3]]&#x3D;1;</span><br><span class="line">				++next.step;</span><br><span class="line">				q.push(next);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		for(i&#x3D;0;i&lt;3;++i)		&#x2F;&#x2F;交换  周围相邻点合法且未被访问的放入,放入后标记已经访问</span><br><span class="line">		&#123;</span><br><span class="line">			next&#x3D;a;</span><br><span class="line">			next.num[i]&#x3D;a.num[i+1];</span><br><span class="line">			next.num[i+1]&#x3D;a.num[i];</span><br><span class="line">			if(!vis[next.num[0]][next.num[1]][next.num[2]][next.num[3]])</span><br><span class="line">			&#123;</span><br><span class="line">				vis[next.num[0]][next.num[1]][next.num[2]][next.num[3]]&#x3D;1;</span><br><span class="line">				++next.step;</span><br><span class="line">				q.push(next);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int i,j;</span><br><span class="line">	for(i&#x3D;0;i&lt;4;++i)</span><br><span class="line">		scanf(&quot;%d&quot;,&amp;first.num[i]);</span><br><span class="line">	for(i&#x3D;0;i&lt;4;++i)</span><br><span class="line">		scanf(&quot;%d&quot;,&amp;last.num[i]);</span><br><span class="line">	bfs();</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>排序算法</category>
+        <category>C++笔记</category>
       </categories>
   </entry>
   <entry>
@@ -133,6 +124,15 @@
 ]]></content>
       <categories>
         <category>C++笔记</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>各种排序时间复杂度对比</title>
+    <url>/2020/08/12/Untitled/</url>
+    <content><![CDATA[<p><img src="/img/25.png"></p>
+]]></content>
+      <categories>
+        <category>排序算法</category>
       </categories>
   </entry>
   <entry>
@@ -266,26 +266,6 @@
       </categories>
   </entry>
   <entry>
-    <title>set</title>
-    <url>/2020/08/16/set/</url>
-    <content><![CDATA[<p><label style="color:red"> </label></p>
-<h4 id="set的常用函数"><a href="#set的常用函数" class="headerlink" title="set的常用函数"></a>set的常用函数</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">begin();            &#x2F;&#x2F; 返回指向第一个元素的迭代器，iterator</span><br><span class="line">end();              &#x2F;&#x2F; 返回指向最后一个元素的迭代器</span><br><span class="line">rbegin()		&#x2F;&#x2F;返回指向集合中最后一个元素的反向迭代器，reverse_iterator</span><br><span class="line">rend() 			&#x2F;&#x2F;返回指向集合中第一个元素的反向迭代器</span><br><span class="line">clear();            &#x2F;&#x2F; 清除所有元素</span><br><span class="line">count();            &#x2F;&#x2F; 返回某个值元素的个数,可以用来判断元素是否存在</span><br><span class="line">find()		    &#x2F;&#x2F;返回一个指向被查找到元素的迭代器</span><br><span class="line">erase()		   &#x2F;&#x2F;删除集合中的元素</span><br><span class="line">insert()		&#x2F;&#x2F;在集合中插入元素</span><br><span class="line">empty();            &#x2F;&#x2F; 如果集合为空，返回true</span><br><span class="line">size()			&#x2F;&#x2F;集合中元素的数目</span><br><span class="line">max_size()		&#x2F;&#x2F;返回集合能容纳的元素的最大限值 </span><br><span class="line">swap()			&#x2F;&#x2F;交换两个集合变量</span><br><span class="line"> </span><br><span class="line">lower_bound()	&#x2F;&#x2F;返回指向大于（或等于）某值的第一个元素的迭代器</span><br><span class="line">upper_bound()	&#x2F;&#x2F;返回大于某个值元素的迭代器</span><br><span class="line">equal_range();      &#x2F;&#x2F;返回集合中与给定值相等的上下限的两个迭代器，lower_bound()与upper_bound()的结合。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">get_allocator()	–返回集合的分配器</span><br><span class="line">key_comp()	–返回一个用于元素间值比较的函数</span><br><span class="line">value_comp()	–返回一个用于比较元素间的值的函数</span><br></pre></td></tr></table></figure>
-<h4 id="c-stl集合set插入-遍历用法举例"><a href="#c-stl集合set插入-遍历用法举例" class="headerlink" title="c++ stl集合set插入,遍历用法举例"></a>c++ stl集合set插入,遍历用法举例</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include&lt;iostream&gt; </span><br><span class="line">#include&lt;set&gt; </span><br><span class="line">using namespace std; </span><br><span class="line">&#x2F;&#x2F;set插入元素操作  </span><br><span class="line">int main() </span><br><span class="line">&#123; </span><br><span class="line">    &#x2F;&#x2F;定义一个int型集合对象s,当前没有任何元素.由www.169it.com搜集整理</span><br><span class="line">    set&lt;int&gt; s; </span><br><span class="line">    s.insert(8);  &#x2F;&#x2F;第一次插入8，可以插入  </span><br><span class="line">    s.insert(1); </span><br><span class="line">    s.insert(12); </span><br><span class="line">    s.insert(6); </span><br><span class="line">    s.insert(8);   &#x2F;&#x2F;第二次插入8，重复元素，不会插入  </span><br><span class="line">    set&lt;int&gt;::iterator it; &#x2F;&#x2F;定义前向迭代器 </span><br><span class="line">    &#x2F;&#x2F;中序遍历集合中的所有元素  </span><br><span class="line">    for(it&#x3D;s.begin();it!&#x3D;s.end();it++) </span><br><span class="line">    cout&lt;&lt;*it&lt;&lt;endl;    </span><br><span class="line">    system(&quot;pause&quot;); </span><br><span class="line">    return 0; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-]]></content>
-      <categories>
-        <category>STL容器</category>
-      </categories>
-  </entry>
-  <entry>
     <title>queue(队列与优先队列)</title>
     <url>/2020/08/15/queue/</url>
     <content><![CDATA[<h4 id="queue的常用成员函数"><a href="#queue的常用成员函数" class="headerlink" title="queue的常用成员函数"></a>queue的常用成员函数</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">front()：返回值为队列中的第一个元素，也就是最早、最先进入队列的元素。</span><br><span class="line">	&#x2F;&#x2F;注意这里只是返回最早进入的元素，并没有把它剔除出队列。</span><br><span class="line"></span><br><span class="line">back()：返回队列中最后一个元素，也就是最晚进去的元素。</span><br><span class="line">g</span><br><span class="line">push()：队列中由于是先进先出，push即在队尾插入一个元素。</span><br><span class="line">	&#x2F;&#x2F;这是通过调用底层容器的成员函数 push_back() 来完成的。</span><br><span class="line"></span><br><span class="line">pop()：将队列中最靠前位置的元素拿掉，是没有返回值的void函数。</span><br><span class="line"></span><br><span class="line">size()：返回队列中元素的个数，返回值类型为unsigned int。</span><br><span class="line"></span><br><span class="line">empty()：判断队列是否为空的，如果为空则返回true。</span><br><span class="line"></span><br><span class="line">emplace()：用传给 emplace() 的参数调用 T 的构造函数，在 queue 的尾部生成对象。</span><br><span class="line"></span><br><span class="line">swap()：将当前 queue 中的元素和参数 queue 中的元素交换。</span><br><span class="line">	&#x2F;&#x2F;它们需要包含相同类型的元素。也可以调用全局函数模板 swap() 来完成同样的操作。</span><br><span class="line">    q1.swap(q2);</span><br><span class="line">    swap(q1,q2);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -301,6 +281,26 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int main() </span><br><span class="line"> &#123;</span><br><span class="line">     priority_queue&lt;pair&lt;int, int&gt; &gt; a;</span><br><span class="line">     pair&lt;int, int&gt; b(1, 2);</span><br><span class="line">     pair&lt;int, int&gt; c(1, 3);</span><br><span class="line">     pair&lt;int, int&gt; d(2, 5);</span><br><span class="line">     a.push(d);</span><br><span class="line">     a.push(c);</span><br><span class="line">     a.push(b);</span><br><span class="line">     while (!a.empty()) </span><br><span class="line">     &#123;</span><br><span class="line">         cout &lt;&lt; a.top().first &lt;&lt; &#39; &#39; &lt;&lt; a.top().second &lt;&lt; &#39;\n&#39;;</span><br><span class="line">         a.pop();</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">2 5</span><br><span class="line">1 3</span><br><span class="line">1 2</span><br></pre></td></tr></table></figure>
 <p><label style="color:red"> 用自定义类型做优先队列元素的例子</label></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;queue&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;方法1</span><br><span class="line">struct tmp1 &#x2F;&#x2F;运算符重载&lt;</span><br><span class="line">&#123;</span><br><span class="line">    int x;</span><br><span class="line">    tmp1(int a) &#123;x &#x3D; a;&#125;</span><br><span class="line">    bool operator&lt;(const tmp1&amp; t) const</span><br><span class="line">    &#123;</span><br><span class="line">        return x &lt; t.x; &#x2F;&#x2F;大顶堆,,,&#x2F;&#x2F;return x &gt; t.x;小顶堆</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;方法2</span><br><span class="line">struct tmp2 &#x2F;&#x2F;重写仿函数</span><br><span class="line">&#123;</span><br><span class="line">    bool operator() (tmp1 a, tmp1 b)</span><br><span class="line">    &#123;</span><br><span class="line">        return a.x &lt; b.x; &#x2F;&#x2F;大顶堆,,,&#x2F;&#x2F;return a.x &gt; b.x;小顶堆</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    tmp1 a(1);</span><br><span class="line">    tmp1 b(2);</span><br><span class="line">    tmp1 c(3);</span><br><span class="line">    priority_queue&lt;tmp1&gt; d;</span><br><span class="line">    d.push(b);</span><br><span class="line">    d.push(c);</span><br><span class="line">    d.push(a);</span><br><span class="line">    while (!d.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; d.top().x &lt;&lt; &#39;\n&#39;;</span><br><span class="line">        d.pop();</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    priority_queue&lt;tmp1, vector&lt;tmp1&gt;, tmp2&gt; f;</span><br><span class="line">    f.push(b);</span><br><span class="line">    f.push(c);</span><br><span class="line">    f.push(a);</span><br><span class="line">    while (!f.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; f.top().x &lt;&lt; &#39;\n&#39;;</span><br><span class="line">        f.pop();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">3</span><br><span class="line">2</span><br><span class="line">1</span><br><span class="line"> </span><br><span class="line">3</span><br><span class="line">2</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>STL容器</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>set</title>
+    <url>/2020/08/16/set/</url>
+    <content><![CDATA[<p><label style="color:red"> </label></p>
+<h4 id="set的常用函数"><a href="#set的常用函数" class="headerlink" title="set的常用函数"></a>set的常用函数</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">begin();            &#x2F;&#x2F; 返回指向第一个元素的迭代器，iterator</span><br><span class="line">end();              &#x2F;&#x2F; 返回指向最后一个元素的迭代器</span><br><span class="line">rbegin()		&#x2F;&#x2F;返回指向集合中最后一个元素的反向迭代器，reverse_iterator</span><br><span class="line">rend() 			&#x2F;&#x2F;返回指向集合中第一个元素的反向迭代器</span><br><span class="line">clear();            &#x2F;&#x2F; 清除所有元素</span><br><span class="line">count();            &#x2F;&#x2F; 返回某个值元素的个数,可以用来判断元素是否存在</span><br><span class="line">find()		    &#x2F;&#x2F;返回一个指向被查找到元素的迭代器</span><br><span class="line">erase()		   &#x2F;&#x2F;删除集合中的元素</span><br><span class="line">insert()		&#x2F;&#x2F;在集合中插入元素</span><br><span class="line">empty();            &#x2F;&#x2F; 如果集合为空，返回true</span><br><span class="line">size()			&#x2F;&#x2F;集合中元素的数目</span><br><span class="line">max_size()		&#x2F;&#x2F;返回集合能容纳的元素的最大限值 </span><br><span class="line">swap()			&#x2F;&#x2F;交换两个集合变量</span><br><span class="line"> </span><br><span class="line">lower_bound()	&#x2F;&#x2F;返回指向大于（或等于）某值的第一个元素的迭代器</span><br><span class="line">upper_bound()	&#x2F;&#x2F;返回大于某个值元素的迭代器</span><br><span class="line">equal_range();      &#x2F;&#x2F;返回集合中与给定值相等的上下限的两个迭代器，lower_bound()与upper_bound()的结合。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">get_allocator()	–返回集合的分配器</span><br><span class="line">key_comp()	–返回一个用于元素间值比较的函数</span><br><span class="line">value_comp()	–返回一个用于比较元素间的值的函数</span><br></pre></td></tr></table></figure>
+<h4 id="c-stl集合set插入-遍历用法举例"><a href="#c-stl集合set插入-遍历用法举例" class="headerlink" title="c++ stl集合set插入,遍历用法举例"></a>c++ stl集合set插入,遍历用法举例</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include&lt;iostream&gt; </span><br><span class="line">#include&lt;set&gt; </span><br><span class="line">using namespace std; </span><br><span class="line">&#x2F;&#x2F;set插入元素操作  </span><br><span class="line">int main() </span><br><span class="line">&#123; </span><br><span class="line">    &#x2F;&#x2F;定义一个int型集合对象s,当前没有任何元素.由www.169it.com搜集整理</span><br><span class="line">    set&lt;int&gt; s; </span><br><span class="line">    s.insert(8);  &#x2F;&#x2F;第一次插入8，可以插入  </span><br><span class="line">    s.insert(1); </span><br><span class="line">    s.insert(12); </span><br><span class="line">    s.insert(6); </span><br><span class="line">    s.insert(8);   &#x2F;&#x2F;第二次插入8，重复元素，不会插入  </span><br><span class="line">    set&lt;int&gt;::iterator it; &#x2F;&#x2F;定义前向迭代器 </span><br><span class="line">    &#x2F;&#x2F;中序遍历集合中的所有元素  </span><br><span class="line">    for(it&#x3D;s.begin();it!&#x3D;s.end();it++) </span><br><span class="line">    cout&lt;&lt;*it&lt;&lt;endl;    </span><br><span class="line">    system(&quot;pause&quot;); </span><br><span class="line">    return 0; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
 
 
 
@@ -535,35 +535,6 @@
       </categories>
   </entry>
   <entry>
-    <title>剑-05 替换空格</title>
-    <url>/2020/07/22/%E5%89%91-05-%E6%9B%BF%E6%8D%A2%E7%A9%BA%E6%A0%BC/</url>
-    <content><![CDATA[<h3 id="替换空格"><a href="#替换空格" class="headerlink" title="替换空格"></a>替换空格</h3><p>请实现一个函数，把字符串 s 中的每个空格替换成”%20”。 </p>
-<p>示例 1：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;We are happy.&quot;</span></span><br><span class="line">输出：<span class="string">&quot;We%20are%20happy.&quot;</span></span><br></pre></td></tr></table></figure>
-<p>限制：<br>0 &lt;= s 的长度 &lt;= 10000</p>
-<h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><p>方法一</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    string replaceSpace(string s) &#123;</span><br><span class="line">        string res;</span><br><span class="line">        <span class="keyword">for</span>(auto c : s)&#123; //auto即char</span><br><span class="line">            <span class="keyword">if</span>(c == <span class="string">&#x27; &#x27;</span>)</span><br><span class="line">                res += <span class="string">&quot;%20&quot;</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                res += c;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>方法二</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">	 //和方法一差不多区别在于string的操作方式</span><br><span class="line">    string replaceSpace(string s) &#123;</span><br><span class="line">        string ss;</span><br><span class="line">        <span class="keyword">for</span>(int i=0;i&lt;s.size();i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(s[i]==<span class="string">&#x27; &#x27;</span>)&#123;</span><br><span class="line">                ss.push_back(<span class="string">&#x27;%&#x27;</span>);</span><br><span class="line">                ss.push_back(<span class="string">&#x27;2&#x27;</span>);</span><br><span class="line">                ss.push_back(<span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                ss.push_back(s[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">return</span> ss;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-]]></content>
-      <categories>
-        <category>刷题</category>
-        <category>剑指</category>
-      </categories>
-      <tags>
-        <tag>剑指留意</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>剑-06 从尾到头打印链表(改变链表结构)</title>
     <url>/2020/07/22/%E5%89%91-06-%E4%BB%8E%E5%B0%BE%E5%88%B0%E5%A4%B4%E6%89%93%E5%8D%B0%E9%93%BE%E8%A1%A8/</url>
     <content><![CDATA[<h3 id="从尾到头打印链表"><a href="#从尾到头打印链表" class="headerlink" title="从尾到头打印链表"></a>从尾到头打印链表</h3><p>输入一个链表的头节点，从尾到头反过来返回每个节点的值（用数组返回）。</p>
@@ -590,6 +561,35 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">前序遍历 preorder = [3,9,20,15,7]</span><br><span class="line">中序遍历 inorder = [9,3,15,20,7]</span><br><span class="line">返回如下的二叉树：</span><br><span class="line"></span><br><span class="line">    3</span><br><span class="line">   / \</span><br><span class="line">  9  20</span><br><span class="line">    /  \</span><br><span class="line">   15   7</span><br><span class="line"> </span><br></pre></td></tr></table></figure>
 <p>限制：0 &lt;= 节点个数 &lt;= 5000</p>
 <h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Definition <span class="keyword">for</span> a binary tree node.</span><br><span class="line"> * struct TreeNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     TreeNode *left;</span><br><span class="line"> *     TreeNode *right;</span><br><span class="line"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</span><br><span class="line"> * &#125;;</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    TreeNode* buildTree(vector&lt;int&gt;&amp; preorder, vector&lt;int&gt;&amp; inorder) &#123;</span><br><span class="line">        //递归分治</span><br><span class="line">        int pb=0;</span><br><span class="line">        int ib=0;</span><br><span class="line">        int pe=preorder.size();</span><br><span class="line">        int ie=inorder.size();</span><br><span class="line">        <span class="built_in">return</span> recursionBuild( preorder, pb, pe, inorder, ib, ie);</span><br><span class="line">    &#125;</span><br><span class="line">    //递归分治</span><br><span class="line">    TreeNode* recursionBuild(vector&lt;int&gt;&amp; preorder,int pb,int pe, vector&lt;int&gt;&amp; inorder,int ib,int ie ) &#123;</span><br><span class="line">        <span class="keyword">if</span>(ib==ie) <span class="built_in">return</span> NULL;//递归终止条件，叶节点是ib=ie</span><br><span class="line">        TreeNode* cur = new TreeNode(preorder[pb]);//根节点</span><br><span class="line">        int index=-1;</span><br><span class="line">        <span class="keyword">for</span>(int i=ib;i&lt;ie;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(inorder[i]==preorder[pb])&#123;</span><br><span class="line">                index=i;</span><br><span class="line">                <span class="built_in">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        cur-&gt;left = recursionBuild(preorder,pb+1,pb+1+(index-ib),inorder,ib,index);</span><br><span class="line">        //重建左子树，将左子树的前序和中序传入</span><br><span class="line">        cur-&gt;right = recursionBuild(preorder,pb+1+(index-ib),pe,inorder,index+1,ie);</span><br><span class="line">        //重建右子树，将右子树的前序和中序传入</span><br><span class="line">        <span class="built_in">return</span> cur;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>刷题</category>
+        <category>剑指</category>
+      </categories>
+      <tags>
+        <tag>剑指留意</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>剑-05 替换空格</title>
+    <url>/2020/07/22/%E5%89%91-05-%E6%9B%BF%E6%8D%A2%E7%A9%BA%E6%A0%BC/</url>
+    <content><![CDATA[<h3 id="替换空格"><a href="#替换空格" class="headerlink" title="替换空格"></a>替换空格</h3><p>请实现一个函数，把字符串 s 中的每个空格替换成”%20”。 </p>
+<p>示例 1：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;We are happy.&quot;</span></span><br><span class="line">输出：<span class="string">&quot;We%20are%20happy.&quot;</span></span><br></pre></td></tr></table></figure>
+<p>限制：<br>0 &lt;= s 的长度 &lt;= 10000</p>
+<h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><p>方法一</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    string replaceSpace(string s) &#123;</span><br><span class="line">        string res;</span><br><span class="line">        <span class="keyword">for</span>(auto c : s)&#123; //auto即char</span><br><span class="line">            <span class="keyword">if</span>(c == <span class="string">&#x27; &#x27;</span>)</span><br><span class="line">                res += <span class="string">&quot;%20&quot;</span>;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                res += c;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>方法二</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">	 //和方法一差不多区别在于string的操作方式</span><br><span class="line">    string replaceSpace(string s) &#123;</span><br><span class="line">        string ss;</span><br><span class="line">        <span class="keyword">for</span>(int i=0;i&lt;s.size();i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(s[i]==<span class="string">&#x27; &#x27;</span>)&#123;</span><br><span class="line">                ss.push_back(<span class="string">&#x27;%&#x27;</span>);</span><br><span class="line">                ss.push_back(<span class="string">&#x27;2&#x27;</span>);</span><br><span class="line">                ss.push_back(<span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                ss.push_back(s[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">return</span> ss;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
 
 
 
@@ -679,20 +679,6 @@
       </categories>
   </entry>
   <entry>
-    <title>剑-11 旋转数组的最小数字</title>
-    <url>/2020/07/24/%E5%89%91-11-%E6%97%8B%E8%BD%AC%E6%95%B0%E7%BB%84%E7%9A%84%E6%9C%80%E5%B0%8F%E6%95%B0%E5%AD%97/</url>
-    <content><![CDATA[<h3 id="旋转数组的最小数字"><a href="#旋转数组的最小数字" class="headerlink" title="旋转数组的最小数字"></a>旋转数组的最小数字</h3><p>把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。输入一个递增排序的数组的一个旋转，输出旋转数组的最小元素。例如，数组 [3,4,5,1,2] 为 [1,2,3,4,5] 的一个旋转，该数组的最小值为1。  </p>
-<p>示例 1：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：[3,4,5,1,2]</span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure>
-<p>示例 2：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：[2,2,2,0,1]</span><br><span class="line">输出：0</span><br></pre></td></tr></table></figure>
-<h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int minArray(vector&lt;int&gt;&amp; numbers) &#123;</span><br><span class="line">        int a&#x3D;numbers[0];</span><br><span class="line">        int m&#x3D;numbers.size()-1;</span><br><span class="line">        if(numbers[m]&gt;a)&#123;</span><br><span class="line">            return a;</span><br><span class="line">        &#125;</span><br><span class="line">        while(1)&#123;</span><br><span class="line">            if(m&#x3D;&#x3D;0)&#123;</span><br><span class="line">                return a;  </span><br><span class="line">            &#125;</span><br><span class="line">            if(numbers[m]&gt;&#x3D;numbers[m-1])&#123;</span><br><span class="line">                m--;</span><br><span class="line">            &#125;</span><br><span class="line">            else&#123;</span><br><span class="line">                a&#x3D;numbers[m];</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return a;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>刷题</category>
-        <category>剑指</category>
-      </categories>
-  </entry>
-  <entry>
     <title>剑-10-II 青蛙跳台阶问题(斐波拉契数列)</title>
     <url>/2020/07/24/%E5%89%91-10-II-%E9%9D%92%E8%9B%99%E8%B7%B3%E5%8F%B0%E9%98%B6%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<h3 id="青蛙跳台阶问题"><a href="#青蛙跳台阶问题" class="headerlink" title="青蛙跳台阶问题"></a>青蛙跳台阶问题</h3><p>一只青蛙一次可以跳上1级台阶，也可以跳上2级台阶。求该青蛙跳上一个 n 级的台阶总共有多少种跳法。</p>
@@ -717,6 +703,20 @@
 
 
 ]]></content>
+      <categories>
+        <category>刷题</category>
+        <category>剑指</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>剑-11 旋转数组的最小数字</title>
+    <url>/2020/07/24/%E5%89%91-11-%E6%97%8B%E8%BD%AC%E6%95%B0%E7%BB%84%E7%9A%84%E6%9C%80%E5%B0%8F%E6%95%B0%E5%AD%97/</url>
+    <content><![CDATA[<h3 id="旋转数组的最小数字"><a href="#旋转数组的最小数字" class="headerlink" title="旋转数组的最小数字"></a>旋转数组的最小数字</h3><p>把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。输入一个递增排序的数组的一个旋转，输出旋转数组的最小元素。例如，数组 [3,4,5,1,2] 为 [1,2,3,4,5] 的一个旋转，该数组的最小值为1。  </p>
+<p>示例 1：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：[3,4,5,1,2]</span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure>
+<p>示例 2：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：[2,2,2,0,1]</span><br><span class="line">输出：0</span><br></pre></td></tr></table></figure>
+<h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int minArray(vector&lt;int&gt;&amp; numbers) &#123;</span><br><span class="line">        int a&#x3D;numbers[0];</span><br><span class="line">        int m&#x3D;numbers.size()-1;</span><br><span class="line">        if(numbers[m]&gt;a)&#123;</span><br><span class="line">            return a;</span><br><span class="line">        &#125;</span><br><span class="line">        while(1)&#123;</span><br><span class="line">            if(m&#x3D;&#x3D;0)&#123;</span><br><span class="line">                return a;  </span><br><span class="line">            &#125;</span><br><span class="line">            if(numbers[m]&gt;&#x3D;numbers[m-1])&#123;</span><br><span class="line">                m--;</span><br><span class="line">            &#125;</span><br><span class="line">            else&#123;</span><br><span class="line">                a&#x3D;numbers[m];</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return a;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>刷题</category>
         <category>剑指</category>
@@ -760,6 +760,28 @@
       </tags>
   </entry>
   <entry>
+    <title>剑-13 机器人的运动范围(DFS+BFS)</title>
+    <url>/2020/07/24/%E5%89%91-13-%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%9A%84%E8%BF%90%E5%8A%A8%E8%8C%83%E5%9B%B4/</url>
+    <content><![CDATA[<h3 id="机器人的运动范围"><a href="#机器人的运动范围" class="headerlink" title="机器人的运动范围"></a>机器人的运动范围</h3><p>地上有一个m行n列的方格，从坐标 [0,0] 到坐标 [m-1,n-1] 。一个机器人从坐标 [0, 0] 的格子开始移动，它每次可以向左、右、上、下移动一格（不能移动到方格外），也不能进入行坐标和列坐标的数位之和大于k的格子。例如，当k为18时，机器人能够进入方格 [35, 37] ，因为3+5+3+7=18。但它不能进入方格 [35, 38]，因为3+5+3+8=19。请问该机器人能够到达多少个格子？</p>
+<p> </p>
+<p>示例 1：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：m &#x3D; 2, n &#x3D; 3, k &#x3D; 1</span><br><span class="line">输出：3</span><br></pre></td></tr></table></figure>
+<p>示例 2：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：m &#x3D; 3, n &#x3D; 1, k &#x3D; 0</span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure>
+<p>提示：1 &lt;= n,m &lt;= 100; 0 &lt;= k &lt;= 20</p>
+<h3 id="解答"><a href="#解答" class="headerlink" title="解答:"></a>解答:</h3><p><strong>DFS:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">   vector&lt;vector&lt;int&gt;&gt; dxy &#x3D; &#123;&#123;-1, 0&#125;, &#123;1, 0&#125;, &#123;0, 1&#125;, &#123;0, -1&#125;&#125;;</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line">      void dfs( int x, int y, int m, int n, int&amp; count, vector&lt;int&gt;&amp; vec, int k )&#123;</span><br><span class="line">       if ( x &#x2F; 10 + x % 10 + y &#x2F; 10 + y % 10 &gt; k )&#x2F;&#x2F;一些判断</span><br><span class="line">            return;</span><br><span class="line">        if(x&lt;0 || x&gt;m-1 || y&lt;0 || y&gt;n-1 || vec[x*n+y]&#x3D;&#x3D;1)</span><br><span class="line">                return;</span><br><span class="line">      </span><br><span class="line">        vec[x*n+y]&#x3D;1;&#x2F;&#x2F;标记 一些操作</span><br><span class="line">        ++count;   </span><br><span class="line">        for(vector&lt;int&gt; xy:dxy)&#123; </span><br><span class="line">            int x1&#x3D;x+xy[0];</span><br><span class="line">            int y1&#x3D;y+xy[1];</span><br><span class="line">            dfs(x1, y1, m, n, count, vec, k ); &#x2F;&#x2F;深搜   </span><br><span class="line">        &#125;       </span><br><span class="line">    &#125;</span><br><span class="line">    int movingCount(int m, int n, int k) &#123;</span><br><span class="line">      int count&#x3D;0;</span><br><span class="line">        vector&lt;int&gt; sign ( m*n, 0 );&#x2F;&#x2F;访问标记数组</span><br><span class="line">        dfs(0,0,m,n,count,sign,k);</span><br><span class="line">        return count;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><strong>BFS:</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; dxy &#x3D; &#123;&#123;-1, 0&#125;, &#123;1, 0&#125;, &#123;0, 1&#125;, &#123;0, -1&#125;&#125;;</span><br><span class="line"></span><br><span class="line">    int movingCount(int m, int n, int k) &#123;</span><br><span class="line">        int count&#x3D;0;</span><br><span class="line">        vector&lt;bool&gt; sign(m*n,false);&#x2F;&#x2F;标记访问数组</span><br><span class="line">        </span><br><span class="line">        queue&lt;pair&lt;int,int&gt;&gt; q;&#x2F;&#x2F;初始点</span><br><span class="line">        q.push(make_pair(0,0));</span><br><span class="line">        sign[0]&#x3D;true;</span><br><span class="line"></span><br><span class="line">        while(!q.empty())&#123;</span><br><span class="line">            pair&lt;int,int&gt; tmp&#x3D;q.front();&#x2F;&#x2F;取出</span><br><span class="line">            q.pop();  </span><br><span class="line">                count++;&#x2F;&#x2F;一些操作</span><br><span class="line">                </span><br><span class="line">            for(auto xy : dxy)&#123;</span><br><span class="line">                int x&#x3D;tmp.first+xy[0];</span><br><span class="line">                int y&#x3D;tmp.second+xy[1];</span><br><span class="line">                &#x2F;&#x2F;相邻合法且未访问过的点</span><br><span class="line">                if(x&gt;&#x3D;0 &amp;&amp; x&lt;m &amp;&amp; y&gt;&#x3D;0 &amp;&amp; y&lt;n &amp;&amp; sign[x*n+y]!&#x3D;true &amp;&amp; x &#x2F; 10 + x % 10 + y &#x2F; 10 + y % 10 &lt;&#x3D;k)&#123;</span><br><span class="line">                    q.push(make_pair(x,y));</span><br><span class="line">                    sign[x*n+y]&#x3D;true;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    return count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>刷题</category>
+        <category>剑指</category>
+      </categories>
+      <tags>
+        <tag>剑指留意</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>剑-14-I 剪绳子</title>
     <url>/2020/07/24/%E5%89%91-14-I-%E5%89%AA%E7%BB%B3%E5%AD%90/</url>
     <content><![CDATA[<h3 id="剪绳子"><a href="#剪绳子" class="headerlink" title="剪绳子"></a>剪绳子</h3><p>给你一根长度为 n 的绳子，请把绳子剪成整数长度的 m 段（m、n都是整数，n&gt;1并且m&gt;1），每段绳子的长度记为 k[0],k[1]…k[m-1] 。请问 k[0]<em>k[1]</em>…*k[m-1] 可能的最大乘积是多少？例如，当绳子的长度是8时，我们把它剪成长度分别为2、3、3的三段，此时得到的最大乘积是18。</p>
@@ -790,19 +812,30 @@
       </tags>
   </entry>
   <entry>
-    <title>剑-13 机器人的运动范围(DFS+BFS)</title>
-    <url>/2020/07/24/%E5%89%91-13-%E6%9C%BA%E5%99%A8%E4%BA%BA%E7%9A%84%E8%BF%90%E5%8A%A8%E8%8C%83%E5%9B%B4/</url>
-    <content><![CDATA[<h3 id="机器人的运动范围"><a href="#机器人的运动范围" class="headerlink" title="机器人的运动范围"></a>机器人的运动范围</h3><p>地上有一个m行n列的方格，从坐标 [0,0] 到坐标 [m-1,n-1] 。一个机器人从坐标 [0, 0] 的格子开始移动，它每次可以向左、右、上、下移动一格（不能移动到方格外），也不能进入行坐标和列坐标的数位之和大于k的格子。例如，当k为18时，机器人能够进入方格 [35, 37] ，因为3+5+3+7=18。但它不能进入方格 [35, 38]，因为3+5+3+8=19。请问该机器人能够到达多少个格子？</p>
-<p> </p>
+    <title>剑-15  二进制中1的个数</title>
+    <url>/2020/07/25/%E5%89%91-15-%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%AD1%E7%9A%84%E4%B8%AA%E6%95%B0/</url>
+    <content><![CDATA[<h3 id="二进制中1的个数"><a href="#二进制中1的个数" class="headerlink" title="二进制中1的个数"></a>二进制中1的个数</h3><p>请实现一个函数，输入一个整数，输出该数二进制表示中 1 的个数。例如，把 9 表示成二进制是 1001，有 2 位是 1。因此，如果输入 9，则该函数输出 2。</p>
 <p>示例 1：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：m &#x3D; 2, n &#x3D; 3, k &#x3D; 1</span><br><span class="line">输出：3</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：00000000000000000000000000001011</span><br><span class="line">输出：3</span><br><span class="line">解释：输入的二进制串 00000000000000000000000000001011 中，共有三位为 &#39;1&#39;。</span><br></pre></td></tr></table></figure>
 <p>示例 2：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：m &#x3D; 3, n &#x3D; 1, k &#x3D; 0</span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure>
-<p>提示：1 &lt;= n,m &lt;= 100; 0 &lt;= k &lt;= 20</p>
-<h3 id="解答"><a href="#解答" class="headerlink" title="解答:"></a>解答:</h3><p><strong>DFS:</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">   vector&lt;vector&lt;int&gt;&gt; dxy &#x3D; &#123;&#123;-1, 0&#125;, &#123;1, 0&#125;, &#123;0, 1&#125;, &#123;0, -1&#125;&#125;;</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line">      void dfs( int x, int y, int m, int n, int&amp; count, vector&lt;int&gt;&amp; vec, int k )&#123;</span><br><span class="line">       if ( x &#x2F; 10 + x % 10 + y &#x2F; 10 + y % 10 &gt; k )&#x2F;&#x2F;一些判断</span><br><span class="line">            return;</span><br><span class="line">        if(x&lt;0 || x&gt;m-1 || y&lt;0 || y&gt;n-1 || vec[x*n+y]&#x3D;&#x3D;1)</span><br><span class="line">                return;</span><br><span class="line">      </span><br><span class="line">        vec[x*n+y]&#x3D;1;&#x2F;&#x2F;标记 一些操作</span><br><span class="line">        ++count;   </span><br><span class="line">        for(vector&lt;int&gt; xy:dxy)&#123; </span><br><span class="line">            int x1&#x3D;x+xy[0];</span><br><span class="line">            int y1&#x3D;y+xy[1];</span><br><span class="line">            dfs(x1, y1, m, n, count, vec, k ); &#x2F;&#x2F;深搜   </span><br><span class="line">        &#125;       </span><br><span class="line">    &#125;</span><br><span class="line">    int movingCount(int m, int n, int k) &#123;</span><br><span class="line">      int count&#x3D;0;</span><br><span class="line">        vector&lt;int&gt; sign ( m*n, 0 );&#x2F;&#x2F;访问标记数组</span><br><span class="line">        dfs(0,0,m,n,count,sign,k);</span><br><span class="line">        return count;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p><strong>BFS:</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; dxy &#x3D; &#123;&#123;-1, 0&#125;, &#123;1, 0&#125;, &#123;0, 1&#125;, &#123;0, -1&#125;&#125;;</span><br><span class="line"></span><br><span class="line">    int movingCount(int m, int n, int k) &#123;</span><br><span class="line">        int count&#x3D;0;</span><br><span class="line">        vector&lt;bool&gt; sign(m*n,false);&#x2F;&#x2F;标记访问数组</span><br><span class="line">        </span><br><span class="line">        queue&lt;pair&lt;int,int&gt;&gt; q;&#x2F;&#x2F;初始点</span><br><span class="line">        q.push(make_pair(0,0));</span><br><span class="line">        sign[0]&#x3D;true;</span><br><span class="line"></span><br><span class="line">        while(!q.empty())&#123;</span><br><span class="line">            pair&lt;int,int&gt; tmp&#x3D;q.front();&#x2F;&#x2F;取出</span><br><span class="line">            q.pop();  </span><br><span class="line">                count++;&#x2F;&#x2F;一些操作</span><br><span class="line">                </span><br><span class="line">            for(auto xy : dxy)&#123;</span><br><span class="line">                int x&#x3D;tmp.first+xy[0];</span><br><span class="line">                int y&#x3D;tmp.second+xy[1];</span><br><span class="line">                &#x2F;&#x2F;相邻合法且未访问过的点</span><br><span class="line">                if(x&gt;&#x3D;0 &amp;&amp; x&lt;m &amp;&amp; y&gt;&#x3D;0 &amp;&amp; y&lt;n &amp;&amp; sign[x*n+y]!&#x3D;true &amp;&amp; x &#x2F; 10 + x % 10 + y &#x2F; 10 + y % 10 &lt;&#x3D;k)&#123;</span><br><span class="line">                    q.push(make_pair(x,y));</span><br><span class="line">                    sign[x*n+y]&#x3D;true;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    return count;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：00000000000000000000000010000000</span><br><span class="line">输出：1</span><br><span class="line">解释：输入的二进制串 00000000000000000000000010000000 中，共有一位为 &#39;1&#39;。</span><br></pre></td></tr></table></figure>
+<p>示例 3：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：11111111111111111111111111111101</span><br><span class="line">输出：31</span><br><span class="line">解释：输入的二进制串 11111111111111111111111111111101 中，共有 31 位为 &#39;1&#39;。</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><p><strong>方法一：</strong>一个数 n 与一个比它小 1 的数（n−1）进行与运算（&amp;）之后，得到的结果会消除 n 中最低位的 1.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">示例1: 7 &amp; 6</span><br><span class="line">00111  &#x2F;&#x2F;7</span><br><span class="line">      &amp;   &#x3D;》 00110</span><br><span class="line">00110  &#x2F;&#x2F;6</span><br><span class="line"></span><br><span class="line">示例2: 8 &amp; 7</span><br><span class="line">01000  &#x2F;&#x2F;8</span><br><span class="line">      &amp;   &#x3D;》 00000</span><br><span class="line">00111  &#x2F;&#x2F;7</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int hammingWeight(uint32_t n) &#123;</span><br><span class="line">        int ret &#x3D; 0;</span><br><span class="line">        while (n !&#x3D; 0) &#123;</span><br><span class="line">            n &amp;&#x3D; n-1;</span><br><span class="line">            ret ++;</span><br><span class="line">        &#125;</span><br><span class="line">        return ret;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><strong>方法二：</strong>按位判断</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int hammingWeight(uint32_t n) &#123;</span><br><span class="line">        int ret &#x3D; 0;</span><br><span class="line">        for (int i &#x3D; 0; i &lt; 32; i ++) &#123;</span><br><span class="line">            if (n &amp; (1 &lt;&lt; i)) &#123;</span><br><span class="line">                ret ++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+]]></content>
       <categories>
         <category>刷题</category>
         <category>剑指</category>
@@ -840,39 +873,6 @@
         <category>刷题</category>
         <category>剑指</category>
       </categories>
-  </entry>
-  <entry>
-    <title>剑-15  二进制中1的个数</title>
-    <url>/2020/07/25/%E5%89%91-15-%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%AD1%E7%9A%84%E4%B8%AA%E6%95%B0/</url>
-    <content><![CDATA[<h3 id="二进制中1的个数"><a href="#二进制中1的个数" class="headerlink" title="二进制中1的个数"></a>二进制中1的个数</h3><p>请实现一个函数，输入一个整数，输出该数二进制表示中 1 的个数。例如，把 9 表示成二进制是 1001，有 2 位是 1。因此，如果输入 9，则该函数输出 2。</p>
-<p>示例 1：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：00000000000000000000000000001011</span><br><span class="line">输出：3</span><br><span class="line">解释：输入的二进制串 00000000000000000000000000001011 中，共有三位为 &#39;1&#39;。</span><br></pre></td></tr></table></figure>
-<p>示例 2：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：00000000000000000000000010000000</span><br><span class="line">输出：1</span><br><span class="line">解释：输入的二进制串 00000000000000000000000010000000 中，共有一位为 &#39;1&#39;。</span><br></pre></td></tr></table></figure>
-<p>示例 3：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：11111111111111111111111111111101</span><br><span class="line">输出：31</span><br><span class="line">解释：输入的二进制串 11111111111111111111111111111101 中，共有 31 位为 &#39;1&#39;。</span><br></pre></td></tr></table></figure>
-
-
-<h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><p><strong>方法一：</strong>一个数 n 与一个比它小 1 的数（n−1）进行与运算（&amp;）之后，得到的结果会消除 n 中最低位的 1.</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">示例1: 7 &amp; 6</span><br><span class="line">00111  &#x2F;&#x2F;7</span><br><span class="line">      &amp;   &#x3D;》 00110</span><br><span class="line">00110  &#x2F;&#x2F;6</span><br><span class="line"></span><br><span class="line">示例2: 8 &amp; 7</span><br><span class="line">01000  &#x2F;&#x2F;8</span><br><span class="line">      &amp;   &#x3D;》 00000</span><br><span class="line">00111  &#x2F;&#x2F;7</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int hammingWeight(uint32_t n) &#123;</span><br><span class="line">        int ret &#x3D; 0;</span><br><span class="line">        while (n !&#x3D; 0) &#123;</span><br><span class="line">            n &amp;&#x3D; n-1;</span><br><span class="line">            ret ++;</span><br><span class="line">        &#125;</span><br><span class="line">        return ret;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p><strong>方法二：</strong>按位判断</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int hammingWeight(uint32_t n) &#123;</span><br><span class="line">        int ret &#x3D; 0;</span><br><span class="line">        for (int i &#x3D; 0; i &lt; 32; i ++) &#123;</span><br><span class="line">            if (n &amp; (1 &lt;&lt; i)) &#123;</span><br><span class="line">                ret ++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-]]></content>
-      <categories>
-        <category>刷题</category>
-        <category>剑指</category>
-      </categories>
-      <tags>
-        <tag>剑指留意</tag>
-      </tags>
   </entry>
   <entry>
     <title>剑-16 数值的整数次方(递归)</title>
@@ -1015,6 +1015,22 @@
       </tags>
   </entry>
   <entry>
+    <title>剑-21 调整数组顺序使奇数位于偶数前面(前后指针遍历交换)</title>
+    <url>/2020/07/28/%E5%89%91-21-%E8%B0%83%E6%95%B4%E6%95%B0%E7%BB%84%E9%A1%BA%E5%BA%8F%E4%BD%BF%E5%A5%87%E6%95%B0%E4%BD%8D%E4%BA%8E%E5%81%B6%E6%95%B0%E5%89%8D%E9%9D%A2/</url>
+    <content><![CDATA[<h3 id="调整数组顺序使奇数位于偶数前面"><a href="#调整数组顺序使奇数位于偶数前面" class="headerlink" title="调整数组顺序使奇数位于偶数前面"></a>调整数组顺序使奇数位于偶数前面</h3><p>输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有奇数位于数组的前半部分，所有偶数位于数组的后半部分。</p>
+<p> </p>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：nums &#x3D; [1,2,3,4]</span><br><span class="line">输出：[1,3,2,4] </span><br><span class="line">注：[3,1,2,4] 也是正确的答案之一。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<p>提示：<br>1 &lt;= nums.length &lt;= 50000, 1 &lt;= nums[i] &lt;= 10000</p>
+<h3 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; exchange(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">       &#x2F;&#x2F;俩个指针，一个从前一个从后，互相交换</span><br><span class="line">       </span><br><span class="line">        int m&#x3D;0;int n&#x3D;nums.size()-1;</span><br><span class="line">        while(m&lt;n)&#123;</span><br><span class="line">            if(nums[m]%2&#x3D;&#x3D;1)&#123;</span><br><span class="line">                m++;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            if(nums[n]%2&#x3D;&#x3D;0)&#123;</span><br><span class="line">                n--;</span><br><span class="line">                 continue;</span><br><span class="line">            &#125;</span><br><span class="line">            if(m!&#x3D;n)&#123;</span><br><span class="line">                int tmp&#x3D;nums[m];</span><br><span class="line">                nums[m]&#x3D;nums[n];</span><br><span class="line">                nums[n]&#x3D;tmp;</span><br><span class="line">                &#x2F;&#x2F;swap(nums[m],nums[n]); </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return nums;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>刷题</category>
+        <category>剑指</category>
+      </categories>
+  </entry>
+  <entry>
     <title>剑-22 链表中倒数第k个节点(俩个指针相距k同时移动)</title>
     <url>/2020/07/28/%E5%89%91-22-%E9%93%BE%E8%A1%A8%E4%B8%AD%E5%80%92%E6%95%B0%E7%AC%ACk%E4%B8%AA%E8%8A%82%E7%82%B9/</url>
     <content><![CDATA[<h3 id="链表中倒数第k个节点"><a href="#链表中倒数第k个节点" class="headerlink" title="链表中倒数第k个节点"></a>链表中倒数第k个节点</h3><p>输入一个链表，输出该链表中倒数第k个节点。为了符合大多数人的习惯，本题从1开始计数，即链表的尾节点是倒数第1个节点。例如，一个链表有6个节点，从头节点开始，它们的值依次是1、2、3、4、5、6。这个链表的倒数第3个节点是值为4的节点。</p>
@@ -1045,37 +1061,6 @@
       <tags>
         <tag>剑指留意</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>剑-21 调整数组顺序使奇数位于偶数前面(前后指针遍历交换)</title>
-    <url>/2020/07/28/%E5%89%91-21-%E8%B0%83%E6%95%B4%E6%95%B0%E7%BB%84%E9%A1%BA%E5%BA%8F%E4%BD%BF%E5%A5%87%E6%95%B0%E4%BD%8D%E4%BA%8E%E5%81%B6%E6%95%B0%E5%89%8D%E9%9D%A2/</url>
-    <content><![CDATA[<h3 id="调整数组顺序使奇数位于偶数前面"><a href="#调整数组顺序使奇数位于偶数前面" class="headerlink" title="调整数组顺序使奇数位于偶数前面"></a>调整数组顺序使奇数位于偶数前面</h3><p>输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有奇数位于数组的前半部分，所有偶数位于数组的后半部分。</p>
-<p> </p>
-<p>示例：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：nums &#x3D; [1,2,3,4]</span><br><span class="line">输出：[1,3,2,4] </span><br><span class="line">注：[3,1,2,4] 也是正确的答案之一。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<p>提示：<br>1 &lt;= nums.length &lt;= 50000, 1 &lt;= nums[i] &lt;= 10000</p>
-<h3 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; exchange(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">       &#x2F;&#x2F;俩个指针，一个从前一个从后，互相交换</span><br><span class="line">       </span><br><span class="line">        int m&#x3D;0;int n&#x3D;nums.size()-1;</span><br><span class="line">        while(m&lt;n)&#123;</span><br><span class="line">            if(nums[m]%2&#x3D;&#x3D;1)&#123;</span><br><span class="line">                m++;</span><br><span class="line">                continue;</span><br><span class="line">            &#125;</span><br><span class="line">            if(nums[n]%2&#x3D;&#x3D;0)&#123;</span><br><span class="line">                n--;</span><br><span class="line">                 continue;</span><br><span class="line">            &#125;</span><br><span class="line">            if(m!&#x3D;n)&#123;</span><br><span class="line">                int tmp&#x3D;nums[m];</span><br><span class="line">                nums[m]&#x3D;nums[n];</span><br><span class="line">                nums[n]&#x3D;tmp;</span><br><span class="line">                &#x2F;&#x2F;swap(nums[m],nums[n]); </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return nums;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>刷题</category>
-        <category>剑指</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>剑-24 反转链表(双指针)</title>
-    <url>/2020/07/28/%E5%89%91-23-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/</url>
-    <content><![CDATA[<h3 id="反转链表"><a href="#反转链表" class="headerlink" title="反转链表"></a>反转链表</h3><p>定义一个函数，输入一个链表的头节点，反转该链表并输出反转后链表的头节点。</p>
-<p> </p>
-<p>示例:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL</span><br><span class="line">输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL</span><br></pre></td></tr></table></figure>
-
-<p>限制：<br>0 &lt;= 节点个数 &lt;= 5000</p>
-<h3 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * struct ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode *next;</span><br><span class="line"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span><br><span class="line"> * &#125;;</span><br><span class="line"> *&#x2F;</span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    ListNode* reverseList(ListNode* head) &#123;</span><br><span class="line">        ListNode* p&#x3D;NULL,*q&#x3D;head;&#x2F;&#x2F;双指针，依次交换</span><br><span class="line">        while(q!&#x3D;NULL)&#123;</span><br><span class="line">            ListNode* tmp&#x3D;q-&gt;next;</span><br><span class="line">            q-&gt;next&#x3D;p;</span><br><span class="line">            p&#x3D;q;</span><br><span class="line">            q&#x3D;tmp;</span><br><span class="line">        &#125; </span><br><span class="line">        return p;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;递归方式</span><br><span class="line">&#x2F;&#x2F; class Solution &#123;</span><br><span class="line">&#x2F;&#x2F; public:</span><br><span class="line">&#x2F;&#x2F;     ListNode* reverseList(ListNode* head) &#123;</span><br><span class="line">&#x2F;&#x2F;         if (head &#x3D;&#x3D; NULL || head-&gt;next &#x3D;&#x3D; NULL) &#123;</span><br><span class="line">&#x2F;&#x2F;             return head;</span><br><span class="line">&#x2F;&#x2F;         &#125;</span><br><span class="line">&#x2F;&#x2F;         ListNode* ret &#x3D; reverseList(head-&gt;next);&#x2F;&#x2F;递归到最底层</span><br><span class="line">&#x2F;&#x2F;         head-&gt;next-&gt;next &#x3D; head;&#x2F;&#x2F;指针转向，后面的指向本身</span><br><span class="line">&#x2F;&#x2F;         head-&gt;next &#x3D; NULL;&#x2F;&#x2F;本身指向空</span><br><span class="line">&#x2F;&#x2F;         return ret;</span><br><span class="line">&#x2F;&#x2F;     &#125;</span><br><span class="line">&#x2F;&#x2F; &#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>刷题</category>
-        <category>剑指</category>
-      </categories>
   </entry>
   <entry>
     <title>剑-25 合并两个排序的链表</title>
@@ -1112,6 +1097,21 @@
 
 
 ]]></content>
+      <categories>
+        <category>刷题</category>
+        <category>剑指</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>剑-24 反转链表(双指针)</title>
+    <url>/2020/07/28/%E5%89%91-23-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/</url>
+    <content><![CDATA[<h3 id="反转链表"><a href="#反转链表" class="headerlink" title="反转链表"></a>反转链表</h3><p>定义一个函数，输入一个链表的头节点，反转该链表并输出反转后链表的头节点。</p>
+<p> </p>
+<p>示例:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: 1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;NULL</span><br><span class="line">输出: 5-&gt;4-&gt;3-&gt;2-&gt;1-&gt;NULL</span><br></pre></td></tr></table></figure>
+
+<p>限制：<br>0 &lt;= 节点个数 &lt;= 5000</p>
+<h3 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Definition for singly-linked list.</span><br><span class="line"> * struct ListNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     ListNode *next;</span><br><span class="line"> *     ListNode(int x) : val(x), next(NULL) &#123;&#125;</span><br><span class="line"> * &#125;;</span><br><span class="line"> *&#x2F;</span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    ListNode* reverseList(ListNode* head) &#123;</span><br><span class="line">        ListNode* p&#x3D;NULL,*q&#x3D;head;&#x2F;&#x2F;双指针，依次交换</span><br><span class="line">        while(q!&#x3D;NULL)&#123;</span><br><span class="line">            ListNode* tmp&#x3D;q-&gt;next;</span><br><span class="line">            q-&gt;next&#x3D;p;</span><br><span class="line">            p&#x3D;q;</span><br><span class="line">            q&#x3D;tmp;</span><br><span class="line">        &#125; </span><br><span class="line">        return p;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;递归方式</span><br><span class="line">&#x2F;&#x2F; class Solution &#123;</span><br><span class="line">&#x2F;&#x2F; public:</span><br><span class="line">&#x2F;&#x2F;     ListNode* reverseList(ListNode* head) &#123;</span><br><span class="line">&#x2F;&#x2F;         if (head &#x3D;&#x3D; NULL || head-&gt;next &#x3D;&#x3D; NULL) &#123;</span><br><span class="line">&#x2F;&#x2F;             return head;</span><br><span class="line">&#x2F;&#x2F;         &#125;</span><br><span class="line">&#x2F;&#x2F;         ListNode* ret &#x3D; reverseList(head-&gt;next);&#x2F;&#x2F;递归到最底层</span><br><span class="line">&#x2F;&#x2F;         head-&gt;next-&gt;next &#x3D; head;&#x2F;&#x2F;指针转向，后面的指向本身</span><br><span class="line">&#x2F;&#x2F;         head-&gt;next &#x3D; NULL;&#x2F;&#x2F;本身指向空</span><br><span class="line">&#x2F;&#x2F;         return ret;</span><br><span class="line">&#x2F;&#x2F;     &#125;</span><br><span class="line">&#x2F;&#x2F; &#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>刷题</category>
         <category>剑指</category>
@@ -1342,6 +1342,25 @@
       </tags>
   </entry>
   <entry>
+    <title>剑-32-II 从上到下打印二叉树 II</title>
+    <url>/2020/07/30/%E5%89%91-32-II-%E4%BB%8E%E4%B8%8A%E5%88%B0%E4%B8%8B%E6%89%93%E5%8D%B0%E4%BA%8C%E5%8F%89%E6%A0%91-II/</url>
+    <content><![CDATA[<h3 id="从上到下打印二叉树-II"><a href="#从上到下打印二叉树-II" class="headerlink" title="从上到下打印二叉树 II"></a>从上到下打印二叉树 II</h3><p>从上到下按层打印二叉树，同一层的节点按从左到右的顺序打印，每一层打印到一行。</p>
+<p> </p>
+<p>例如:<br>给定二叉树: [3,9,20,null,null,15,7],</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">  3</span><br><span class="line"> &#x2F; \</span><br><span class="line">9  20</span><br><span class="line">  &#x2F;  \</span><br><span class="line"> 15   7</span><br></pre></td></tr></table></figure>
+
+<p>返回其层次遍历结果：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[</span><br><span class="line">  [3],</span><br><span class="line">  [9,20],</span><br><span class="line">  [15,7]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>提示：<br>节点总数 &lt;= 1000</p>
+<h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Definition for a binary tree node.</span><br><span class="line"> * struct TreeNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     TreeNode *left;</span><br><span class="line"> *     TreeNode *right;</span><br><span class="line"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</span><br><span class="line"> * &#125;;</span><br><span class="line"> *&#x2F;</span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; levelOrder(TreeNode* root) &#123;</span><br><span class="line">        queue&lt;TreeNode*&gt; q;</span><br><span class="line">         vector&lt;vector&lt;int&gt;&gt; vec;</span><br><span class="line">        vector&lt;int&gt; v;</span><br><span class="line">        if(root&#x3D;&#x3D;NULL)</span><br><span class="line">            return vec;</span><br><span class="line">        q.push(root);</span><br><span class="line">        int now&#x3D;1;</span><br><span class="line">        int future&#x3D;0;</span><br><span class="line"></span><br><span class="line">        while(!q.empty())&#123;</span><br><span class="line">            TreeNode* tmp&#x3D;q.front();</span><br><span class="line">            q.pop();</span><br><span class="line">            v.push_back(tmp-&gt;val);</span><br><span class="line">            if(tmp-&gt;left!&#x3D;NULL)&#123;</span><br><span class="line">                q.push(tmp-&gt;left);</span><br><span class="line">                future++;&#x2F;&#x2F;计算新加的数量</span><br><span class="line">            &#125;</span><br><span class="line">                </span><br><span class="line">            if(tmp-&gt;right!&#x3D;NULL)&#123;</span><br><span class="line">                q.push(tmp-&gt;right);</span><br><span class="line">                future++;</span><br><span class="line">            &#125;</span><br><span class="line">                </span><br><span class="line">            now--;&#x2F;&#x2F;统计取出的数量</span><br><span class="line">            if(now&#x3D;&#x3D;0)&#123;</span><br><span class="line">                vec.push_back(v);</span><br><span class="line">                &#x2F;&#x2F; &#123;</span><br><span class="line">                &#x2F;&#x2F;     std::vector&lt;int&gt; tt;   </span><br><span class="line">                &#x2F;&#x2F;     v.swap(tt);</span><br><span class="line">                &#x2F;&#x2F; &#125; </span><br><span class="line">                &#x2F;&#x2F;&#x2F;&#x2F;v.clear();</span><br><span class="line">                vector&lt;int&gt;().swap(v);</span><br><span class="line">                now&#x3D;future;&#x2F;&#x2F;下一层的数量</span><br><span class="line">                future&#x3D;0;&#x2F;&#x2F;重置数量</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return vec;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>动态数组的清空方式。<br>   vector<int>().swap(ivec); 或者如下所示 加一对大括号都可以，意思一样的：<br>     {<br>      std::vector<int> tmp;<br>      ivec.swap(tmp);<br>     }<br>   v.clear();</p>
+]]></content>
+      <categories>
+        <category>刷题</category>
+        <category>剑指</category>
+      </categories>
+  </entry>
+  <entry>
     <title>剑-32-I 从上到下打印二叉树(按层次打印，队列queue)</title>
     <url>/2020/07/30/%E5%89%91-32-I-%E4%BB%8E%E4%B8%8A%E5%88%B0%E4%B8%8B%E6%89%93%E5%8D%B0%E4%BA%8C%E5%8F%89%E6%A0%91/</url>
     <content><![CDATA[<h3 id="从上到下打印二叉树"><a href="#从上到下打印二叉树" class="headerlink" title="从上到下打印二叉树"></a>从上到下打印二叉树</h3><p>从上到下打印出二叉树的每个节点，同一层的节点按照从左到右的顺序打印。</p>
@@ -1360,25 +1379,6 @@
 
 
 
-]]></content>
-      <categories>
-        <category>刷题</category>
-        <category>剑指</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>剑-32-II 从上到下打印二叉树 II</title>
-    <url>/2020/07/30/%E5%89%91-32-II-%E4%BB%8E%E4%B8%8A%E5%88%B0%E4%B8%8B%E6%89%93%E5%8D%B0%E4%BA%8C%E5%8F%89%E6%A0%91-II/</url>
-    <content><![CDATA[<h3 id="从上到下打印二叉树-II"><a href="#从上到下打印二叉树-II" class="headerlink" title="从上到下打印二叉树 II"></a>从上到下打印二叉树 II</h3><p>从上到下按层打印二叉树，同一层的节点按从左到右的顺序打印，每一层打印到一行。</p>
-<p> </p>
-<p>例如:<br>给定二叉树: [3,9,20,null,null,15,7],</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">  3</span><br><span class="line"> &#x2F; \</span><br><span class="line">9  20</span><br><span class="line">  &#x2F;  \</span><br><span class="line"> 15   7</span><br></pre></td></tr></table></figure>
-
-<p>返回其层次遍历结果：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[</span><br><span class="line">  [3],</span><br><span class="line">  [9,20],</span><br><span class="line">  [15,7]</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-<p>提示：<br>节点总数 &lt;= 1000</p>
-<h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line"> * Definition for a binary tree node.</span><br><span class="line"> * struct TreeNode &#123;</span><br><span class="line"> *     int val;</span><br><span class="line"> *     TreeNode *left;</span><br><span class="line"> *     TreeNode *right;</span><br><span class="line"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</span><br><span class="line"> * &#125;;</span><br><span class="line"> *&#x2F;</span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; levelOrder(TreeNode* root) &#123;</span><br><span class="line">        queue&lt;TreeNode*&gt; q;</span><br><span class="line">         vector&lt;vector&lt;int&gt;&gt; vec;</span><br><span class="line">        vector&lt;int&gt; v;</span><br><span class="line">        if(root&#x3D;&#x3D;NULL)</span><br><span class="line">            return vec;</span><br><span class="line">        q.push(root);</span><br><span class="line">        int now&#x3D;1;</span><br><span class="line">        int future&#x3D;0;</span><br><span class="line"></span><br><span class="line">        while(!q.empty())&#123;</span><br><span class="line">            TreeNode* tmp&#x3D;q.front();</span><br><span class="line">            q.pop();</span><br><span class="line">            v.push_back(tmp-&gt;val);</span><br><span class="line">            if(tmp-&gt;left!&#x3D;NULL)&#123;</span><br><span class="line">                q.push(tmp-&gt;left);</span><br><span class="line">                future++;&#x2F;&#x2F;计算新加的数量</span><br><span class="line">            &#125;</span><br><span class="line">                </span><br><span class="line">            if(tmp-&gt;right!&#x3D;NULL)&#123;</span><br><span class="line">                q.push(tmp-&gt;right);</span><br><span class="line">                future++;</span><br><span class="line">            &#125;</span><br><span class="line">                </span><br><span class="line">            now--;&#x2F;&#x2F;统计取出的数量</span><br><span class="line">            if(now&#x3D;&#x3D;0)&#123;</span><br><span class="line">                vec.push_back(v);</span><br><span class="line">                &#x2F;&#x2F; &#123;</span><br><span class="line">                &#x2F;&#x2F;     std::vector&lt;int&gt; tt;   </span><br><span class="line">                &#x2F;&#x2F;     v.swap(tt);</span><br><span class="line">                &#x2F;&#x2F; &#125; </span><br><span class="line">                &#x2F;&#x2F;&#x2F;&#x2F;v.clear();</span><br><span class="line">                vector&lt;int&gt;().swap(v);</span><br><span class="line">                now&#x3D;future;&#x2F;&#x2F;下一层的数量</span><br><span class="line">                future&#x3D;0;&#x2F;&#x2F;重置数量</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return vec;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>动态数组的清空方式。<br>   vector<int>().swap(ivec); 或者如下所示 加一对大括号都可以，意思一样的：<br>     {<br>      std::vector<int> tmp;<br>      ivec.swap(tmp);<br>     }<br>   v.clear();</p>
 ]]></content>
       <categories>
         <category>刷题</category>
@@ -1464,48 +1464,6 @@
       </categories>
   </entry>
   <entry>
-    <title>剑-35 复杂链表的复制(分离法，哈希表)</title>
-    <url>/2020/07/30/%E5%89%91-35-%E5%A4%8D%E6%9D%82%E9%93%BE%E8%A1%A8%E7%9A%84%E5%A4%8D%E5%88%B6/</url>
-    <content><![CDATA[<h3 id="复杂链表的复制"><a href="#复杂链表的复制" class="headerlink" title="复杂链表的复制"></a>复杂链表的复制</h3><p>请实现 copyRandomList 函数，复制一个复杂链表。在复杂链表中，每个节点除了有一个 next 指针指向下一个节点，还有一个 random 指针指向链表中的任意节点或者 null。</p>
-<p> </p>
-<p>示例 1：</p>
-<p><img src="/img/4.png"></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：head &#x3D; [[7,null],[13,0],[11,4],[10,2],[1,0]]</span><br><span class="line">输出：[[7,null],[13,0],[11,4],[10,2],[1,0]]</span><br></pre></td></tr></table></figure>
-<p>示例 2：</p>
-<p><img src="/img/5.png"></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：head &#x3D; [[1,1],[2,1]]</span><br><span class="line">输出：[[1,1],[2,1]]</span><br></pre></td></tr></table></figure>
-<p>示例 3：</p>
-<p><img src="/img/6.png"></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：head &#x3D; [[3,null],[3,0],[3,null]]</span><br><span class="line">输出：[[3,null],[3,0],[3,null]]</span><br></pre></td></tr></table></figure>
-<p>示例 4：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：head &#x3D; []</span><br><span class="line">输出：[]</span><br><span class="line">解释：给定的链表为空（空指针），因此返回 null。</span><br></pre></td></tr></table></figure>
-
-<p>提示：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-10000 &lt;&#x3D; Node.val &lt;&#x3D; 10000</span><br><span class="line">Node.random 为空（null）或指向链表中的节点。</span><br><span class="line">节点数目不超过 1000 。</span><br></pre></td></tr></table></figure>
-
-<h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><p>解题思路：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;*</span><br><span class="line"> * 分解法</span><br><span class="line"> *</span><br><span class="line"> * A-&gt;A&#39;-&gt;B-&gt;B&#39;-&gt;C-&gt;C&#39;-&gt;D-&gt;D&#39;-&gt;E-&gt;E&#39;</span><br><span class="line"> * |_____R|_______|R    |      |R</span><br><span class="line"> *        |_____________|______|</span><br><span class="line"> *        |_____________|</span><br><span class="line"> *</span><br><span class="line"> * 1. 根据原链表的value和next对原链表进行复制，</span><br><span class="line"> *    复制的节点在原节点之后，此步未处理random指针</span><br><span class="line"> * 2. 遍历链表，复制每个节点的random指针</span><br><span class="line"> * 3. 将复制后的链表拆分为原链表和复制链表。</span><br><span class="line"> * *&#x2F;</span><br></pre></td></tr></table></figure>
-
-<p>代码实现：</p>
-<p>方法一：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;*</span><br><span class="line">&#x2F;&#x2F; Definition for a Node.</span><br><span class="line">class Node &#123;</span><br><span class="line">public:</span><br><span class="line">    int val;</span><br><span class="line">    Node* next;</span><br><span class="line">    Node* random;</span><br><span class="line">    </span><br><span class="line">    Node(int _val) &#123;</span><br><span class="line">        val &#x3D; _val;</span><br><span class="line">        next &#x3D; NULL;</span><br><span class="line">        random &#x3D; NULL;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">*&#x2F;</span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    Node* copyRandomList(Node* head) &#123;</span><br><span class="line">        </span><br><span class="line">         if(head&#x3D;&#x3D;NULL)</span><br><span class="line">            return NULL;</span><br><span class="line">        Node* head1&#x3D;head;</span><br><span class="line">        </span><br><span class="line">        &#x2F;&#x2F;复制备份所有节点</span><br><span class="line">        while(head1!&#x3D;NULL)&#x2F;&#x2F;复制的节点在原节点之后，此步未处理random指针</span><br><span class="line">        &#123;</span><br><span class="line">            Node* newnode&#x3D;new Node(head1-&gt;val);</span><br><span class="line">            newnode-&gt;next&#x3D;head1-&gt;next;</span><br><span class="line">            head1-&gt;next&#x3D;newnode;</span><br><span class="line">            head1&#x3D;newnode-&gt;next;&#x2F;&#x2F;移动节点指针</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        &#x2F;&#x2F;更新每个备份节点的指针指向</span><br><span class="line">        head1&#x3D;head;</span><br><span class="line">        while(head1!&#x3D;NULL)</span><br><span class="line">        &#123;</span><br><span class="line">            Node* randmnode&#x3D;head1-&gt;random;</span><br><span class="line">            if (head1-&gt;random!&#x3D;NULL)&#x2F;&#x2F;一定要判断是否为空，只有非空节点才能操作，切记</span><br><span class="line">				head1-&gt;next-&gt;random &#x3D; randmnode-&gt;next;</span><br><span class="line">                &#x2F;&#x2F;randmnode是原本节点的指向，randmnode-&gt;next是原本指向节点的拷贝</span><br><span class="line">                &#x2F;&#x2F;A的random指向D，head1-&gt;next-&gt;random代表A&#39;的random，randmnode-&gt;next代表D&#39;。</span><br><span class="line">            head1&#x3D;head1-&gt;next-&gt;next;&#x2F;&#x2F;移动节点指针，一次性跳跃两个节点</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        &#x2F;&#x2F;分离两个链表</span><br><span class="line">        head1&#x3D;head;</span><br><span class="line">        Node* head2&#x3D;head-&gt;next;</span><br><span class="line">        Node* tmp&#x3D;head2;</span><br><span class="line">        while(1)</span><br><span class="line">        &#x2F;&#x2F;A指向B并移到B</span><br><span class="line">        &#x2F;&#x2F;A&#39;指向B&#39;并移到B&#39;</span><br><span class="line">        &#123;</span><br><span class="line">            head1-&gt;next&#x3D;tmp-&gt;next;&#x2F;&#x2F;head1：A，指向A&#39;的next B</span><br><span class="line">            head1&#x3D;head1-&gt;next;&#x2F;&#x2F;head1：B</span><br><span class="line"></span><br><span class="line">            if(head1&#x3D;&#x3D;NULL)</span><br><span class="line">                break;</span><br><span class="line"></span><br><span class="line">            tmp-&gt;next&#x3D;head1-&gt;next;&#x2F;&#x2F;tmp：A&#39;，指向B的next B&#39;</span><br><span class="line">            tmp&#x3D;tmp-&gt;next;&#x2F;&#x2F;tmp：B&#39;</span><br><span class="line">        &#125;</span><br><span class="line">        return head2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>方法二：哈希表</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    Node* copyRandomList(Node* head) &#123;</span><br><span class="line">        if(head&#x3D;&#x3D;NULL)  return head;</span><br><span class="line">        unordered_map&lt;Node*,Node*&gt;mp;</span><br><span class="line">        Node *t&#x3D;head;</span><br><span class="line">        while(t!&#x3D;NULL)&#123;&#x2F;&#x2F;哈希表复制存储</span><br><span class="line">            mp[t]&#x3D;new Node(t-&gt;val);</span><br><span class="line">            t&#x3D;t-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        t&#x3D;head;</span><br><span class="line">        while(t!&#x3D;NULL)&#123;</span><br><span class="line">            if(t-&gt;next)&#123;&#x2F;&#x2F;next指针处理</span><br><span class="line">                mp[t]-&gt;next&#x3D;mp[t-&gt;next];</span><br><span class="line">            &#125;</span><br><span class="line">            if(t-&gt;random)&#123;&#x2F;&#x2F;random指针处理</span><br><span class="line">                mp[t]-&gt;random&#x3D;mp[t-&gt;random];</span><br><span class="line">            &#125;</span><br><span class="line">            t&#x3D;t-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        return mp[head];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-
-]]></content>
-      <categories>
-        <category>刷题</category>
-        <category>剑指</category>
-      </categories>
-      <tags>
-        <tag>剑指留意</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>剑-36 二叉搜索树与双向链表</title>
     <url>/2020/07/30/%E5%89%91-36-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E4%B8%8E%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8/</url>
     <content><![CDATA[<h3 id="二叉搜索树与双向链表"><a href="#二叉搜索树与双向链表" class="headerlink" title="二叉搜索树与双向链表"></a>二叉搜索树与双向链表</h3><p>输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的循环双向链表。要求不能创建任何新的节点，只能调整树中节点指针的指向。</p>
@@ -1554,6 +1512,48 @@
       </tags>
   </entry>
   <entry>
+    <title>剑-35 复杂链表的复制(分离法，哈希表)</title>
+    <url>/2020/07/30/%E5%89%91-35-%E5%A4%8D%E6%9D%82%E9%93%BE%E8%A1%A8%E7%9A%84%E5%A4%8D%E5%88%B6/</url>
+    <content><![CDATA[<h3 id="复杂链表的复制"><a href="#复杂链表的复制" class="headerlink" title="复杂链表的复制"></a>复杂链表的复制</h3><p>请实现 copyRandomList 函数，复制一个复杂链表。在复杂链表中，每个节点除了有一个 next 指针指向下一个节点，还有一个 random 指针指向链表中的任意节点或者 null。</p>
+<p> </p>
+<p>示例 1：</p>
+<p><img src="/img/4.png"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：head &#x3D; [[7,null],[13,0],[11,4],[10,2],[1,0]]</span><br><span class="line">输出：[[7,null],[13,0],[11,4],[10,2],[1,0]]</span><br></pre></td></tr></table></figure>
+<p>示例 2：</p>
+<p><img src="/img/5.png"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：head &#x3D; [[1,1],[2,1]]</span><br><span class="line">输出：[[1,1],[2,1]]</span><br></pre></td></tr></table></figure>
+<p>示例 3：</p>
+<p><img src="/img/6.png"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：head &#x3D; [[3,null],[3,0],[3,null]]</span><br><span class="line">输出：[[3,null],[3,0],[3,null]]</span><br></pre></td></tr></table></figure>
+<p>示例 4：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：head &#x3D; []</span><br><span class="line">输出：[]</span><br><span class="line">解释：给定的链表为空（空指针），因此返回 null。</span><br></pre></td></tr></table></figure>
+
+<p>提示：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-10000 &lt;&#x3D; Node.val &lt;&#x3D; 10000</span><br><span class="line">Node.random 为空（null）或指向链表中的节点。</span><br><span class="line">节点数目不超过 1000 。</span><br></pre></td></tr></table></figure>
+
+<h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><p>解题思路：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;*</span><br><span class="line"> * 分解法</span><br><span class="line"> *</span><br><span class="line"> * A-&gt;A&#39;-&gt;B-&gt;B&#39;-&gt;C-&gt;C&#39;-&gt;D-&gt;D&#39;-&gt;E-&gt;E&#39;</span><br><span class="line"> * |_____R|_______|R    |      |R</span><br><span class="line"> *        |_____________|______|</span><br><span class="line"> *        |_____________|</span><br><span class="line"> *</span><br><span class="line"> * 1. 根据原链表的value和next对原链表进行复制，</span><br><span class="line"> *    复制的节点在原节点之后，此步未处理random指针</span><br><span class="line"> * 2. 遍历链表，复制每个节点的random指针</span><br><span class="line"> * 3. 将复制后的链表拆分为原链表和复制链表。</span><br><span class="line"> * *&#x2F;</span><br></pre></td></tr></table></figure>
+
+<p>代码实现：</p>
+<p>方法一：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;*</span><br><span class="line">&#x2F;&#x2F; Definition for a Node.</span><br><span class="line">class Node &#123;</span><br><span class="line">public:</span><br><span class="line">    int val;</span><br><span class="line">    Node* next;</span><br><span class="line">    Node* random;</span><br><span class="line">    </span><br><span class="line">    Node(int _val) &#123;</span><br><span class="line">        val &#x3D; _val;</span><br><span class="line">        next &#x3D; NULL;</span><br><span class="line">        random &#x3D; NULL;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">*&#x2F;</span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    Node* copyRandomList(Node* head) &#123;</span><br><span class="line">        </span><br><span class="line">         if(head&#x3D;&#x3D;NULL)</span><br><span class="line">            return NULL;</span><br><span class="line">        Node* head1&#x3D;head;</span><br><span class="line">        </span><br><span class="line">        &#x2F;&#x2F;复制备份所有节点</span><br><span class="line">        while(head1!&#x3D;NULL)&#x2F;&#x2F;复制的节点在原节点之后，此步未处理random指针</span><br><span class="line">        &#123;</span><br><span class="line">            Node* newnode&#x3D;new Node(head1-&gt;val);</span><br><span class="line">            newnode-&gt;next&#x3D;head1-&gt;next;</span><br><span class="line">            head1-&gt;next&#x3D;newnode;</span><br><span class="line">            head1&#x3D;newnode-&gt;next;&#x2F;&#x2F;移动节点指针</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        &#x2F;&#x2F;更新每个备份节点的指针指向</span><br><span class="line">        head1&#x3D;head;</span><br><span class="line">        while(head1!&#x3D;NULL)</span><br><span class="line">        &#123;</span><br><span class="line">            Node* randmnode&#x3D;head1-&gt;random;</span><br><span class="line">            if (head1-&gt;random!&#x3D;NULL)&#x2F;&#x2F;一定要判断是否为空，只有非空节点才能操作，切记</span><br><span class="line">				head1-&gt;next-&gt;random &#x3D; randmnode-&gt;next;</span><br><span class="line">                &#x2F;&#x2F;randmnode是原本节点的指向，randmnode-&gt;next是原本指向节点的拷贝</span><br><span class="line">                &#x2F;&#x2F;A的random指向D，head1-&gt;next-&gt;random代表A&#39;的random，randmnode-&gt;next代表D&#39;。</span><br><span class="line">            head1&#x3D;head1-&gt;next-&gt;next;&#x2F;&#x2F;移动节点指针，一次性跳跃两个节点</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        &#x2F;&#x2F;分离两个链表</span><br><span class="line">        head1&#x3D;head;</span><br><span class="line">        Node* head2&#x3D;head-&gt;next;</span><br><span class="line">        Node* tmp&#x3D;head2;</span><br><span class="line">        while(1)</span><br><span class="line">        &#x2F;&#x2F;A指向B并移到B</span><br><span class="line">        &#x2F;&#x2F;A&#39;指向B&#39;并移到B&#39;</span><br><span class="line">        &#123;</span><br><span class="line">            head1-&gt;next&#x3D;tmp-&gt;next;&#x2F;&#x2F;head1：A，指向A&#39;的next B</span><br><span class="line">            head1&#x3D;head1-&gt;next;&#x2F;&#x2F;head1：B</span><br><span class="line"></span><br><span class="line">            if(head1&#x3D;&#x3D;NULL)</span><br><span class="line">                break;</span><br><span class="line"></span><br><span class="line">            tmp-&gt;next&#x3D;head1-&gt;next;&#x2F;&#x2F;tmp：A&#39;，指向B的next B&#39;</span><br><span class="line">            tmp&#x3D;tmp-&gt;next;&#x2F;&#x2F;tmp：B&#39;</span><br><span class="line">        &#125;</span><br><span class="line">        return head2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>方法二：哈希表</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    Node* copyRandomList(Node* head) &#123;</span><br><span class="line">        if(head&#x3D;&#x3D;NULL)  return head;</span><br><span class="line">        unordered_map&lt;Node*,Node*&gt;mp;</span><br><span class="line">        Node *t&#x3D;head;</span><br><span class="line">        while(t!&#x3D;NULL)&#123;&#x2F;&#x2F;哈希表复制存储</span><br><span class="line">            mp[t]&#x3D;new Node(t-&gt;val);</span><br><span class="line">            t&#x3D;t-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        t&#x3D;head;</span><br><span class="line">        while(t!&#x3D;NULL)&#123;</span><br><span class="line">            if(t-&gt;next)&#123;&#x2F;&#x2F;next指针处理</span><br><span class="line">                mp[t]-&gt;next&#x3D;mp[t-&gt;next];</span><br><span class="line">            &#125;</span><br><span class="line">            if(t-&gt;random)&#123;&#x2F;&#x2F;random指针处理</span><br><span class="line">                mp[t]-&gt;random&#x3D;mp[t-&gt;random];</span><br><span class="line">            &#125;</span><br><span class="line">            t&#x3D;t-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        return mp[head];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+
+]]></content>
+      <categories>
+        <category>刷题</category>
+        <category>剑指</category>
+      </categories>
+      <tags>
+        <tag>剑指留意</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>剑-38 字符串的排列(dfs)</title>
     <url>/2020/07/31/%E5%89%91-38-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%8E%92%E5%88%97/</url>
     <content><![CDATA[<h3 id="字符串的排列"><a href="#字符串的排列" class="headerlink" title="字符串的排列"></a>字符串的排列</h3><p>输入一个字符串，打印出该字符串中字符的所有排列。</p>
@@ -1566,6 +1566,45 @@
 <p>限制：</p>
 <p>1 &lt;= s 的长度 &lt;= 8</p>
 <h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;string&gt; result;</span><br><span class="line">    vector&lt;string&gt; permutation(string s) &#123;</span><br><span class="line">        dfs(s, 0);</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    void dfs(string&amp; s, int pos) &#123;</span><br><span class="line">        if (pos &gt;&#x3D; s.size()) &#123;</span><br><span class="line">            result.push_back(s);</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i &#x3D; pos; i &lt; s.size(); ++i) &#123;</span><br><span class="line">            if (judge(s, pos, i)) continue;   &#x2F;&#x2F; 如果pos和i之间有字符等于s[i]，则跳过。</span><br><span class="line">            swap(s[pos], s[i]);&#x2F;&#x2F;第一个位置所有情况都取到</span><br><span class="line">            dfs(s, pos+1);&#x2F;&#x2F;利用交换位置使得第一个位置取到所有不同值，然后再对第二个位置进行处理</span><br><span class="line">            swap(s[pos], s[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    bool judge(string&amp; s, int start, int end) &#123;</span><br><span class="line">        for (int i &#x3D; start; i &lt; end; ++i) &#123;</span><br><span class="line">            if (s[i] &#x3D;&#x3D; s[end]) return true;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>刷题</category>
+        <category>剑指</category>
+      </categories>
+      <tags>
+        <tag>剑指留意</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>剑-40 最小的k个数(大根堆)</title>
+    <url>/2020/07/31/%E5%89%91-40-%E6%9C%80%E5%B0%8F%E7%9A%84k%E4%B8%AA%E6%95%B0/</url>
+    <content><![CDATA[<h3 id="最小的k个数"><a href="#最小的k个数" class="headerlink" title="最小的k个数"></a>最小的k个数</h3><p>输入整数数组 arr ，找出其中最小的 k 个数。例如，输入4、5、1、6、2、7、3、8这8个数字，则最小的4个数字是1、2、3、4。</p>
+<p> </p>
+<p>示例 1：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：arr &#x3D; [3,2,1], k &#x3D; 2</span><br><span class="line">输出：[1,2] 或者 [2,1]</span><br></pre></td></tr></table></figure>
+<p>示例 2：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：arr &#x3D; [0,1,2,1], k &#x3D; 1</span><br><span class="line">输出：[0]</span><br></pre></td></tr></table></figure>
+
+<p>限制：<br>0 &lt;= k &lt;= arr.length &lt;= 10000, 0 &lt;= arr[i] &lt;= 10000</p>
+<h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><p>方法一：排序</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; getLeastNumbers(vector&lt;int&gt;&amp; arr, int k) &#123;</span><br><span class="line">        vector&lt;int&gt; vec(k, 0);</span><br><span class="line">        sort(arr.begin(), arr.end());</span><br><span class="line">        for (int i &#x3D; 0; i &lt; k; ++i) vec[i] &#x3D; arr[i];</span><br><span class="line">        return vec;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>方法二：利用大根堆，最大优先队列</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; getLeastNumbers(vector&lt;int&gt;&amp; arr, int k) &#123;</span><br><span class="line">        vector&lt;int&gt;vec(k, 0);</span><br><span class="line">        if (k &#x3D;&#x3D; 0) return vec; &#x2F;&#x2F; 排除 0 的情况</span><br><span class="line">        priority_queue&lt;int&gt;Q;</span><br><span class="line">        for (int i &#x3D; 0; i &lt; k; ++i) Q.push(arr[i]);&#x2F;&#x2F;往最大优先队列先放入k个数</span><br><span class="line">        for (int i &#x3D; k; i &lt; arr.size(); ++i) &#123;&#x2F;&#x2F;剩余的数组中的数，与队列中的最大值进行比较</span><br><span class="line">            if (Q.top() &gt; arr[i]) &#123;&#x2F;&#x2F;比队列最大值小，则替换进去</span><br><span class="line">                Q.pop();</span><br><span class="line">                Q.push(arr[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i &#x3D; 0; i &lt; k; ++i) &#123;</span><br><span class="line">            vec[i] &#x3D; Q.top();</span><br><span class="line">            Q.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        return vec;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+
 
 
 
@@ -1608,45 +1647,6 @@
         <category>刷题</category>
         <category>剑指</category>
       </categories>
-  </entry>
-  <entry>
-    <title>剑-40 最小的k个数(大根堆)</title>
-    <url>/2020/07/31/%E5%89%91-40-%E6%9C%80%E5%B0%8F%E7%9A%84k%E4%B8%AA%E6%95%B0/</url>
-    <content><![CDATA[<h3 id="最小的k个数"><a href="#最小的k个数" class="headerlink" title="最小的k个数"></a>最小的k个数</h3><p>输入整数数组 arr ，找出其中最小的 k 个数。例如，输入4、5、1、6、2、7、3、8这8个数字，则最小的4个数字是1、2、3、4。</p>
-<p> </p>
-<p>示例 1：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：arr &#x3D; [3,2,1], k &#x3D; 2</span><br><span class="line">输出：[1,2] 或者 [2,1]</span><br></pre></td></tr></table></figure>
-<p>示例 2：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：arr &#x3D; [0,1,2,1], k &#x3D; 1</span><br><span class="line">输出：[0]</span><br></pre></td></tr></table></figure>
-
-<p>限制：<br>0 &lt;= k &lt;= arr.length &lt;= 10000, 0 &lt;= arr[i] &lt;= 10000</p>
-<h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><p>方法一：排序</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; getLeastNumbers(vector&lt;int&gt;&amp; arr, int k) &#123;</span><br><span class="line">        vector&lt;int&gt; vec(k, 0);</span><br><span class="line">        sort(arr.begin(), arr.end());</span><br><span class="line">        for (int i &#x3D; 0; i &lt; k; ++i) vec[i] &#x3D; arr[i];</span><br><span class="line">        return vec;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>方法二：利用大根堆，最大优先队列</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; getLeastNumbers(vector&lt;int&gt;&amp; arr, int k) &#123;</span><br><span class="line">        vector&lt;int&gt;vec(k, 0);</span><br><span class="line">        if (k &#x3D;&#x3D; 0) return vec; &#x2F;&#x2F; 排除 0 的情况</span><br><span class="line">        priority_queue&lt;int&gt;Q;</span><br><span class="line">        for (int i &#x3D; 0; i &lt; k; ++i) Q.push(arr[i]);&#x2F;&#x2F;往最大优先队列先放入k个数</span><br><span class="line">        for (int i &#x3D; k; i &lt; arr.size(); ++i) &#123;&#x2F;&#x2F;剩余的数组中的数，与队列中的最大值进行比较</span><br><span class="line">            if (Q.top() &gt; arr[i]) &#123;&#x2F;&#x2F;比队列最大值小，则替换进去</span><br><span class="line">                Q.pop();</span><br><span class="line">                Q.push(arr[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i &#x3D; 0; i &lt; k; ++i) &#123;</span><br><span class="line">            vec[i] &#x3D; Q.top();</span><br><span class="line">            Q.pop();</span><br><span class="line">        &#125;</span><br><span class="line">        return vec;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-]]></content>
-      <categories>
-        <category>刷题</category>
-        <category>剑指</category>
-      </categories>
-      <tags>
-        <tag>剑指留意</tag>
-      </tags>
   </entry>
   <entry>
     <title>剑-41 数据流中的中位数(大小根堆)</title>
@@ -1734,6 +1734,30 @@
       </tags>
   </entry>
   <entry>
+    <title>剑-45 把数组排成最小的数(sort改写，比较字符串)</title>
+    <url>/2020/08/02/%E5%89%91-45-%E6%8A%8A%E6%95%B0%E7%BB%84%E6%8E%92%E6%88%90%E6%9C%80%E5%B0%8F%E7%9A%84%E6%95%B0/</url>
+    <content><![CDATA[<h3 id="把数组排成最小的数"><a href="#把数组排成最小的数" class="headerlink" title="把数组排成最小的数"></a>把数组排成最小的数</h3><p>输入一个非负整数数组，把数组里所有数字拼接起来排成一个数，打印能拼接出的所有数字中最小的一个。</p>
+<p> </p>
+<p>示例 1:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: [10,2]</span><br><span class="line">输出: &quot;102&quot;</span><br></pre></td></tr></table></figure>
+<p>示例 2:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: [3,30,34,5,9]</span><br><span class="line">输出: &quot;3033459&quot;</span><br></pre></td></tr></table></figure>
+
+<p>提示:<br>0 &lt; nums.length &lt;= 100</p>
+<p>说明:</p>
+<p>输出结果可能非常大，所以你需要返回一个字符串而不是整数<br>拼接起来的数字可能会有前导 0，最后结果不需要去掉前导 0</p>
+<h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><p>我们这里说的排列大小比较和字符串大小有点区别，比如 3 和 30，明显 30 排在前面比较好，所以我们要重构比较，我们组合 s1 和 s2 ，如果 s1 + s2 &gt; s2 + s1，那么 s1 &gt; s2</p>
+<p>方法一：直接改写sort</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    static bool compare(string sa, string sb)</span><br><span class="line">    &#123;return sa+sb &lt; sb+sa;&#125;</span><br><span class="line">    </span><br><span class="line">    string minNumber(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        &#x2F;&#x2F; 选取使字符串组合更小的排序规则</span><br><span class="line">        vector&lt;string&gt; tmp;</span><br><span class="line">        for(int n : nums)&#123;</span><br><span class="line">            tmp.push_back(to_string(n));</span><br><span class="line">        &#125;</span><br><span class="line">        sort(tmp.begin(), tmp.end(), compare);</span><br><span class="line">        string ans &#x3D; &quot;&quot;;</span><br><span class="line">        for(string s : tmp) ans +&#x3D; s;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>方法二：匿名函数lambda表达式</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    string minNumber(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        &#x2F;&#x2F; 选取使字符串组合更小的排序规则</span><br><span class="line">        &#x2F;&#x2F;auto compare &#x3D; [](string sa, string sb)&#123;return sa+sb &lt; sb+sa;&#125;;</span><br><span class="line">        vector&lt;string&gt; tmp;</span><br><span class="line">        for(int n : nums)&#123;</span><br><span class="line">            tmp.push_back(to_string(n));</span><br><span class="line">        &#125;</span><br><span class="line">        sort(tmp.begin(), tmp.end(), [](string s1, string s2)&#123;return s1 + s2 &lt; s2 + s1;&#125;);</span><br><span class="line">        &#x2F;&#x2F;sort(tmp.begin(), tmp.end(), compare);</span><br><span class="line">        string ans &#x3D; &quot;&quot;;</span><br><span class="line">        for(string s : tmp) ans +&#x3D; s;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>刷题</category>
+        <category>剑指</category>
+      </categories>
+  </entry>
+  <entry>
     <title>剑-44 数字序列中某一位的数字</title>
     <url>/2020/08/02/%E5%89%91-44-%E6%95%B0%E5%AD%97%E5%BA%8F%E5%88%97%E4%B8%AD%E6%9F%90%E4%B8%80%E4%BD%8D%E7%9A%84%E6%95%B0%E5%AD%97/</url>
     <content><![CDATA[<h3 id="数字序列中某一位的数字"><a href="#数字序列中某一位的数字" class="headerlink" title="数字序列中某一位的数字"></a>数字序列中某一位的数字</h3><p>数字以0123456789101112131415…的格式序列化到一个字符序列中。在这个序列中，第5位（从下标0开始计数）是5，第13位是1，第19位是4，等等。</p>
@@ -1765,30 +1789,6 @@
       </tags>
   </entry>
   <entry>
-    <title>剑-45 把数组排成最小的数(sort改写，比较字符串)</title>
-    <url>/2020/08/02/%E5%89%91-45-%E6%8A%8A%E6%95%B0%E7%BB%84%E6%8E%92%E6%88%90%E6%9C%80%E5%B0%8F%E7%9A%84%E6%95%B0/</url>
-    <content><![CDATA[<h3 id="把数组排成最小的数"><a href="#把数组排成最小的数" class="headerlink" title="把数组排成最小的数"></a>把数组排成最小的数</h3><p>输入一个非负整数数组，把数组里所有数字拼接起来排成一个数，打印能拼接出的所有数字中最小的一个。</p>
-<p> </p>
-<p>示例 1:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: [10,2]</span><br><span class="line">输出: &quot;102&quot;</span><br></pre></td></tr></table></figure>
-<p>示例 2:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: [3,30,34,5,9]</span><br><span class="line">输出: &quot;3033459&quot;</span><br></pre></td></tr></table></figure>
-
-<p>提示:<br>0 &lt; nums.length &lt;= 100</p>
-<p>说明:</p>
-<p>输出结果可能非常大，所以你需要返回一个字符串而不是整数<br>拼接起来的数字可能会有前导 0，最后结果不需要去掉前导 0</p>
-<h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><p>我们这里说的排列大小比较和字符串大小有点区别，比如 3 和 30，明显 30 排在前面比较好，所以我们要重构比较，我们组合 s1 和 s2 ，如果 s1 + s2 &gt; s2 + s1，那么 s1 &gt; s2</p>
-<p>方法一：直接改写sort</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    static bool compare(string sa, string sb)</span><br><span class="line">    &#123;return sa+sb &lt; sb+sa;&#125;</span><br><span class="line">    </span><br><span class="line">    string minNumber(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        &#x2F;&#x2F; 选取使字符串组合更小的排序规则</span><br><span class="line">        vector&lt;string&gt; tmp;</span><br><span class="line">        for(int n : nums)&#123;</span><br><span class="line">            tmp.push_back(to_string(n));</span><br><span class="line">        &#125;</span><br><span class="line">        sort(tmp.begin(), tmp.end(), compare);</span><br><span class="line">        string ans &#x3D; &quot;&quot;;</span><br><span class="line">        for(string s : tmp) ans +&#x3D; s;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>方法二：匿名函数lambda表达式</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    string minNumber(vector&lt;int&gt;&amp; nums) &#123;</span><br><span class="line">        &#x2F;&#x2F; 选取使字符串组合更小的排序规则</span><br><span class="line">        &#x2F;&#x2F;auto compare &#x3D; [](string sa, string sb)&#123;return sa+sb &lt; sb+sa;&#125;;</span><br><span class="line">        vector&lt;string&gt; tmp;</span><br><span class="line">        for(int n : nums)&#123;</span><br><span class="line">            tmp.push_back(to_string(n));</span><br><span class="line">        &#125;</span><br><span class="line">        sort(tmp.begin(), tmp.end(), [](string s1, string s2)&#123;return s1 + s2 &lt; s2 + s1;&#125;);</span><br><span class="line">        &#x2F;&#x2F;sort(tmp.begin(), tmp.end(), compare);</span><br><span class="line">        string ans &#x3D; &quot;&quot;;</span><br><span class="line">        for(string s : tmp) ans +&#x3D; s;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>刷题</category>
-        <category>剑指</category>
-      </categories>
-  </entry>
-  <entry>
     <title>剑-46 把数字翻译成字符串(递归)</title>
     <url>/2020/08/03/%E5%89%91-46-%E6%8A%8A%E6%95%B0%E5%AD%97%E7%BF%BB%E8%AF%91%E6%88%90%E5%AD%97%E7%AC%A6%E4%B8%B2/</url>
     <content><![CDATA[<h3 id="把数字翻译成字符串"><a href="#把数字翻译成字符串" class="headerlink" title="把数字翻译成字符串"></a>把数字翻译成字符串</h3><p>给定一个数字，我们按照如下规则把它翻译为字符串：0 翻译成 “a” ，1 翻译成 “b”，……，11 翻译成 “l”，……，25 翻译成 “z”。一个数字可能有多个翻译。请编程实现一个函数，用来计算一个数字有多少种不同的翻译方法。</p>
@@ -1813,33 +1813,6 @@
 
 
 
-
-
-
-
-]]></content>
-      <categories>
-        <category>刷题</category>
-        <category>剑指</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>剑-47 礼物的最大价值(数组记忆搜索)</title>
-    <url>/2020/08/03/%E5%89%91-47-%E7%A4%BC%E7%89%A9%E7%9A%84%E6%9C%80%E5%A4%A7%E4%BB%B7%E5%80%BC/</url>
-    <content><![CDATA[<h3 id="礼物的最大价值"><a href="#礼物的最大价值" class="headerlink" title="礼物的最大价值"></a>礼物的最大价值</h3><p>在一个 m*n 的棋盘的每一格都放有一个礼物，每个礼物都有一定的价值（价值大于 0）。你可以从棋盘的左上角开始拿格子里的礼物，并每次向右或者向下移动一格、直到到达棋盘的右下角。给定一个棋盘及其上面的礼物的价值，请计算你最多能拿到多少价值的礼物？</p>
-<p> </p>
-<p>示例 1:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: </span><br><span class="line">[</span><br><span class="line">  [1,3,1],</span><br><span class="line">  [1,5,1],</span><br><span class="line">  [4,2,1]</span><br><span class="line">]</span><br><span class="line">输出: 12</span><br><span class="line">解释: 路径 1→3→5→2→1 可以拿到最多价值的礼物</span><br></pre></td></tr></table></figure>
-
-<p>提示：0 &lt; grid.length &lt;= 200, 0 &lt; grid[0].length &lt;= 200</p>
-<h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><p>迭代，记忆搜索，二维数组存储走到每个位置的最大值。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int maxValue(vector&lt;vector&lt;int&gt;&gt;&amp; grid) &#123;</span><br><span class="line">        int row &#x3D; grid.size();</span><br><span class="line">        int col &#x3D; grid[0].size();</span><br><span class="line">        vector&lt;vector&lt;int&gt;&gt; res(row, vector&lt;int&gt;(col, 0));</span><br><span class="line">        for (int i &#x3D; 0; i &lt; row; ++i) &#123;</span><br><span class="line">            for (int j &#x3D; 0; j &lt; col; ++j) &#123;</span><br><span class="line">                if (i &#x3D;&#x3D; 0 &amp;&amp; j &#x3D;&#x3D; 0)</span><br><span class="line">                    res[i][j] &#x3D; grid[0][0];</span><br><span class="line">                else if (i &#x3D;&#x3D; 0)</span><br><span class="line">                    res[i][j] &#x3D; res[i][j - 1] + grid[i][j];</span><br><span class="line">                else if (j &#x3D;&#x3D; 0)</span><br><span class="line">                    res[i][j] &#x3D; res[i - 1][j] + grid[i][j];</span><br><span class="line">                else</span><br><span class="line">                    res[i][j] &#x3D; max(res[i - 1][j], res[i][j - 1]) + grid[i][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return res[row - 1][col - 1];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>状态表示：dp[i][j]表示到达i,j位置处的最大价值</p>
-<p>转移方程：dp[i][j] = max{dp[i-1][j],dp[i][j-1]} + grid[i][j];</p>
-<p>dp数组初始状态：dp[0][j] = {0}, dp[i][0] = {0} (就是将第一行和第一列全部设为0)</p>
-<p>其实这里的dp数组我们可以将它优化成一维的，优化之后的一维dp保存的是当前上一行的最大价值，然后我们从做到有去更新这个数组即可</p>
-<p>dp[0]一直是0，dp[i]存的是当前上一行最大值，dp[i-1]是dp[i]左侧最大值。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int maxValue(vector&lt;vector&lt;int&gt;&gt;&amp; grid) &#123;</span><br><span class="line">       int r &#x3D; grid.size(), c &#x3D; grid[0].size();</span><br><span class="line">        vector&lt;int&gt; dp(c+1,0);</span><br><span class="line">        for(int i &#x3D; 0; i &lt; r; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            for(int j &#x3D; 0; j &lt; c; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                dp[j+1] &#x3D; max(dp[j],dp[j+1]) + grid[i][j];   </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[c];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
 
@@ -1895,6 +1868,33 @@
       </categories>
   </entry>
   <entry>
+    <title>剑-47 礼物的最大价值(数组记忆搜索)</title>
+    <url>/2020/08/03/%E5%89%91-47-%E7%A4%BC%E7%89%A9%E7%9A%84%E6%9C%80%E5%A4%A7%E4%BB%B7%E5%80%BC/</url>
+    <content><![CDATA[<h3 id="礼物的最大价值"><a href="#礼物的最大价值" class="headerlink" title="礼物的最大价值"></a>礼物的最大价值</h3><p>在一个 m*n 的棋盘的每一格都放有一个礼物，每个礼物都有一定的价值（价值大于 0）。你可以从棋盘的左上角开始拿格子里的礼物，并每次向右或者向下移动一格、直到到达棋盘的右下角。给定一个棋盘及其上面的礼物的价值，请计算你最多能拿到多少价值的礼物？</p>
+<p> </p>
+<p>示例 1:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: </span><br><span class="line">[</span><br><span class="line">  [1,3,1],</span><br><span class="line">  [1,5,1],</span><br><span class="line">  [4,2,1]</span><br><span class="line">]</span><br><span class="line">输出: 12</span><br><span class="line">解释: 路径 1→3→5→2→1 可以拿到最多价值的礼物</span><br></pre></td></tr></table></figure>
+
+<p>提示：0 &lt; grid.length &lt;= 200, 0 &lt; grid[0].length &lt;= 200</p>
+<h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><p>迭代，记忆搜索，二维数组存储走到每个位置的最大值。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int maxValue(vector&lt;vector&lt;int&gt;&gt;&amp; grid) &#123;</span><br><span class="line">        int row &#x3D; grid.size();</span><br><span class="line">        int col &#x3D; grid[0].size();</span><br><span class="line">        vector&lt;vector&lt;int&gt;&gt; res(row, vector&lt;int&gt;(col, 0));</span><br><span class="line">        for (int i &#x3D; 0; i &lt; row; ++i) &#123;</span><br><span class="line">            for (int j &#x3D; 0; j &lt; col; ++j) &#123;</span><br><span class="line">                if (i &#x3D;&#x3D; 0 &amp;&amp; j &#x3D;&#x3D; 0)</span><br><span class="line">                    res[i][j] &#x3D; grid[0][0];</span><br><span class="line">                else if (i &#x3D;&#x3D; 0)</span><br><span class="line">                    res[i][j] &#x3D; res[i][j - 1] + grid[i][j];</span><br><span class="line">                else if (j &#x3D;&#x3D; 0)</span><br><span class="line">                    res[i][j] &#x3D; res[i - 1][j] + grid[i][j];</span><br><span class="line">                else</span><br><span class="line">                    res[i][j] &#x3D; max(res[i - 1][j], res[i][j - 1]) + grid[i][j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return res[row - 1][col - 1];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>状态表示：dp[i][j]表示到达i,j位置处的最大价值</p>
+<p>转移方程：dp[i][j] = max{dp[i-1][j],dp[i][j-1]} + grid[i][j];</p>
+<p>dp数组初始状态：dp[0][j] = {0}, dp[i][0] = {0} (就是将第一行和第一列全部设为0)</p>
+<p>其实这里的dp数组我们可以将它优化成一维的，优化之后的一维dp保存的是当前上一行的最大价值，然后我们从做到有去更新这个数组即可</p>
+<p>dp[0]一直是0，dp[i]存的是当前上一行最大值，dp[i-1]是dp[i]左侧最大值。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int maxValue(vector&lt;vector&lt;int&gt;&gt;&amp; grid) &#123;</span><br><span class="line">       int r &#x3D; grid.size(), c &#x3D; grid[0].size();</span><br><span class="line">        vector&lt;int&gt; dp(c+1,0);</span><br><span class="line">        for(int i &#x3D; 0; i &lt; r; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            for(int j &#x3D; 0; j &lt; c; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                dp[j+1] &#x3D; max(dp[j],dp[j+1]) + grid[i][j];   </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return dp[c];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+]]></content>
+      <categories>
+        <category>刷题</category>
+        <category>剑指</category>
+      </categories>
+  </entry>
+  <entry>
     <title>剑-50 第一个只出现一次的字符(哈希表)</title>
     <url>/2020/08/03/%E5%89%91-50-%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%8F%AA%E5%87%BA%E7%8E%B0%E4%B8%80%E6%AC%A1%E7%9A%84%E5%AD%97%E7%AC%A6/</url>
     <content><![CDATA[<h3 id="第一个只出现一次的字符"><a href="#第一个只出现一次的字符" class="headerlink" title="第一个只出现一次的字符"></a>第一个只出现一次的字符</h3><p>在字符串 s 中找出第一个只出现一次的字符。如果没有，返回一个单空格。 s 只包含小写字母。</p>
@@ -1912,37 +1912,6 @@
         <category>刷题</category>
         <category>剑指</category>
       </categories>
-  </entry>
-  <entry>
-    <title>剑-51 数组中的逆序对(归并排序)</title>
-    <url>/2020/08/03/%E5%89%91-51-%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%80%86%E5%BA%8F%E5%AF%B9/</url>
-    <content><![CDATA[<h3 id="数组中的逆序对"><a href="#数组中的逆序对" class="headerlink" title="数组中的逆序对"></a>数组中的逆序对</h3><p>在数组中的两个数字，如果前面一个数字大于后面的数字，则这两个数字组成一个逆序对。输入一个数组，求出这个数组中的逆序对的总数。</p>
-<p> </p>
-<p>示例 1:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: [7,5,6,4]</span><br><span class="line">输出: 5</span><br></pre></td></tr></table></figure>
-
-<p>限制：0 &lt;= 数组长度 &lt;= 50000</p>
-<h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><p><label style="color:red"> 「归并排序」是分治思想的典型应用，它包含这样三个步骤：</label></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">分解： 待排序的区间为[l,r]，令 m &#x3D;(l+r)&#x2F;2 ，我们把[l,r]分成[l,m]和[m+1,r]</span><br><span class="line">解决： 使用归并排序递归地排序两个子序列</span><br><span class="line">合并： 把两个已经排好序的子序列 [l, m][l,m] 和 [m + 1, r][m+1,r] 合并起来</span><br></pre></td></tr></table></figure>
-<p>在待排序序列长度为 11 的时候，递归开始「回升」，因为我们默认长度为 11 的序列是排好序的。</p>
-<p><label style="color:red">思路: </label></p>
-<p>那么求逆序对和归并排序又有什么关系呢？关键就在于「归并」当中「并」的过程。我们通过一个实例来看看。假设我们有两个已排序的序列等待合并，分别是 L ={ 8, 12, 16, 22, 100 }和 R = R={9,26,55,64,91}。一开始我们用指针 lPtr = 0 指向 L 的首部，rPtr = 0 指向 R 的头部。记已经合并好的部分为 M。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">L &#x3D; [8, 12, 16, 22, 100]   R &#x3D; [9, 26, 55, 64, 91]  M &#x3D; []</span><br><span class="line">     |                          |</span><br><span class="line">   lPtr                       rPtr</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>我们发现 lPtr 指向的元素小于 rPtr 指向的元素，于是把 lPtr 指向的元素放入答案，并把 lPtr 后移一位。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">L &#x3D; [8, 12, 16, 22, 100]   R &#x3D; [9, 26, 55, 64, 91]  M &#x3D; [8]</span><br><span class="line">        |                       |</span><br><span class="line">      lPtr                     rPtr</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>接着我们继续合并，此时 lPtr 指向 12，rPtr指向的 9 小于12，则12到100都比9大，贡献为mid-i+1。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">L &#x3D; [8, 12, 16, 22, 100]   R &#x3D; [9, 26, 55, 64, 91]  M &#x3D; [8, 9]</span><br><span class="line">        |                          |</span><br><span class="line">       lPtr                       rPtr</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-<p><strong><label style="color:red"> 实现代码</label></strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int reversePairs(vector&lt;int&gt;&amp; nums) &#123;           </span><br><span class="line">        vector&lt;int&gt; temp(nums.size(), 0);</span><br><span class="line">        int kk&#x3D;nums.size()-1;</span><br><span class="line">        sort(nums,0,kk,temp);</span><br><span class="line">        return this-&gt;count;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void sort(vector&lt;int&gt;&amp; arr,int left,int right,vector&lt;int&gt;&amp; temp)&#123;</span><br><span class="line">        if(left&lt;right)&#123;</span><br><span class="line">            int mid &#x3D; (left+right)&#x2F;2;</span><br><span class="line">            sort(arr,left,mid,temp);&#x2F;&#x2F;左边归并排序，使得左子序列有序</span><br><span class="line">            sort(arr,mid+1,right,temp);&#x2F;&#x2F;右边归并排序，使得右子序列有序</span><br><span class="line">            merge(arr,left,mid,right,temp);&#x2F;&#x2F;将两个有序子数组合并操作</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void merge(vector&lt;int&gt;&amp; arr,int left,int mid,int right,vector&lt;int&gt;&amp; temp)&#123;</span><br><span class="line">        int i &#x3D; left;&#x2F;&#x2F;左序列指针</span><br><span class="line">        int j &#x3D; mid+1;&#x2F;&#x2F;右序列指针</span><br><span class="line">        int t &#x3D; 0;&#x2F;&#x2F;临时数组指针</span><br><span class="line">        while (i&lt;&#x3D;mid &amp;&amp; j&lt;&#x3D;right)&#123;</span><br><span class="line">            if(arr[i]&lt;&#x3D;arr[j])&#123;</span><br><span class="line">                temp[t++] &#x3D; arr[i++];</span><br><span class="line">            &#125;else &#123;</span><br><span class="line">                temp[t++] &#x3D; arr[j++];</span><br><span class="line">                this-&gt;count&#x3D;this-&gt;count+mid-i+1;&#x2F;&#x2F;归并排序添加的一行,左侧i到mid的元素都比j的元素大。</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        while(i&lt;&#x3D;mid)&#123;&#x2F;&#x2F;将左边剩余元素填充进temp中</span><br><span class="line">            temp[t++] &#x3D; arr[i++];</span><br><span class="line">        &#125;</span><br><span class="line">        while(j&lt;&#x3D;right)&#123;&#x2F;&#x2F;将右序列剩余元素填充进temp中</span><br><span class="line">            temp[t++] &#x3D; arr[j++];</span><br><span class="line">        &#125;</span><br><span class="line">        t &#x3D; 0;</span><br><span class="line">        &#x2F;&#x2F;将temp中的元素全部拷贝到原数组中</span><br><span class="line">        while(left &lt;&#x3D; right)&#123;</span><br><span class="line">            arr[left++] &#x3D; temp[t++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">private:</span><br><span class="line">    int count&#x3D;0;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>刷题</category>
-        <category>剑指</category>
-      </categories>
-      <tags>
-        <tag>剑指留意</tag>
-      </tags>
   </entry>
   <entry>
     <title>剑-52 两个链表的第一个公共节点(AB，BA，拼接)</title>
@@ -1977,6 +1946,37 @@
 
 
 ]]></content>
+      <categories>
+        <category>刷题</category>
+        <category>剑指</category>
+      </categories>
+      <tags>
+        <tag>剑指留意</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>剑-51 数组中的逆序对(归并排序)</title>
+    <url>/2020/08/03/%E5%89%91-51-%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E9%80%86%E5%BA%8F%E5%AF%B9/</url>
+    <content><![CDATA[<h3 id="数组中的逆序对"><a href="#数组中的逆序对" class="headerlink" title="数组中的逆序对"></a>数组中的逆序对</h3><p>在数组中的两个数字，如果前面一个数字大于后面的数字，则这两个数字组成一个逆序对。输入一个数组，求出这个数组中的逆序对的总数。</p>
+<p> </p>
+<p>示例 1:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: [7,5,6,4]</span><br><span class="line">输出: 5</span><br></pre></td></tr></table></figure>
+
+<p>限制：0 &lt;= 数组长度 &lt;= 50000</p>
+<h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><p><label style="color:red"> 「归并排序」是分治思想的典型应用，它包含这样三个步骤：</label></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">分解： 待排序的区间为[l,r]，令 m &#x3D;(l+r)&#x2F;2 ，我们把[l,r]分成[l,m]和[m+1,r]</span><br><span class="line">解决： 使用归并排序递归地排序两个子序列</span><br><span class="line">合并： 把两个已经排好序的子序列 [l, m][l,m] 和 [m + 1, r][m+1,r] 合并起来</span><br></pre></td></tr></table></figure>
+<p>在待排序序列长度为 11 的时候，递归开始「回升」，因为我们默认长度为 11 的序列是排好序的。</p>
+<p><label style="color:red">思路: </label></p>
+<p>那么求逆序对和归并排序又有什么关系呢？关键就在于「归并」当中「并」的过程。我们通过一个实例来看看。假设我们有两个已排序的序列等待合并，分别是 L ={ 8, 12, 16, 22, 100 }和 R = R={9,26,55,64,91}。一开始我们用指针 lPtr = 0 指向 L 的首部，rPtr = 0 指向 R 的头部。记已经合并好的部分为 M。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">L &#x3D; [8, 12, 16, 22, 100]   R &#x3D; [9, 26, 55, 64, 91]  M &#x3D; []</span><br><span class="line">     |                          |</span><br><span class="line">   lPtr                       rPtr</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>我们发现 lPtr 指向的元素小于 rPtr 指向的元素，于是把 lPtr 指向的元素放入答案，并把 lPtr 后移一位。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">L &#x3D; [8, 12, 16, 22, 100]   R &#x3D; [9, 26, 55, 64, 91]  M &#x3D; [8]</span><br><span class="line">        |                       |</span><br><span class="line">      lPtr                     rPtr</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>接着我们继续合并，此时 lPtr 指向 12，rPtr指向的 9 小于12，则12到100都比9大，贡献为mid-i+1。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">L &#x3D; [8, 12, 16, 22, 100]   R &#x3D; [9, 26, 55, 64, 91]  M &#x3D; [8, 9]</span><br><span class="line">        |                          |</span><br><span class="line">       lPtr                       rPtr</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<p><strong><label style="color:red"> 实现代码</label></strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int reversePairs(vector&lt;int&gt;&amp; nums) &#123;           </span><br><span class="line">        vector&lt;int&gt; temp(nums.size(), 0);</span><br><span class="line">        int kk&#x3D;nums.size()-1;</span><br><span class="line">        sort(nums,0,kk,temp);</span><br><span class="line">        return this-&gt;count;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void sort(vector&lt;int&gt;&amp; arr,int left,int right,vector&lt;int&gt;&amp; temp)&#123;</span><br><span class="line">        if(left&lt;right)&#123;</span><br><span class="line">            int mid &#x3D; (left+right)&#x2F;2;</span><br><span class="line">            sort(arr,left,mid,temp);&#x2F;&#x2F;左边归并排序，使得左子序列有序</span><br><span class="line">            sort(arr,mid+1,right,temp);&#x2F;&#x2F;右边归并排序，使得右子序列有序</span><br><span class="line">            merge(arr,left,mid,right,temp);&#x2F;&#x2F;将两个有序子数组合并操作</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    void merge(vector&lt;int&gt;&amp; arr,int left,int mid,int right,vector&lt;int&gt;&amp; temp)&#123;</span><br><span class="line">        int i &#x3D; left;&#x2F;&#x2F;左序列指针</span><br><span class="line">        int j &#x3D; mid+1;&#x2F;&#x2F;右序列指针</span><br><span class="line">        int t &#x3D; 0;&#x2F;&#x2F;临时数组指针</span><br><span class="line">        while (i&lt;&#x3D;mid &amp;&amp; j&lt;&#x3D;right)&#123;</span><br><span class="line">            if(arr[i]&lt;&#x3D;arr[j])&#123;</span><br><span class="line">                temp[t++] &#x3D; arr[i++];</span><br><span class="line">            &#125;else &#123;</span><br><span class="line">                temp[t++] &#x3D; arr[j++];</span><br><span class="line">                this-&gt;count&#x3D;this-&gt;count+mid-i+1;&#x2F;&#x2F;归并排序添加的一行,左侧i到mid的元素都比j的元素大。</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        while(i&lt;&#x3D;mid)&#123;&#x2F;&#x2F;将左边剩余元素填充进temp中</span><br><span class="line">            temp[t++] &#x3D; arr[i++];</span><br><span class="line">        &#125;</span><br><span class="line">        while(j&lt;&#x3D;right)&#123;&#x2F;&#x2F;将右序列剩余元素填充进temp中</span><br><span class="line">            temp[t++] &#x3D; arr[j++];</span><br><span class="line">        &#125;</span><br><span class="line">        t &#x3D; 0;</span><br><span class="line">        &#x2F;&#x2F;将temp中的元素全部拷贝到原数组中</span><br><span class="line">        while(left &lt;&#x3D; right)&#123;</span><br><span class="line">            arr[left++] &#x3D; temp[t++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">private:</span><br><span class="line">    int count&#x3D;0;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>刷题</category>
         <category>剑指</category>
@@ -2173,6 +2173,32 @@
       </tags>
   </entry>
   <entry>
+    <title>剑-57-II 和为s的连续正数序列(双指针)</title>
+    <url>/2020/08/04/%E5%89%91-57-II-%E5%92%8C%E4%B8%BAs%E7%9A%84%E8%BF%9E%E7%BB%AD%E6%AD%A3%E6%95%B0%E5%BA%8F%E5%88%97/</url>
+    <content><![CDATA[<h3 id="和为s的连续正数序列"><a href="#和为s的连续正数序列" class="headerlink" title="和为s的连续正数序列"></a>和为s的连续正数序列</h3><p>输入一个正整数 target ，输出所有和为 target 的连续正整数序列（至少含有两个数）。</p>
+<p>序列内的数字由小到大排列，不同序列按照首个数字从小到大排列。</p>
+<p> </p>
+<p>示例 1：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：target &#x3D; 9</span><br><span class="line">输出：[[2,3,4],[4,5]]</span><br></pre></td></tr></table></figure>
+<p>示例 2：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：target &#x3D; 15</span><br><span class="line">输出：[[1,2,3,4,5],[4,5,6],[7,8]]</span><br></pre></td></tr></table></figure>
+
+<p>限制：1 &lt;= target &lt;= 10^5</p>
+<h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><p>方法一：枚举</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; findContinuousSequence(int target) &#123;</span><br><span class="line">        int m&#x3D;(target+1)&#x2F;2;</span><br><span class="line">        int count&#x3D;0;   </span><br><span class="line">        vector&lt;int&gt; a;</span><br><span class="line">        vector&lt;vector&lt;int&gt;&gt; b;</span><br><span class="line">        for(int i&#x3D;1;i&lt;&#x3D;m;i++)&#123;</span><br><span class="line">            for(int j&#x3D;i;j&lt;&#x3D;m;j++)&#123;</span><br><span class="line">                count+&#x3D;j;</span><br><span class="line">                a.push_back(j);</span><br><span class="line">                if(count&#x3D;&#x3D;target)&#123;</span><br><span class="line">                    b.push_back(a);</span><br><span class="line">                    a.clear();</span><br><span class="line">                    count&#x3D;0;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">                if(count&gt;target)&#123;</span><br><span class="line">                    a.clear();</span><br><span class="line">                    count&#x3D;0;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>方法二：双指针</p>
+<p><img src="/img/15.png"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; findContinuousSequence(int target) &#123;    </span><br><span class="line">         vector&lt;vector&lt;int&gt;&gt;vec;</span><br><span class="line">        vector&lt;int&gt; res;</span><br><span class="line">        for (int l &#x3D; 1, r &#x3D; 2; l &lt; r;)&#123;</span><br><span class="line">            int sum &#x3D; (l + r) * (r - l + 1) &#x2F; 2;</span><br><span class="line">            if (sum &#x3D;&#x3D; target)&#123;</span><br><span class="line">                res.clear();</span><br><span class="line">                for (int i &#x3D; l; i &lt;&#x3D; r; ++i) res.push_back(i);</span><br><span class="line">                vec.emplace_back(res);</span><br><span class="line">                l++;</span><br><span class="line">            &#125;</span><br><span class="line">            else if (sum &lt; target) r++;</span><br><span class="line">            else l++;</span><br><span class="line">        &#125;</span><br><span class="line">        return vec;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>刷题</category>
+        <category>剑指</category>
+      </categories>
+  </entry>
+  <entry>
     <title>剑-57  和为s的两个数字(哈希，双指针，二分查找)</title>
     <url>/2020/08/04/%E5%89%91-57-%E5%92%8C%E4%B8%BAs%E7%9A%84%E4%B8%A4%E4%B8%AA%E6%95%B0%E5%AD%97/</url>
     <content><![CDATA[<h3 id="和为s的两个数字"><a href="#和为s的两个数字" class="headerlink" title="和为s的两个数字"></a>和为s的两个数字</h3><p>输入一个递增排序的数组和一个数字s，在数组中查找两个数，使得它们的和正好是s。如果有多对数字的和等于s，则输出任意一对即可。</p>
@@ -2204,32 +2230,6 @@
       <tags>
         <tag>剑指留意</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>剑-57-II 和为s的连续正数序列(双指针)</title>
-    <url>/2020/08/04/%E5%89%91-57-II-%E5%92%8C%E4%B8%BAs%E7%9A%84%E8%BF%9E%E7%BB%AD%E6%AD%A3%E6%95%B0%E5%BA%8F%E5%88%97/</url>
-    <content><![CDATA[<h3 id="和为s的连续正数序列"><a href="#和为s的连续正数序列" class="headerlink" title="和为s的连续正数序列"></a>和为s的连续正数序列</h3><p>输入一个正整数 target ，输出所有和为 target 的连续正整数序列（至少含有两个数）。</p>
-<p>序列内的数字由小到大排列，不同序列按照首个数字从小到大排列。</p>
-<p> </p>
-<p>示例 1：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：target &#x3D; 9</span><br><span class="line">输出：[[2,3,4],[4,5]]</span><br></pre></td></tr></table></figure>
-<p>示例 2：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：target &#x3D; 15</span><br><span class="line">输出：[[1,2,3,4,5],[4,5,6],[7,8]]</span><br></pre></td></tr></table></figure>
-
-<p>限制：1 &lt;= target &lt;= 10^5</p>
-<h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><p>方法一：枚举</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; findContinuousSequence(int target) &#123;</span><br><span class="line">        int m&#x3D;(target+1)&#x2F;2;</span><br><span class="line">        int count&#x3D;0;   </span><br><span class="line">        vector&lt;int&gt; a;</span><br><span class="line">        vector&lt;vector&lt;int&gt;&gt; b;</span><br><span class="line">        for(int i&#x3D;1;i&lt;&#x3D;m;i++)&#123;</span><br><span class="line">            for(int j&#x3D;i;j&lt;&#x3D;m;j++)&#123;</span><br><span class="line">                count+&#x3D;j;</span><br><span class="line">                a.push_back(j);</span><br><span class="line">                if(count&#x3D;&#x3D;target)&#123;</span><br><span class="line">                    b.push_back(a);</span><br><span class="line">                    a.clear();</span><br><span class="line">                    count&#x3D;0;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">                if(count&gt;target)&#123;</span><br><span class="line">                    a.clear();</span><br><span class="line">                    count&#x3D;0;</span><br><span class="line">                    break;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return b;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>方法二：双指针</p>
-<p><img src="/img/15.png"></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;vector&lt;int&gt;&gt; findContinuousSequence(int target) &#123;    </span><br><span class="line">         vector&lt;vector&lt;int&gt;&gt;vec;</span><br><span class="line">        vector&lt;int&gt; res;</span><br><span class="line">        for (int l &#x3D; 1, r &#x3D; 2; l &lt; r;)&#123;</span><br><span class="line">            int sum &#x3D; (l + r) * (r - l + 1) &#x2F; 2;</span><br><span class="line">            if (sum &#x3D;&#x3D; target)&#123;</span><br><span class="line">                res.clear();</span><br><span class="line">                for (int i &#x3D; l; i &lt;&#x3D; r; ++i) res.push_back(i);</span><br><span class="line">                vec.emplace_back(res);</span><br><span class="line">                l++;</span><br><span class="line">            &#125;</span><br><span class="line">            else if (sum &lt; target) r++;</span><br><span class="line">            else l++;</span><br><span class="line">        &#125;</span><br><span class="line">        return vec;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-
-]]></content>
-      <categories>
-        <category>刷题</category>
-        <category>剑指</category>
-      </categories>
   </entry>
   <entry>
     <title>剑-58-I 翻转单词顺序(拼接字符，字符流)</title>
@@ -2268,6 +2268,25 @@
       </tags>
   </entry>
   <entry>
+    <title>剑-59-I 滑动窗口的最大值(deque，维护队列只存最大值)</title>
+    <url>/2020/08/05/%E5%89%91-59-I-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%9A%84%E6%9C%80%E5%A4%A7%E5%80%BC/</url>
+    <content><![CDATA[<h3 id="滑动窗口的最大值"><a href="#滑动窗口的最大值" class="headerlink" title="滑动窗口的最大值"></a>滑动窗口的最大值</h3><p>给定一个数组 nums 和滑动窗口的大小 k，请找出所有滑动窗口里的最大值。</p>
+<p>示例:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: nums &#x3D; [1,3,-1,-3,5,3,6,7], 和 k &#x3D; 3</span><br><span class="line">输出: [3,3,5,5,6,7] </span><br><span class="line">解释: </span><br><span class="line"></span><br><span class="line">  滑动窗口的位置                最大值</span><br><span class="line">---------------               -----</span><br><span class="line">[1  3  -1] -3  5  3  6  7       3</span><br><span class="line"> 1 [3  -1  -3] 5  3  6  7       3</span><br><span class="line"> 1  3 [-1  -3  5] 3  6  7       5</span><br><span class="line"> 1  3  -1 [-3  5  3] 6  7       5</span><br><span class="line"> 1  3  -1  -3 [5  3  6] 7       6</span><br><span class="line"> 1  3  -1  -3  5 [3  6  7]      7</span><br></pre></td></tr></table></figure>
+
+<p>提示：你可以假设 k 总是有效的，在输入数组不为空的情况下，1 ≤ k ≤ 输入数组的大小。</p>
+<h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><p>窗口左边是队尾，右边是队头。</p>
+<p>队头存的是最大值的索引，队头到队尾递减。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; maxSlidingWindow(vector&lt;int&gt;&amp; nums, int k) &#123;</span><br><span class="line">        vector&lt;int&gt; ans;</span><br><span class="line">        deque&lt;int&gt; deq;&#x2F;&#x2F;双端队列实现滑动窗口</span><br><span class="line">        int n &#x3D; nums.size();</span><br><span class="line">        for (int i &#x3D; 0; i &lt; n; i++)&#123;</span><br><span class="line">            while(!deq.empty() &amp;&amp; nums[i] &gt; nums[deq.back()])&#123;</span><br><span class="line">                deq.pop_back();&#x2F;&#x2F;清理尾部(左边)比即将放入值小的数值</span><br><span class="line">            &#125;</span><br><span class="line">            if (!deq.empty() &amp;&amp; deq.front() &lt; i - k + 1) deq.pop_front();</span><br><span class="line">            &#x2F;&#x2F;判断头部越界，即将放入的位置索引为i,判断队列里面队头的位置索引是否越界</span><br><span class="line">            deq.push_back(i);</span><br><span class="line">            if (i &gt;&#x3D; k -1) ans.push_back(nums[deq.front()]);&#x2F;&#x2F;将窗口内最大值存入</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>刷题</category>
+        <category>剑指</category>
+      </categories>
+      <tags>
+        <tag>剑指留意</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>剑-58-II 左旋转字符串(substr)</title>
     <url>/2020/08/05/%E5%89%91-58-II-%E5%B7%A6%E6%97%8B%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2/</url>
     <content><![CDATA[<h3 id="左旋转字符串"><a href="#左旋转字符串" class="headerlink" title="左旋转字符串"></a>左旋转字符串</h3><p>字符串的左旋转操作是把字符串前面的若干个字符转移到字符串的尾部。请定义一个函数实现字符串左旋转操作的功能。比如，输入字符串”abcdefg”和数字2，该函数将返回左旋转两位得到的结果”cdefgab”。</p>
@@ -2287,25 +2306,6 @@
         <category>刷题</category>
         <category>剑指</category>
       </categories>
-  </entry>
-  <entry>
-    <title>剑-59-I 滑动窗口的最大值(deque，维护队列只存最大值)</title>
-    <url>/2020/08/05/%E5%89%91-59-I-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E7%9A%84%E6%9C%80%E5%A4%A7%E5%80%BC/</url>
-    <content><![CDATA[<h3 id="滑动窗口的最大值"><a href="#滑动窗口的最大值" class="headerlink" title="滑动窗口的最大值"></a>滑动窗口的最大值</h3><p>给定一个数组 nums 和滑动窗口的大小 k，请找出所有滑动窗口里的最大值。</p>
-<p>示例:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: nums &#x3D; [1,3,-1,-3,5,3,6,7], 和 k &#x3D; 3</span><br><span class="line">输出: [3,3,5,5,6,7] </span><br><span class="line">解释: </span><br><span class="line"></span><br><span class="line">  滑动窗口的位置                最大值</span><br><span class="line">---------------               -----</span><br><span class="line">[1  3  -1] -3  5  3  6  7       3</span><br><span class="line"> 1 [3  -1  -3] 5  3  6  7       3</span><br><span class="line"> 1  3 [-1  -3  5] 3  6  7       5</span><br><span class="line"> 1  3  -1 [-3  5  3] 6  7       5</span><br><span class="line"> 1  3  -1  -3 [5  3  6] 7       6</span><br><span class="line"> 1  3  -1  -3  5 [3  6  7]      7</span><br></pre></td></tr></table></figure>
-
-<p>提示：你可以假设 k 总是有效的，在输入数组不为空的情况下，1 ≤ k ≤ 输入数组的大小。</p>
-<h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><p>窗口左边是队尾，右边是队头。</p>
-<p>队头存的是最大值的索引，队头到队尾递减。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    vector&lt;int&gt; maxSlidingWindow(vector&lt;int&gt;&amp; nums, int k) &#123;</span><br><span class="line">        vector&lt;int&gt; ans;</span><br><span class="line">        deque&lt;int&gt; deq;&#x2F;&#x2F;双端队列实现滑动窗口</span><br><span class="line">        int n &#x3D; nums.size();</span><br><span class="line">        for (int i &#x3D; 0; i &lt; n; i++)&#123;</span><br><span class="line">            while(!deq.empty() &amp;&amp; nums[i] &gt; nums[deq.back()])&#123;</span><br><span class="line">                deq.pop_back();&#x2F;&#x2F;清理尾部(左边)比即将放入值小的数值</span><br><span class="line">            &#125;</span><br><span class="line">            if (!deq.empty() &amp;&amp; deq.front() &lt; i - k + 1) deq.pop_front();</span><br><span class="line">            &#x2F;&#x2F;判断头部越界，即将放入的位置索引为i,判断队列里面队头的位置索引是否越界</span><br><span class="line">            deq.push_back(i);</span><br><span class="line">            if (i &gt;&#x3D; k -1) ans.push_back(nums[deq.front()]);&#x2F;&#x2F;将窗口内最大值存入</span><br><span class="line">        &#125;</span><br><span class="line">        return ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>刷题</category>
-        <category>剑指</category>
-      </categories>
-      <tags>
-        <tag>剑指留意</tag>
-      </tags>
   </entry>
   <entry>
     <title>剑-59-II 队列的最大值(deque，维护队列最大值)</title>
@@ -2449,6 +2449,28 @@
       </categories>
   </entry>
   <entry>
+    <title>剑-65 不用加减乘除做加法(异或求和，与操作左移求进位)</title>
+    <url>/2020/08/06/%E5%89%91-65-%E4%B8%8D%E7%94%A8%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4%E5%81%9A%E5%8A%A0%E6%B3%95/</url>
+    <content><![CDATA[<h3 id="不用加减乘除做加法"><a href="#不用加减乘除做加法" class="headerlink" title="不用加减乘除做加法"></a>不用加减乘除做加法</h3><p>写一个函数，求两个整数之和，要求在函数体内不得使用 “+”、“-”、“*”、“/” 四则运算符号。</p>
+<p> </p>
+<p>示例:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: a &#x3D; 1, b &#x3D; 1</span><br><span class="line">输出: 2</span><br></pre></td></tr></table></figure>
+
+<p>提示：a, b 均可能是负数或 0, 结果不会溢出 32 位整数</p>
+<h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;*</span><br><span class="line"> * 位运算</span><br><span class="line"> *</span><br><span class="line"> * 因为不能使用加减乘除四则运算，所以只能想到使用二进制的位运算实现相加操作。</span><br><span class="line"> * 二进制位运算中，异或操作: 1^1&#x3D;0 0^0&#x3D;0 1^0&#x3D;1 0^1&#x3D;1，可以模拟无进位的加操作；</span><br><span class="line"> * 与操作：1&amp;1&#x3D;1 0&amp;1&#x3D;0 1&amp;0&#x3D;0 0&amp;0&#x3D;0，可以模拟进位的情况，再将与后的值左移一位即等于进位值。</span><br><span class="line"> *</span><br><span class="line"> * 普通的十进制数相加过程是：</span><br><span class="line"> * 1) 各位相加，无进位和 2) 计算进位值 3) 无进位和加上进位值</span><br><span class="line"> *</span><br><span class="line"> * 使用位运算的二进制数的相加过程相同：</span><br><span class="line"> * 1) 两个二进制数各位异或，得到无进位的和 2) 二进制数各位与再左移，计算进位 3) 无进位和与进位异或</span><br><span class="line"> * 重复上面操作，直到不再有进位，即进位为0。</span><br><span class="line"> *</span><br><span class="line"> * 相关问题：</span><br><span class="line"> * 不使用新的变量，交换两个变量的值。比如有两个变量a、b，希望交换它们的值。有两种不同的操作：</span><br><span class="line"> * 1. 基于加减法 -- a &#x3D; a + b; b &#x3D; a - b; a &#x3D; a - b;</span><br><span class="line"> * 2. 基于位运算 -- a &#x3D; a ^ b; b &#x3D; a ^ b; a &#x3D; a ^ b;</span><br><span class="line"> * *&#x2F;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><img src="/img/1.jpg"></p>
+<p>计算 3+7 的值，其中 s 表示每一步不考虑进位的求和，c 表示每一步的进位。</p>
+<p>因为是二进制，所以不考虑进位求和的话，可以直接采用异或运算。而计算进位的话，直接用位与和左移一位就行了。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int add(int a, int b) &#123;</span><br><span class="line">         while(b !&#x3D; 0)  &#x2F;&#x2F;b&#x3D;&#x3D;0说明已经无法进位了</span><br><span class="line">        &#123;</span><br><span class="line">            int temp &#x3D; (a ^ b);  &#x2F;&#x2F;相加,不考虑进位的加的结果</span><br><span class="line">            b &#x3D; ((unsigned int)(a &amp; b) &lt;&lt; 1);  </span><br><span class="line">            &#x2F;&#x2F;进位，注意：C++不支持负值左移！！这里要加上unsigned int</span><br><span class="line">            a &#x3D; temp;</span><br><span class="line">        &#125;</span><br><span class="line">        return a;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>刷题</category>
+        <category>剑指</category>
+      </categories>
+      <tags>
+        <tag>剑指留意</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>剑-64 求1+2+…+n(A &amp;&amp; B,A递归出口，B主体函数)</title>
     <url>/2020/08/06/%E5%89%91-64-%E6%B1%821-2-%E2%80%A6-n/</url>
     <content><![CDATA[<h3 id="求1-2-…-n"><a href="#求1-2-…-n" class="headerlink" title="求1+2+…+n"></a>求1+2+…+n</h3><p>求 1+2+…+n ，要求不能使用乘除法、for、while、if、else、switch、case等关键字及条件判断语句（A?B:C）。</p>
@@ -2496,28 +2518,6 @@
 
 
 ]]></content>
-      <categories>
-        <category>刷题</category>
-        <category>剑指</category>
-      </categories>
-      <tags>
-        <tag>剑指留意</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>剑-65 不用加减乘除做加法(异或求和，与操作左移求进位)</title>
-    <url>/2020/08/06/%E5%89%91-65-%E4%B8%8D%E7%94%A8%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4%E5%81%9A%E5%8A%A0%E6%B3%95/</url>
-    <content><![CDATA[<h3 id="不用加减乘除做加法"><a href="#不用加减乘除做加法" class="headerlink" title="不用加减乘除做加法"></a>不用加减乘除做加法</h3><p>写一个函数，求两个整数之和，要求在函数体内不得使用 “+”、“-”、“*”、“/” 四则运算符号。</p>
-<p> </p>
-<p>示例:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: a &#x3D; 1, b &#x3D; 1</span><br><span class="line">输出: 2</span><br></pre></td></tr></table></figure>
-
-<p>提示：a, b 均可能是负数或 0, 结果不会溢出 32 位整数</p>
-<h3 id="解答："><a href="#解答：" class="headerlink" title="解答："></a>解答：</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;*</span><br><span class="line"> * 位运算</span><br><span class="line"> *</span><br><span class="line"> * 因为不能使用加减乘除四则运算，所以只能想到使用二进制的位运算实现相加操作。</span><br><span class="line"> * 二进制位运算中，异或操作: 1^1&#x3D;0 0^0&#x3D;0 1^0&#x3D;1 0^1&#x3D;1，可以模拟无进位的加操作；</span><br><span class="line"> * 与操作：1&amp;1&#x3D;1 0&amp;1&#x3D;0 1&amp;0&#x3D;0 0&amp;0&#x3D;0，可以模拟进位的情况，再将与后的值左移一位即等于进位值。</span><br><span class="line"> *</span><br><span class="line"> * 普通的十进制数相加过程是：</span><br><span class="line"> * 1) 各位相加，无进位和 2) 计算进位值 3) 无进位和加上进位值</span><br><span class="line"> *</span><br><span class="line"> * 使用位运算的二进制数的相加过程相同：</span><br><span class="line"> * 1) 两个二进制数各位异或，得到无进位的和 2) 二进制数各位与再左移，计算进位 3) 无进位和与进位异或</span><br><span class="line"> * 重复上面操作，直到不再有进位，即进位为0。</span><br><span class="line"> *</span><br><span class="line"> * 相关问题：</span><br><span class="line"> * 不使用新的变量，交换两个变量的值。比如有两个变量a、b，希望交换它们的值。有两种不同的操作：</span><br><span class="line"> * 1. 基于加减法 -- a &#x3D; a + b; b &#x3D; a - b; a &#x3D; a - b;</span><br><span class="line"> * 2. 基于位运算 -- a &#x3D; a ^ b; b &#x3D; a ^ b; a &#x3D; a ^ b;</span><br><span class="line"> * *&#x2F;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><img src="/img/1.jpg"></p>
-<p>计算 3+7 的值，其中 s 表示每一步不考虑进位的求和，c 表示每一步的进位。</p>
-<p>因为是二进制，所以不考虑进位求和的话，可以直接采用异或运算。而计算进位的话，直接用位与和左移一位就行了。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int add(int a, int b) &#123;</span><br><span class="line">         while(b !&#x3D; 0)  &#x2F;&#x2F;b&#x3D;&#x3D;0说明已经无法进位了</span><br><span class="line">        &#123;</span><br><span class="line">            int temp &#x3D; (a ^ b);  &#x2F;&#x2F;相加,不考虑进位的加的结果</span><br><span class="line">            b &#x3D; ((unsigned int)(a &amp; b) &lt;&lt; 1);  </span><br><span class="line">            &#x2F;&#x2F;进位，注意：C++不支持负值左移！！这里要加上unsigned int</span><br><span class="line">            a &#x3D; temp;</span><br><span class="line">        &#125;</span><br><span class="line">        return a;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>刷题</category>
         <category>剑指</category>
@@ -2721,42 +2721,6 @@
       </categories>
   </entry>
   <entry>
-    <title>快速排序</title>
-    <url>/2020/08/17/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/</url>
-    <content><![CDATA[<h4 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h4><p><strong>算法步骤</strong></p>
-<p>1.从数列中挑出一个元素，称为 “基准”（pivot）;</p>
-<p>2.重新排序数列，所有元素比基准值小的摆放在基准前面，所有元素比基准值大的摆在基准的后面（相同的数可以到任一边）。在这个分区退出之后，该基准就处于数列的中间位置。这个称为分区（partition）操作；</p>
-<p>3.递归地（recursive）把小于基准值元素的子数列和大于基准值元素的子数列排序；</p>
-<p><img src="/img/28.png"><br><img src="/img/29.png"><br><img src="/img/30.png"><br><img src="/img/31.png"></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;快速排序（从小到大）</span><br><span class="line">void quickSort(int left, int right, vector&lt;int&gt;&amp; arr)</span><br><span class="line">&#123;</span><br><span class="line">	if(left &gt;&#x3D; right)</span><br><span class="line">		return;</span><br><span class="line">        </span><br><span class="line">   	if(left &lt; 0 || right &gt;&#x3D; arr.size())</span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; &quot;error args! array bound.&quot; &lt;&lt; endl;</span><br><span class="line">		return;</span><br><span class="line">	&#125;&#x2F;&#x2F;非法输入判断,防止数组越界</span><br><span class="line">    </span><br><span class="line">	int i, j, base, temp;</span><br><span class="line">	i &#x3D; left, j &#x3D; right;</span><br><span class="line">	base &#x3D; arr[left];  &#x2F;&#x2F;取最左边的数为基准数</span><br><span class="line">	while (i &lt; j)</span><br><span class="line">	&#123;</span><br><span class="line">		while (arr[j] &gt;&#x3D; base &amp;&amp; i &lt; j)</span><br><span class="line">			j--;</span><br><span class="line">		while (arr[i] &lt;&#x3D; base &amp;&amp; i &lt; j)</span><br><span class="line">			i++;</span><br><span class="line">		if(i &lt; j)</span><br><span class="line">		&#123;</span><br><span class="line">			temp &#x3D; arr[i];</span><br><span class="line">			arr[i] &#x3D; arr[j];</span><br><span class="line">			arr[j] &#x3D; temp;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	&#x2F;&#x2F;基准数归位</span><br><span class="line">	arr[left] &#x3D; arr[i];</span><br><span class="line">	arr[i] &#x3D; base;</span><br><span class="line">	quickSort(left, i - 1, arr);&#x2F;&#x2F;递归左边</span><br><span class="line">	quickSort(i + 1, right, arr);&#x2F;&#x2F;递归右边</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-]]></content>
-      <categories>
-        <category>排序算法</category>
-      </categories>
-  </entry>
-  <entry>
     <title>插入排序,希尔排序</title>
     <url>/2020/08/17/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/</url>
     <content><![CDATA[<h4 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h4><p><strong>算法步骤</strong></p>
@@ -2795,25 +2759,47 @@
       </categories>
   </entry>
   <entry>
+    <title>快速排序</title>
+    <url>/2020/08/17/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/</url>
+    <content><![CDATA[<h4 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h4><p><strong>算法步骤</strong></p>
+<p>1.从数列中挑出一个元素，称为 “基准”（pivot）;</p>
+<p>2.重新排序数列，所有元素比基准值小的摆放在基准前面，所有元素比基准值大的摆在基准的后面（相同的数可以到任一边）。在这个分区退出之后，该基准就处于数列的中间位置。这个称为分区（partition）操作；</p>
+<p>3.递归地（recursive）把小于基准值元素的子数列和大于基准值元素的子数列排序；</p>
+<p><img src="/img/28.png"><br><img src="/img/29.png"><br><img src="/img/30.png"><br><img src="/img/31.png"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;快速排序（从小到大）</span><br><span class="line">void quickSort(int left, int right, vector&lt;int&gt;&amp; arr)</span><br><span class="line">&#123;</span><br><span class="line">	if(left &gt;&#x3D; right)</span><br><span class="line">		return;</span><br><span class="line">        </span><br><span class="line">   	if(left &lt; 0 || right &gt;&#x3D; arr.size())</span><br><span class="line">	&#123;</span><br><span class="line">		cout &lt;&lt; &quot;error args! array bound.&quot; &lt;&lt; endl;</span><br><span class="line">		return;</span><br><span class="line">	&#125;&#x2F;&#x2F;非法输入判断,防止数组越界</span><br><span class="line">    </span><br><span class="line">	int i, j, base, temp;</span><br><span class="line">	i &#x3D; left, j &#x3D; right;</span><br><span class="line">	base &#x3D; arr[left];  &#x2F;&#x2F;取最左边的数为基准数</span><br><span class="line">	while (i &lt; j)</span><br><span class="line">	&#123;</span><br><span class="line">		while (arr[j] &gt;&#x3D; base &amp;&amp; i &lt; j)</span><br><span class="line">			j--;</span><br><span class="line">		while (arr[i] &lt;&#x3D; base &amp;&amp; i &lt; j)</span><br><span class="line">			i++;</span><br><span class="line">		if(i &lt; j)</span><br><span class="line">		&#123;</span><br><span class="line">			temp &#x3D; arr[i];</span><br><span class="line">			arr[i] &#x3D; arr[j];</span><br><span class="line">			arr[j] &#x3D; temp;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	&#x2F;&#x2F;基准数归位</span><br><span class="line">	arr[left] &#x3D; arr[i];</span><br><span class="line">	arr[i] &#x3D; base;</span><br><span class="line">	quickSort(left, i - 1, arr);&#x2F;&#x2F;递归左边</span><br><span class="line">	quickSort(i + 1, right, arr);&#x2F;&#x2F;递归右边</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>排序算法</category>
+      </categories>
+  </entry>
+  <entry>
     <title>操作系统</title>
     <url>/2020/08/20/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</url>
     <content><![CDATA[]]></content>
       <categories>
         <category>C++面经</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>桶排序</title>
-    <url>/2020/08/18/%E6%A1%B6%E6%8E%92%E5%BA%8F/</url>
-    <content><![CDATA[<p><strong>算法步骤</strong></p>
-<p>1.设置固定数量的空桶。</p>
-<p>2.把数据放到对应的桶中。</p>
-<p>3.对每个不为空的桶中数据进行排序。</p>
-<p>4.拼接不为空的桶中数据，得到结果</p>
-<p><img src="/img/42.png"></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">&#x2F;*</span><br><span class="line"> * 桶排序</span><br><span class="line"> *</span><br><span class="line"> * 参数说明：</span><br><span class="line"> *     a -- 待排序数组</span><br><span class="line"> *     n -- 数组a的长度</span><br><span class="line"> *     max -- 数组a中最大值的范围</span><br><span class="line"> *&#x2F;</span><br><span class="line">void bucketSort(int* a, int n, int max)</span><br><span class="line">&#123;</span><br><span class="line">    int i, j;</span><br><span class="line">    int *buckets;</span><br><span class="line"></span><br><span class="line">    if (a&#x3D;&#x3D;NULL || n&lt;1 || max&lt;1)</span><br><span class="line">        return ;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 创建一个容量为max的数组buckets，并且将buckets中的所有数据都初始化为0。</span><br><span class="line">    if ((buckets &#x3D; new int[max])&#x3D;&#x3D;NULL)</span><br><span class="line">        return ;</span><br><span class="line">    memset(buckets, 0, max*sizeof(int));</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 1. 计数</span><br><span class="line">    for(i &#x3D; 0; i &lt; n; i++)</span><br><span class="line">        buckets[a[i]]++;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 2. 排序</span><br><span class="line">    for (i &#x3D; 0, j &#x3D; 0; i &lt; max; i++)</span><br><span class="line">        while( (buckets[i]--) &gt;0 )</span><br><span class="line">            a[j++] &#x3D; i;</span><br><span class="line"></span><br><span class="line">    delete[] buckets;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>排序算法</category>
       </categories>
   </entry>
   <entry>
@@ -2840,6 +2826,20 @@
       </categories>
   </entry>
   <entry>
+    <title>桶排序</title>
+    <url>/2020/08/18/%E6%A1%B6%E6%8E%92%E5%BA%8F/</url>
+    <content><![CDATA[<p><strong>算法步骤</strong></p>
+<p>1.设置固定数量的空桶。</p>
+<p>2.把数据放到对应的桶中。</p>
+<p>3.对每个不为空的桶中数据进行排序。</p>
+<p>4.拼接不为空的桶中数据，得到结果</p>
+<p><img src="/img/42.png"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">&#x2F;*</span><br><span class="line"> * 桶排序</span><br><span class="line"> *</span><br><span class="line"> * 参数说明：</span><br><span class="line"> *     a -- 待排序数组</span><br><span class="line"> *     n -- 数组a的长度</span><br><span class="line"> *     max -- 数组a中最大值的范围</span><br><span class="line"> *&#x2F;</span><br><span class="line">void bucketSort(int* a, int n, int max)</span><br><span class="line">&#123;</span><br><span class="line">    int i, j;</span><br><span class="line">    int *buckets;</span><br><span class="line"></span><br><span class="line">    if (a&#x3D;&#x3D;NULL || n&lt;1 || max&lt;1)</span><br><span class="line">        return ;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 创建一个容量为max的数组buckets，并且将buckets中的所有数据都初始化为0。</span><br><span class="line">    if ((buckets &#x3D; new int[max])&#x3D;&#x3D;NULL)</span><br><span class="line">        return ;</span><br><span class="line">    memset(buckets, 0, max*sizeof(int));</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 1. 计数</span><br><span class="line">    for(i &#x3D; 0; i &lt; n; i++)</span><br><span class="line">        buckets[a[i]]++;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 2. 排序</span><br><span class="line">    for (i &#x3D; 0, j &#x3D; 0; i &lt; max; i++)</span><br><span class="line">        while( (buckets[i]--) &gt;0 )</span><br><span class="line">            a[j++] &#x3D; i;</span><br><span class="line"></span><br><span class="line">    delete[] buckets;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>排序算法</category>
+      </categories>
+  </entry>
+  <entry>
     <title>网易面试_DFS_(商品均分俩份价值相同，多余扔除)</title>
     <url>/2020/08/08/%E7%BD%91%E6%98%93%E9%9D%A2%E8%AF%95/</url>
     <content><![CDATA[<h3 id="给一堆（最多15）有价值的东西，均分给2个人，均分不了的，扔掉，求最小扔掉多少？"><a href="#给一堆（最多15）有价值的东西，均分给2个人，均分不了的，扔掉，求最小扔掉多少？" class="headerlink" title="给一堆（最多15）有价值的东西，均分给2个人，均分不了的，扔掉，求最小扔掉多少？"></a>给一堆（最多15）有价值的东西，均分给2个人，均分不了的，扔掉，求最小扔掉多少？</h3><p><img src="/img/19.png"></p>
@@ -2854,6 +2854,27 @@
       <tags>
         <tag>题目新颖思路</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>计数排序</title>
+    <url>/2020/08/18/%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F/</url>
+    <content><![CDATA[<p><strong>算法步骤</strong></p>
+<p>1.花O(n)的时间扫描一下整个序列 A，获取最小值 min 和最大值 max</p>
+<p>2.开辟一块新的空间创建新的数组 B，长度为 ( max - min + 1)</p>
+<p>3.数组 B 中 index 的元素记录的值是 A 中某元素出现的次数</p>
+<p>4.最后输出目标整数序列，具体的逻辑是遍历数组 B，输出相应元素以及对应的个数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void coutSort(int* data, int length)</span><br><span class="line">&#123;</span><br><span class="line">    if (data &#x3D;&#x3D; nullptr || length &lt;&#x3D; 0)</span><br><span class="line">        return;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;确定数列最大值</span><br><span class="line">    int max &#x3D; data[0];</span><br><span class="line">    int min &#x3D; data[0];</span><br><span class="line">    for (int i &#x3D; 1; i &lt; length; ++i)&#123;</span><br><span class="line">        if (data[i] &gt; max)</span><br><span class="line">            max &#x3D; data[i];</span><br><span class="line">        if (data[i] &lt; min)</span><br><span class="line">            min &#x3D; data[i];</span><br><span class="line">    &#125;</span><br><span class="line">    int d &#x3D; max - min;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 确定统计数组长度并进行初始化</span><br><span class="line">    int* coutData &#x3D; new int[d + 1];</span><br><span class="line">    for (int i &#x3D; 0; i &lt;&#x3D; d; ++i)</span><br><span class="line">        coutData[i] &#x3D; 0;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 遍历数组，统计每个数出现的次数</span><br><span class="line">    for (int i &#x3D; 0; i &lt; length; ++i)</span><br><span class="line">            ++coutData[data[i] - min];</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 排序数组，某个数出现了几次，便在data里累计输出几次</span><br><span class="line">    int index &#x3D; 0;</span><br><span class="line">    for (int i &#x3D; 0; i &lt;&#x3D; max; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        for (int j &#x3D; 0; j &lt; coutData[i]; ++j)</span><br><span class="line">        &#123;</span><br><span class="line">            data[index++] &#x3D; i+min;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>排序算法</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>计算机组成原理</title>
+    <url>/2020/08/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>C++面经</category>
+      </categories>
   </entry>
   <entry>
     <title>背包问题</title>
@@ -2921,27 +2942,6 @@
       <categories>
         <category>刷题</category>
         <category>收藏题</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>计算机组成原理</title>
-    <url>/2020/08/20/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>C++面经</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>计数排序</title>
-    <url>/2020/08/18/%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F/</url>
-    <content><![CDATA[<p><strong>算法步骤</strong></p>
-<p>1.花O(n)的时间扫描一下整个序列 A，获取最小值 min 和最大值 max</p>
-<p>2.开辟一块新的空间创建新的数组 B，长度为 ( max - min + 1)</p>
-<p>3.数组 B 中 index 的元素记录的值是 A 中某元素出现的次数</p>
-<p>4.最后输出目标整数序列，具体的逻辑是遍历数组 B，输出相应元素以及对应的个数</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">void coutSort(int* data, int length)</span><br><span class="line">&#123;</span><br><span class="line">    if (data &#x3D;&#x3D; nullptr || length &lt;&#x3D; 0)</span><br><span class="line">        return;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;确定数列最大值</span><br><span class="line">    int max &#x3D; data[0];</span><br><span class="line">    int min &#x3D; data[0];</span><br><span class="line">    for (int i &#x3D; 1; i &lt; length; ++i)&#123;</span><br><span class="line">        if (data[i] &gt; max)</span><br><span class="line">            max &#x3D; data[i];</span><br><span class="line">        if (data[i] &lt; min)</span><br><span class="line">            min &#x3D; data[i];</span><br><span class="line">    &#125;</span><br><span class="line">    int d &#x3D; max - min;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 确定统计数组长度并进行初始化</span><br><span class="line">    int* coutData &#x3D; new int[d + 1];</span><br><span class="line">    for (int i &#x3D; 0; i &lt;&#x3D; d; ++i)</span><br><span class="line">        coutData[i] &#x3D; 0;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 遍历数组，统计每个数出现的次数</span><br><span class="line">    for (int i &#x3D; 0; i &lt; length; ++i)</span><br><span class="line">            ++coutData[data[i] - min];</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 排序数组，某个数出现了几次，便在data里累计输出几次</span><br><span class="line">    int index &#x3D; 0;</span><br><span class="line">    for (int i &#x3D; 0; i &lt;&#x3D; max; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        for (int j &#x3D; 0; j &lt; coutData[i]; ++j)</span><br><span class="line">        &#123;</span><br><span class="line">            data[index++] &#x3D; i+min;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>排序算法</category>
       </categories>
   </entry>
   <entry>
